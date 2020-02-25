@@ -5,7 +5,7 @@ const db = mysql.createConnection({
   host: "localhost",
   user: "root",
   database: "programmesport",
-  port: 8000
+  port: 3000
 
   //TODO ADD PASSWORD
 });
