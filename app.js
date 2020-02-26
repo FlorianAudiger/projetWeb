@@ -41,6 +41,7 @@ app.post('/register', async function(req, res){
   console.log(req.body);
   
   const account = require("./models/account")
+
   account.create(req.body, function(){
     console.log("OK 3")
     res.redirect("/");

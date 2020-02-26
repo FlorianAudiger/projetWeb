@@ -11,9 +11,16 @@ class account{
         })*/
         db.query("INSERT INTO compte SET Mail =?", [content.mail], function (err, result) {
             if (err) throw err;
-            cb(result)
+            cb(result);
         });
 
+    }
+
+    static all (cb){
+        db.query("SELECT * FROM compte", function (err, results){
+            if(err) throw err;
+            console.log(results);
+        });
     }
 
 }
