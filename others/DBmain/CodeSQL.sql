@@ -20,7 +20,7 @@ use ProgrammeSport;
 -- _____________ 
 
 create table Compte (
-     IDCompte bigint not null,
+     IDCompte bigint NOT NULL AUTO_INCREMENT,
      Mail varchar(30) not null,
      MDP varchar(30) not null,
      Nom varchar(30) not null,
@@ -28,34 +28,34 @@ create table Compte (
      constraint ID_Compte_ID primary key (IDCompte));
 
 create table Programme (
-     IDProgramme bigint not null,
+     IDProgramme bigint NOT NULL AUTO_INCREMENT,
      Nom varchar(30) not null,
      Description varchar(300) not null,
      IDCompte bigint not null,
      constraint ID_Programme_ID primary key (IDProgramme));
 
 create table Seance (
-     IDSeance bigint not null,
+     IDSeance bigint NOT NULL AUTO_INCREMENT,
      Ordre bigint not null,
      Nom varchar(30) not null,
      IDProgramme bigint not null,
      constraint ID_Seance_ID primary key (IDSeance));
 
 create table Exercice (
-     IDExercice bigint not null,
+     IDExercice bigint NOT NULL AUTO_INCREMENT,
      Nom varchar(30) not null,
      Description varchar(300) not null,
      Cardio char not null,
      constraint ID_Exercice_ID primary key (IDExercice));
 
 create table Muscle (
-     IDMuscle bigint not null,
+     IDMuscle bigint NOT NULL AUTO_INCREMENT,
      Nom varchar(30) not null,
      IDExercice bigint not null,
      constraint ID_Muscle_ID primary key (IDMuscle));
 
 create table Materiel (
-     IDMateriel bigint not null,
+     IDMateriel bigint NOT NULL AUTO_INCREMENT,
      Nom varchar(30) not null,
      IDExercice bigint not null,
      constraint ID_Materiel_ID primary key (IDMateriel));

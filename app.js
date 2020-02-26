@@ -42,12 +42,19 @@ app.post('/register', async function(req, res){
   
   const account = require("./models/account")
 
-  account.create(req.body, function(){
-    console.log("OK 3")
-    res.redirect("/");
+  account.boolMail(req.body, function (resDB) {
+    if(resDB == 1){
+      console.log("MAIL DEjA PRESENT DANS LA DB");
+      res.redirect('/')
+    }
+    else{
+      account.create(req.body, function(){
+      console.log("GG")
+      res.redirect('/')
   })
+}
 })
-
+})
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
   next(createError(404));
