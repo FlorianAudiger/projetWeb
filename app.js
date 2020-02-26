@@ -7,9 +7,8 @@ var logger = require('morgan');
 var bodyParser = require('body-parser');
 
 var indexRouter = require('./routes/index');
-var usersRouter = require('./routes/users');
 var register = require('./routes/register');
-
+var login = require('./routes/login');
 //Instantiate server
 var app = express();
 
@@ -25,36 +24,10 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', indexRouter);
-app.use('/users', usersRouter);
 app.use('/register', register);
+app.use('/login', login);
 
-/* OU
-app.get('/', function (req, res) {
-  res.setHeader('Content-Type', 'text/html');
-  res.status(200);
-  res.render('register')
-});
-*/
 
-app.post('/register', async function(req, res){
-  // Can't be undefined
-  console.log(req.body);
-  
-  const account = require("./models/account")
-
-  account.boolMail(req.body, function (resDB) {
-    if(resDB == 1){
-      console.log("MAIL DEjA PRESENT DANS LA DB");
-      res.redirect('/')
-    }
-    else{
-      account.create(req.body, function(){
-      console.log("GG")
-      res.redirect('/')
-  })
-}
-})
-})
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
   next(createError(404));
