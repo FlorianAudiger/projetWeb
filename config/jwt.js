@@ -42,4 +42,26 @@ module.exports = {
         // username given in the token
         return true
     }
+    ,
+    idAccountToken: function(token){
+        if (!token) {
+            console.log("Token n'existe pas")
+            return undefined
+          }
+        var payload
+        try {
+          payload = jwt.verify(token, JWT_KEY)
+        } catch (e) {
+          if (e instanceof jwt.JsonWebTokenError) {
+            // if the error thrown is because the JWT is unauthorized, return a 401 error
+            //return res.status(401).end()
+            return undefined
+          }
+          // otherwise, return a bad request error
+          //return res.status(400).end()
+          return undefined
+        }
+      
+        return payload.userId
+    }
 }
