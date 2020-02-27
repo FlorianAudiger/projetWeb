@@ -4,7 +4,7 @@ var uCtrl = require('../controllers/usersCtrl')
 
 /* GET users listing. */
 
-router.get('/', uCtrl.register_get)
-router.post('/', uCtrl.register_post)
+router.get('/', uCtrl.login_get)
+router.post('/', uCtrl.login_post)
 
 module.exports = router;
