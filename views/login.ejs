@@ -16,10 +16,10 @@
 </div>
   <div class="card-body">
     <h5 class="card-title">Connectez-vous avec votre adresse email</h5>
-    <form action="/action_page.php" class="needs-validation" novalidate>
+    <form action="/login" method="post" class="needs-validation" novalidate>
   <div class="form-group">
     <br></br>
-    <input type="text" class="form-control" id="uname" placeholder="Adresse email" name="uname" required>
+    <input type="text" class="form-control" id="uname" placeholder="Adresse email" name="mail" required>
 
     <div class="invalid-feedback">Veuillez remplir ce champ</div>
   </div>
@@ -57,7 +57,7 @@
 })();
 </script>
   <br></br>
-  <div class="card-text"> Pas encore membre ? <a href="https://example.com">Inscrivez-vous gratuitement</a> en 30s. </div>
+  <div class="card-text"> Pas encore membre ? <a href="/register">Inscrivez-vous gratuitement</a> en 30s. </div>
 
   </div>
 </div>

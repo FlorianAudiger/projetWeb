@@ -1,5 +1,5 @@
 const db = require('../config/db')
-
+const bcrypt = require('bcrypt');
 class account{
 
     static create (content, cb){
@@ -10,25 +10,21 @@ class account{
             cb(result)
         });
     }
-
-    static all (cb){
-        db.query("SELECT * FROM compte", function (err, results){
-            if(err) throw err;
-            console.log(results);
-        });
-    }
-
     static boolMail (content, cb){
         db.query("SELECT * FROM compte WHERE Mail = ?", [content.mail]
         ,function(err, result){
             if(err) throw err;
-            if(result[0]==undefined){
-                cb(0);
-            }
-            else{
-                cb(1);
-            }
+            cb(result[0])
         });
+    }
+
+    static checkLogin (content, cb){ // Enlever ?
+        console.log(content)
+            db.query("SELECT MDP FROM compte WHERE Mail=?", [content.mail]
+            ,function(err, result){
+                if(err) throw err;
+                cb(result[0])
+            });
     }
 
 }
