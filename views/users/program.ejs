@@ -6,10 +6,10 @@
 
   <h1> Mes Programmes </h1>
  
-  <form action="/newProgram">
+  <form action="/program" method="post">
     <br></br>
     <div class="input-group mb-3">
-      <input type="text" name="name" placeholder="Nom Programme" class="form-control">
+      <input type="text" name="name" placeholder="Nom du nouveau programme" class="form-control" required>
       <input type="text" name="description" placeholder="Description" class="form-control">
       <div class="input-group-append">
         <button class="btn btn-primary" type="submit" id="button-addon2"> Créer un programme </button>
@@ -24,7 +24,7 @@
  
       <a class="button list-group-item list-group-item-action" href= "/program/<%=prog.IDProgramme %>">
         <p class="text-left font-weight-bold"><%= prog.Nom %></p>
-        <p class="text-right"><%= prog.Description %></p>
+        <p class="text-right"><%= prog.Description %>&nbsp;</p>
       </a>
     
 

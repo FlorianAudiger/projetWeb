@@ -14,5 +14,17 @@ module.exports = {
             res.render('users/program', {resDB});
             })
           }
+    },
+    addProgram_post: function (req, res, next) {
+        const token = req.cookies["Token"]
+        if(!jwt.verifToken(token)){
+                res.redirect('/login')
+            }
+        else{ //Token OK
+
+            pro.create(req.body, jwt.idAccountToken(token), function(resDB){
+            res.redirect('/program');
+            })
+          }
     }
 }

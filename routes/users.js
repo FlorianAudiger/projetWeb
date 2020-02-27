@@ -7,5 +7,6 @@ var uCtrl = require('../controllers/usersController')
 
 router.get('/', uCtrl.program_get)
 //router.post('/', uCtrl.register_post)
+router.post('/', uCtrl.addProgram_post)
 
 module.exports = router;
