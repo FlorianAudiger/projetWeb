@@ -1,6 +1,8 @@
 //Import
 const account = require("../models/account")
 const bcrypt = require('bcrypt');
+const jwt = require("../config/jwt")
+
 // Constants
 const EMAIL_REGEX     = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
 const PASSWORD_REGEX  = /^(?=.*\d).{4,8}$/;
@@ -29,16 +31,20 @@ module.exports = {
     },
 
     login_post: function(req, res){
-      account.checkLogin(req.body, function (resDB) {
+      account.boolMail(req.body, function (resDB) {
         if(resDB!=undefined){
           console.log("LOGIN TROUVER");
           if(resDB.MDP==req.body.pswd){
             console.log("MDP PAREIL")
+            var token = jwt.generateTokenForUser(resDB.IDCompte)
+            res.cookie('Token',token,{maxAge:600*1000})
+            res.redirect('/program')
           }
           else{
             console.log("MDP DIFFERENT")
+            res.redirect('/')
           }
-          res.redirect('/')
+          
         }
         else{
           console.log("ERREUR IDENTIFIANT N EXISTE PAS")

@@ -9,11 +9,12 @@ var bodyParser = require('body-parser');
 var indexRouter = require('./routes/index');
 var register = require('./routes/register');
 var login = require('./routes/login');
+var routeUsers = require('./routes/users');
 //Instantiate server
 var app = express();
 
 // view engine setup
-//Template
+// Template
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
 
@@ -23,10 +24,11 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
+// router
 app.use('/', indexRouter);
 app.use('/register', register);
 app.use('/login', login);
-
+app.use('/program', routeUsers);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
