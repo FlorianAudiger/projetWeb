@@ -30,7 +30,7 @@ create table Compte (
 create table Programme (
      IDProgramme bigint NOT NULL AUTO_INCREMENT,
      Nom varchar(30) not null,
-     Description varchar(300) not null,
+     Description varchar(300),
      IDCompte bigint not null,
      constraint ID_Programme_ID primary key (IDProgramme));
 
