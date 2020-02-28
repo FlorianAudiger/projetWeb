@@ -27,12 +27,19 @@
   
   <% for (ses of resDB2) { %>
    
-
     <a class="button list-group-item list-group-item-action">
-      <p class="text-left font-weight-bold"><%= ses.Nom %></p>
-      <p class="text-right"><%= ses.Ordre %>&nbsp;</p>
+      <div class="row">
+        <div class="col-4">
+      <p class="text-left font-weight-bold"><%= ses.Nom %></p></div>
+      <div class="col-4">
+      <p class="text-right font-italic"><%= ses.Ordre %>&nbsp;</p></div> 
+      <div class="col-4 text-right">
+       <form action="/program/<%=resDB1[0].IDProgramme %>/deleteSession/<%=ses.IDSeance %>" method="get">
+        <button type="submit" class="btn btn-danger"> Supprimer </button>
+       </form> 
+      </div>
+    </div>
     </a>
-  
 
 <% } %>
 </div>

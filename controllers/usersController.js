@@ -61,6 +61,13 @@ module.exports = {
         ses.create(req.body, req.params.id, function(resDB){
             res.redirect('back');
             })
+          },
+
+    deleteSession_get: function (req, res, next) {
+            var prog= req.params.id1
+                  ses.deleteByIdSession(req.params.id2, function(resDB){
+                    res.redirect('/program/'+prog);
+                  })
           }
     }
 

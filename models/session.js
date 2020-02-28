@@ -23,8 +23,18 @@ class session{
             });
         });
     }
-    static delete (content, cb){
+    static deleteByIdProgram (content, cb){
+        console.log(content)
         db.query("DELETE FROM `seance` WHERE IDProgramme=?",[content]
+        ,function(err, result){
+            if(err) throw err;
+            console.log("SUP Seance")
+            cb(result)
+        });
+    }
+    static deleteByIdSession (content, cb){
+        console.log(content)
+        db.query("DELETE FROM `seance` WHERE IDSeance=?",[content]
         ,function(err, result){
             if(err) throw err;
             console.log("SUP Seance")
