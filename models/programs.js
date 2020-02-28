@@ -13,7 +13,7 @@ class programs{
         });
     }
     static delete (content, cb){
-        ses.delete(content, function(){
+        ses.deleteByIdProgram(content, function(){
             db.query("DELETE FROM `programme` WHERE IDProgramme=?",[content]
             ,function(err, result){
                 if(err) throw err;

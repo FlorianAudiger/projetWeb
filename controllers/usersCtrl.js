@@ -30,6 +30,11 @@ module.exports = {
         res.render('login');
     },
 
+    logout_get:function(req, res, next) {
+      res.clearCookie("Token");
+      res.redirect('../');
+    },
+
     login_post: function(req, res){
       account.boolMail(req.body, function (resDB) {
         if(resDB!=undefined){

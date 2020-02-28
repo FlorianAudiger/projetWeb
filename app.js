@@ -10,6 +10,7 @@ var indexRouter = require('./routes/index');
 var register = require('./routes/register');
 var login = require('./routes/login');
 var routeUsers = require('./routes/users');
+var logout = require('./routes/logout');
 //Instantiate server
 var app = express();
 
@@ -29,6 +30,7 @@ app.use('/', indexRouter);
 app.use('/register', register);
 app.use('/login', login);
 app.use('/program', routeUsers);
+app.use('/logout', logout);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
