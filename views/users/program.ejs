@@ -1,0 +1,45 @@
+<%- include('header') -%>
+
+<body>
+  
+<div class="jumbotron text-center">
+
+  <h1> Mes Programmes </h1>
+ 
+  <form action="/program" method="post">
+    <br></br>
+    <div class="input-group mb-3">
+      <input type="text" name="name" placeholder="Nom du nouveau programme" class="form-control" required>
+      <input type="text" name="description" placeholder="Description (facultatif)" class="form-control">
+      <div class="input-group-append">
+        <button class="btn btn-primary" type="submit" id="button-addon2"> Créer un programme </button>
+      </div>
+    </div>
+  </form>
+
+  <div class="list-group">
+  
+    <% for (prog of resDB) { %>
+     
+      <a class="button list-group-item list-group-item-action" href= "/program/<%=prog.IDProgramme %>">
+        <div class="row">
+          <div class="col-4">
+        <p class="text-left font-weight-bold"><%= prog.Nom %></p></div>
+        <div class="col-4">
+        <p class="text-right font-italic"><%= prog.Description %>&nbsp;</p></div> 
+        <div class="col-4 text-right">
+         <form action="/program/deleteProgram/<%=prog.IDProgramme %>" method="get">
+          <button type="submit" class="btn btn-danger"> Supprimer </button>
+         </form> 
+        </div>
+      </div>
+      </a>
+      
+
+
+<% } %>
+</div>
+</div>
+<%- include('../footer') -%>
+</body>
+</html>

@@ -30,7 +30,7 @@ create table Compte (
 create table Programme (
      IDProgramme bigint NOT NULL AUTO_INCREMENT,
      Nom varchar(30) not null,
-     Description varchar(300) not null,
+     Description varchar(300),
      IDCompte bigint not null,
      constraint ID_Programme_ID primary key (IDProgramme));
 
@@ -45,7 +45,7 @@ create table Exercice (
      IDExercice bigint NOT NULL AUTO_INCREMENT,
      Nom varchar(30) not null,
      Description varchar(300) not null,
-     Cardio char not null,
+     Cardio boolean not null,
      constraint ID_Exercice_ID primary key (IDExercice));
 
 create table Muscle (
@@ -61,7 +61,7 @@ create table Materiel (
      constraint ID_Materiel_ID primary key (IDMateriel));
 
 create table Mensuration (
-     IDMensuration bigint not null,
+     IDMensuration bigint NOT NULL AUTO_INCREMENT,
      Nom varchar(30) not null,
      constraint ID_Mensuration_ID primary key (IDMensuration));
 
