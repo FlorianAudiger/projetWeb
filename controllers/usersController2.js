@@ -8,9 +8,14 @@ module.exports = {
                 res.redirect('/login')
         }
         else{ //Gerer erreur si on cherche dans la barre URL un exo plus loin
-            exer.aExercise(req.params.id, function(resDB){
-                res.render('users/exercise', {resDB});
+            exer.aExercise(req.params.id,jwt.idAccountToken(token), function(resDB){
+                exer.aExerciseAllRecord(req.params.id,jwt.idAccountToken(token), function(resDB2){
+                    exer.aExerciseAllDate(req.params.id,jwt.idAccountToken(token), function(resDB3){
+                        console.log(resDB2[0].PoidsMax)
+                        res.render('users/exercise', {resDB, resDB2, resDB3});
             })
+        })
+    })
           }
     },
     allExercises_get: function(req, res, next) {
@@ -24,6 +29,12 @@ module.exports = {
             })
           }
     
+    },
+    addRecord_post: function(req, res, next) {
+            const token = req.cookies["Token"]
+            exer.createRecord(req.body, jwt.idAccountToken(token), req.params.id, function(resDB){
+                res.redirect('back');        
+        })
     }
 }
 

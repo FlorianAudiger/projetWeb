@@ -4,7 +4,7 @@
   
 <div class="jumbotron text-center">
 
-  <h1> Mes xercices </h1>
+  <h1> Mes exercices </h1>
  <h3> <%- resDB1[0].Nom -%>  </h3>
 </div>
 
@@ -18,10 +18,10 @@
         <option> <%- ses.Nom -%> </option>
         <% } %>
       </select>
-      <input type="text" name="serie" placeholder="Nombre de série" class="form-control" required>
-      <input type="text" name="repetition" placeholder="Nombre de répétitions" class="form-control" required>
-      <input type="text" name="repos" placeholder="Temps de repos" class="form-control" required>
-      <input type="text" name="poids" placeholder="Poids (facultatif)" class="form-control">
+      <input type="number" name="serie" placeholder="Série" class="form-control" required>
+      <input type="number" name="repetition" placeholder="Répétitions" class="form-control" required>
+      <input type="number" name="repos" placeholder="Temps de repos" class="form-control" required>
+      <input type="number" name="poids" placeholder="Poids (facultatif)" class="form-control">
       <div class="input-group-append">
         <button class="btn btn-primary" type="submit" id="button-addon2"> Ajouter </button>
       </div>

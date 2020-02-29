@@ -15,7 +15,23 @@ INSERT INTO mensuration SET Nom="Biceps";
 INSERT INTO mensuration SET Nom="Mollet";
 INSERT INTO mensuration SET Nom="Torse";
 INSERT INTO mensuration SET Nom="Epaule";
+-- Matériel
+INSERT INTO `materiel` (`Nom`) VALUES ('Élastique');
+INSERT INTO `materiel` (`Nom`) VALUES ('Haltère');
+INSERT INTO `materiel` (`Nom`) VALUES ('Vélo elliptiques');
+INSERT INTO `materiel` (`Nom`) VALUES ('Tapis de course');
+INSERT INTO `materiel` (`Nom`) VALUES ('Machine');
+INSERT INTO `materiel` (`Nom`) VALUES ('Banc inclinable');
+INSERT INTO `materiel` (`Nom`) VALUES ('Barre droite');
 
+-- Muscle
+INSERT INTO `muscle` (`Nom`) VALUES ('Abdominaux');
+INSERT INTO `muscle` (`Nom`) VALUES ('Biceps');
+INSERT INTO `muscle` (`Nom`) VALUES ('Triceps');
+INSERT INTO `muscle` (`Nom`) VALUES ('Jambes');
+INSERT INTO `muscle` (`Nom`) VALUES ('Pectoraux');
+INSERT INTO `muscle` (`Nom`) VALUES ('Deltoides');
+INSERT INTO `muscle` (`Nom`) VALUES ('Dos');
 -- Exercice
 INSERT INTO `exercice` (`Nom`, `Description`, `Cardio`) VALUES ('Pompe', 'Pompe basique', '0');
 INSERT INTO `cible` (`IDExercice`, `IDMuscle`) VALUES ('1', '5');
@@ -36,20 +52,3 @@ INSERT INTO `cible` (`IDExercice`, `IDMuscle`) VALUES ('5', '2');
 INSERT INTO `exercice` (`Nom`, `Description`, `Cardio`, `IDMateriel`) VALUES ('Curl concentré', 'Assis, une haltère dans une main, remontée à la l horizontal', '0', '2');
 INSERT INTO `cible` (`IDExercice`, `IDMuscle`) VALUES ('6', '2');
 
--- Matériel
-INSERT INTO `materiel` (`Nom`) VALUES ('Élastique');
-INSERT INTO `materiel` (`Nom`) VALUES ('Haltère');
-INSERT INTO `materiel` (`Nom`) VALUES ('Vélo elliptiques');
-INSERT INTO `materiel` (`Nom`) VALUES ('Tapis de course');
-INSERT INTO `materiel` (`Nom`) VALUES ('Machine');
-INSERT INTO `materiel` (`Nom`) VALUES ('Banc inclinable');
-INSERT INTO `materiel` (`Nom`) VALUES ('Barre droite');
-
--- Muscle
-INSERT INTO `muscle` (`Nom`) VALUES ('Abdominaux');
-INSERT INTO `muscle` (`Nom`) VALUES ('Biceps');
-INSERT INTO `muscle` (`Nom`) VALUES ('Triceps');
-INSERT INTO `muscle` (`Nom`) VALUES ('Jambes');
-INSERT INTO `muscle` (`Nom`) VALUES ('Pectoraux');
-INSERT INTO `muscle` (`Nom`) VALUES ('Deltoides');
-INSERT INTO `muscle` (`Nom`) VALUES ('Dos');

@@ -8,5 +8,7 @@ var uCtrl = require('../controllers/usersController2')
 
 router.get('/', uCtrl.allExercises_get)
 router.get('/:id', uCtrl.exercise_get)
+router.post('/:id', uCtrl.addRecord_post)
+
 
 module.exports = router;
