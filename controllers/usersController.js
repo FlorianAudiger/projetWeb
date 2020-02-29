@@ -1,6 +1,8 @@
 const jwt = require("../config/jwt")
 const pro = require('../models/programs')
 const ses = require('../models/session')
+const work = require('../models/work')
+const exer = require("../models/exercise")
 
 module.exports = {
     program_get: function(req, res, next) {
@@ -68,7 +70,31 @@ module.exports = {
                   ses.deleteByIdSession(req.params.id2, function(resDB){
                     res.redirect('/program/'+prog);
                   })
-          }
+          },
+          work_get: function(req, res, next) {
+            const token = req.cookies["Token"]
+            if(!jwt.verifToken(token)){
+                    res.redirect('/login')
+                }
+            else{ //Token OK
+                ses.aSession(req.params.id, function(resDB1){
+                    exer.allExercises(function(resDB2){
+                        work.allExercises(req.params.id, function(resDB3){
+                            res.render('users/work',{resDB1, resDB2, resDB3})
+                        })
+                    })
+              })
+        }
+    },    
+        work_post: function (req, res, next) {
+        //On est forcément login ici
+        exer.selectIdByName(req.body.exercice, function(resDB1){
+        var idEx =resDB1;
+        console.log(idEx)
+        work.create(req.body, req.params.id, idEx, function(resDB2){
+            res.redirect('back');
+            })
+        })
     }
-
+}
     

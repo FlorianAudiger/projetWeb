@@ -11,6 +11,15 @@ class exercise{
         });
     }
 
+    static selectIdByName (name, cb){
+        console.log(name)
+        db.query("SELECT IDExercice FROM exercice WHERE exercice.Nom=?", [name],
+        function(err, result){
+            if(err) throw err;
+            cb(result[0].IDExercice)
+        });
+    }
+
 }
 
 module.exports = exercise;

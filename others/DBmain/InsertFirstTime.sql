@@ -33,6 +33,9 @@ INSERT INTO `cible` (`IDExercice`, `IDMuscle`) VALUES ('4', '1');
 INSERT INTO `exercice` (`Nom`, `Description`, `Cardio`, `IDMateriel`) VALUES ('Curl marteau', 'Une haltère dans chaque main, remontée à la verticale une par une jusqu aux épaules', '0', '2');
 INSERT INTO `cible` (`IDExercice`, `IDMuscle`) VALUES ('5', '2');
 
+INSERT INTO `exercice` (`Nom`, `Description`, `Cardio`, `IDMateriel`) VALUES ('Curl concentré', 'Assis, une haltère dans une main, remontée à la l horizontal', '0', '2');
+INSERT INTO `cible` (`IDExercice`, `IDMuscle`) VALUES ('6', '2');
+
 -- Matériel
 INSERT INTO `materiel` (`Nom`) VALUES ('Élastique');
 INSERT INTO `materiel` (`Nom`) VALUES ('Haltère');

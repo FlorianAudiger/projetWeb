@@ -98,7 +98,7 @@ create table seConstitue (
      TempsRepos int not null,
      Serie int not null,
      Repetition int not null,
-     Poids int not null,
+     Poids int,
      Ordre int not null,
      constraint ID_seConstitue_ID primary key (IDExercice, IDSeance));
 

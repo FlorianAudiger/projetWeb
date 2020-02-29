@@ -9,6 +9,15 @@ class session{
         });
     }
 
+    static aSession(content, cb){
+        console.log(content)
+        db.query("SELECT * FROM seance WHERE IDSeance = ?", [content]
+        ,function(err, result){
+            if(err) throw err;
+            cb(result)
+        });
+    }
+
     static create (content, id, cb){
         db.query("SELECT MAX(seance.Ordre) as max FROM `seance` WHERE IDProgramme = ?",[id],function(err, result){ //On récupère l'ordre
             if(err) throw err;

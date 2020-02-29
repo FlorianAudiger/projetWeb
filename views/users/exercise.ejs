@@ -4,25 +4,22 @@
   
 <div class="jumbotron text-center">
 
-  <h1> Mes exercices </h1>
+  <h1> Liste de tous les exercices </h1>
 </div>
 <div class="container">
-
-  <div class="list-group">
-  
-    <% for (exer of resDB) { %>
-     
-      <a class="button list-group-item list-group-item-action" href= "/program">
-        <div class="row">
-          <div class="col-4">
-        <p class="text-left font-weight-bold"><%= exer.Nom %></p></div>
-        <div class="col-4">
-        <p class="text-right font-italic"><%= exer.Description %>&nbsp;</p></div> 
-        <div class="col-4 text-right">
-        </div>
-      </div>
-      </a>
-<% } %>
+<div class="row row-cols-1 row-cols-4">
+  <% for (exer of resDB) { %>
+    <div class="col mb-2">
+  <div class="card text-center">
+    <img src="img/im.jpg"  class="card-img-top" alt="...">
+    <div class="card-body">
+      <h5 class="card-title"><%= exer.Nom %></h5>
+      <p class="card-text"><%= exer.Description %></p>
+      <a href="/exercise/<%=exer.IDExercice %>" class="btn btn-primary">Statistique</a>
+    </div>
+  </div>
+</div>
+  <% } %>
 </div>
 </div>
 <%- include('../footer') -%>

@@ -14,5 +14,7 @@ router.get('/:id1/deleteSession/:id2', uCtrl.deleteSession_get)
 router.get('/:id', uCtrl.session_get)
 router.post('/:id', uCtrl.addSession_post)
 
+router.get('/session/:id', uCtrl.work_get)
+router.post('/session/:id', uCtrl.work_post)
 
 module.exports = router;

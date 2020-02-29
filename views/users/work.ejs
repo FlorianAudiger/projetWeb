@@ -1,0 +1,63 @@
+<%- include('header') -%>
+
+<body>
+  
+<div class="jumbotron text-center">
+
+  <h1> Mes xercices </h1>
+ <h3> <%- resDB1[0].Nom -%>  </h3>
+</div>
+
+<div class="container">
+  <form action="/program/session/<%=resDB1[0].IDSeance %>" method="post">
+    <br></br>
+    <div class="input-group mb-3">
+      <select type="text" name="exercice" required>
+        <!-- <optgroup label="Couleur"></optgroup> -->
+        <% for (ses of resDB2) { %>
+        <option> <%- ses.Nom -%> </option>
+        <% } %>
+      </select>
+      <input type="text" name="serie" placeholder="Nombre de série" class="form-control" required>
+      <input type="text" name="repetition" placeholder="Nombre de répétitions" class="form-control" required>
+      <input type="text" name="repos" placeholder="Temps de repos" class="form-control" required>
+      <input type="text" name="poids" placeholder="Poids (facultatif)" class="form-control">
+      <div class="input-group-append">
+        <button class="btn btn-primary" type="submit" id="button-addon2"> Ajouter </button>
+      </div>
+    </div>
+</form>
+ 
+
+<div class="list-group">
+  
+  <% for (exer of resDB3) { %>
+   
+    <a class="button list-group-item list-group-item-action" href="/exercise/<%=exer.IDExercice %>">
+      <div class="row">
+        <div class="col">
+      <p class="text-left font-weight-bold"><%= exer.Nom %></p></div>
+      <div class="col">
+      <p class="text-right font-italic"><%= exer.Serie %>&nbsp;</p></div> 
+      <div class="col">
+        <p class="text-right font-italic"><%= exer.Repetition %>&nbsp;</p></div> 
+        <div class="col">
+          <p class="text-right font-italic"><%= exer.TempsRepos %>&nbsp;</p></div> 
+      <div class="col text-right">
+        <p class="text-right font-italic"><%= exer.Poids %>&nbsp;</p></div> 
+        <div class="col-2 text-right">
+       <form action="/program/deleteProgram/" method="get">
+        <button type="submit" class="btn btn-danger"> Supprimer </button>
+       </form> 
+      </div>
+    </div>
+    </a>
+
+<% } %>
+</div>
+
+
+</div>
+<%- include('../footer') -%>
+</body>
+</html>
