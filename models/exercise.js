@@ -11,6 +11,14 @@ class exercise{
         });
     }
 
+    static aExercise (content, cb){
+        db.query("SELECT * FROM exercice WHERE IDExercice = ?",[content],
+        function(err, result){
+            if(err) throw err;
+            cb(result)
+        });
+    }
+
     static selectIdByName (name, cb){
         console.log(name)
         db.query("SELECT IDExercice FROM exercice WHERE exercice.Nom=?", [name],

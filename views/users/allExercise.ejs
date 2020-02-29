@@ -1,0 +1,27 @@
+<%- include('header') -%>
+
+<body>
+  
+<div class="jumbotron text-center">
+
+  <h1> Liste de tous les exercices </h1>
+</div>
+<div class="container">
+<div class="row row-cols-1 row-cols-4">
+  <% for (exer of resDB) { %>
+    <div class="col mb-2">
+  <div class="card text-center">
+    <img src="img/im.jpg"  class="card-img-top" alt="...">
+    <div class="card-body">
+      <h5 class="card-title"><%= exer.Nom %></h5>
+      <p class="card-text"><%= exer.Description %></p>
+      <a href="/exercise/<%=exer.IDExercice %>" class="btn btn-primary">Statistique</a>
+    </div>
+  </div>
+</div>
+  <% } %>
+</div>
+</div>
+<%- include('../footer') -%>
+</body>
+</html>

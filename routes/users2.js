@@ -6,6 +6,7 @@ var uCtrl = require('../controllers/usersController2')
 
 // On est dans /program
 
-router.get('/', uCtrl.exercise_get)
+router.get('/', uCtrl.allExercises_get)
+router.get('/:id', uCtrl.exercise_get)
 
 module.exports = router;
