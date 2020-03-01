@@ -29,13 +29,13 @@ module.exports = {
       })
     },
     register_get: function(req, res, next) {
-        res.render('register');
+        res.render('register', {title: "Inscription"});
     },
     login_get: function(req, res, next) {
-        res.render('login');
+        res.render('login', {title: "Connexion"});
     },
     index_get: function(req, res, next) {
-      res.render('index');
+      res.render('index', {title: "Mon suivi sportif"});
   },
     logout_get:function(req, res, next) {
       res.clearCookie("Token");
@@ -58,8 +58,6 @@ module.exports = {
               res.redirect('/')
             }
           })
-
-          
         }
         else{
           console.log("ERREUR IDENTIFIANT N EXISTE PAS")
@@ -78,7 +76,7 @@ module.exports = {
     }
     else{
       account.select(req.params.id, function(resDB){
-        res.render("users/setting",{resDB})
+        res.render("users/setting",{title: "Paramètres", resDB})
       })
     }
 

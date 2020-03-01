@@ -14,7 +14,7 @@ module.exports = {
 
             
             pro.allPrograms(jwt.idAccountToken(token), function(resDB){
-            res.render('users/program', {resDB});
+            res.render('users/program', {title: "Mes programmes", resDB});
             })
           }
     },
@@ -63,7 +63,7 @@ module.exports = {
                                 })
                             }
                             console.log(tabCount[0])
-                            res.render('users/session', {resDB1, tabCount, resDB2});
+                            res.render('users/session', {title: "Mes séances",resDB1, tabCount, resDB2});
                         })
             })
             }
@@ -92,7 +92,7 @@ module.exports = {
                 ses.aSession(req.params.id, function(resDB1){
                     exer.allExercises(function(resDB2){
                         work.allExercises(req.params.id, function(resDB3){
-                            res.render('users/work',{resDB1, resDB2, resDB3})
+                            res.render('users/work',{title: "Mes exercices", resDB1, resDB2, resDB3})
                         })
                     })
               })

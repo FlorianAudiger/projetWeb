@@ -8,12 +8,13 @@ module.exports = {
                 res.redirect('/login')
         }
         else{ //Gerer erreur si on cherche dans la barre URL un exo plus loin
+            
             exer.aExercise(req.params.id,jwt.idAccountToken(token), function(resDB){
                 exer.aExerciseAllRecord(req.params.id,jwt.idAccountToken(token), function(resDB2){
                     exer.aExerciseAllDate(req.params.id,jwt.idAccountToken(token), function(resDB3){
-                        console.log(resDB2[0].PoidsMax)
+
                         //var a = res.json(resDB2)
-                        res.render('users/exercise', {resDB, resDB3});
+                        //res.render('users/exercise', {title: "Exercice", resDB, resDB3});
             })
         })
     })
@@ -26,7 +27,7 @@ module.exports = {
             }
         else{ //Token OK
             exer.allExercises(function(resDB){
-                res.render('users/allExercise', {resDB});
+                res.render('users/allExercise', {title: "Liste des exercices", resDB});
             })
           }
     
