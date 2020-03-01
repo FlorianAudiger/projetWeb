@@ -4,31 +4,22 @@ const ses = require('../models/session')
 const work = require('../models/work')
 const exer = require("../models/exercise")
 
+
 module.exports = {
     program_get: function(req, res, next) {
         const token = req.cookies["Token"]
-        if(!jwt.verifToken(token)){
-                res.redirect('/login')
-            }
-        else{ //Token OK
-
-            
-            pro.allPrograms(jwt.idAccountToken(token), function(resDB){
+        pro.allPrograms(jwt.idAccountToken(token), function(resDB){
             res.render('users/program', {title: "Mes programmes", resDB});
-            })
-          }
+        })
     },
+
     addProgram_post: function (req, res, next) {
         const token = req.cookies["Token"]
-        /*if(!jwt.verifToken(token)){
-                res.redirect('/login')
-            }
-        else{ //Token OK
-*/
-            pro.create(req.body, jwt.idAccountToken(token), function(resDB){
+        pro.create(req.body, jwt.idAccountToken(token), function(resDB){
             res.redirect('/program');
-            })
+        })
     },
+
     deleteProgram_get: function (req, res, next) {
         /*const token = req.cookies["Token"]
         if(!jwt.verifToken(token)){
@@ -45,10 +36,7 @@ module.exports = {
     },
     session_get: function(req, res, next) {
         const token = req.cookies["Token"]
-        if(!jwt.verifToken(token)){
-                res.redirect('/login')
-        }
-        else { //Token OK
+
             pro.programAcces(jwt.idAccountToken(token),req.params.id, function(resDB){ //Vérifie si on a accès au programme
                 if(resDB[0] ==undefined){res.redirect("/program")}
                 else{
@@ -68,7 +56,6 @@ module.exports = {
             })
             }
           })
-        }
     },
     addSession_post: function (req, res, next) {
         //On est forcément login ici
@@ -84,11 +71,6 @@ module.exports = {
                   })
           },
           work_get: function(req, res, next) {
-            const token = req.cookies["Token"]
-            if(!jwt.verifToken(token)){
-                    res.redirect('/login')
-                }
-            else{ //Token OK
                 ses.aSession(req.params.id, function(resDB1){
                     exer.allExercises(function(resDB2){
                         work.allExercises(req.params.id, function(resDB3){
@@ -96,7 +78,6 @@ module.exports = {
                         })
                     })
               })
-        }
     },    
     work_post: function (req, res, next) {
         //On est forcément login ici
