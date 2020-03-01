@@ -12,16 +12,18 @@ module.exports = {
     register_post: function(req, res){
         account.boolMail(req.body, function (resDB) {
           if(resDB!=undefined){
-            console.log("MAIL DEjA PRESENT DANS LA DB");
-            res.redirect('/')
+            res.cookie('Register',"L'adresse mail existe déjà",{maxAge:5*1000})
+            res.redirect('/register')
           }
           else{
             console.log(req.body.pswd[0])
             bcrypt.hash(req.body.pswd[0], 6, function(err, psw){
               req.body.pswd[0]=psw
               account.create(req.body, function(){
-                console.log("GG")
-                res.redirect('/')
+                console.log("Votre inscription a eu lieu avec succès")
+                res.cookie('Register',"Votre inscription a eu lieu avec succès",{maxAge:5*1000})
+                
+                res.redirect('/register')
             })
 
         })
@@ -29,14 +31,16 @@ module.exports = {
       })
     },
     register_get: function(req, res, next) {
-        res.render('register', {title: "Inscription"});
+      const cookie = req.cookies["Register"]
+        res.render('register', {title: "Inscription", error: cookie});
     },
     login_get: function(req, res, next) {
-        res.render('login', {title: "Connexion"});
+      const cookie = req.cookies["Login"]
+        res.render('login', {title: "Connexion", error: cookie});
     },
     index_get: function(req, res, next) {
       res.render('index', {title: "Mon suivi sportif"});
-  },
+    },
     logout_get:function(req, res, next) {
       res.clearCookie("Token");
       res.redirect('../');
@@ -44,24 +48,22 @@ module.exports = {
 
     login_post: function(req, res){
       account.boolMail(req.body, function (resDB) {
-        if(resDB!=undefined){
-          console.log("LOGIN TROUVER");
+        if(resDB!=undefined){ //login ok
           bcrypt.compare(req.body.pswd, resDB.MDP, function(err, resCrypt){
-            if(resCrypt){
-              console.log("MDP PAREIL")
+            if(resCrypt){ //pwd ok
               var token = jwt.generateTokenForUser(resDB.IDCompte)
-              res.cookie('Token',token,{maxAge:600*1000})
+              res.cookie('Token',token,{maxAge:604800*1000})
               res.redirect('/program')
             }
             else{
-              console.log("MDP DIFFERENT")
-              res.redirect('/')
+              res.cookie('Login',"Votre mot de passe est incorrect",{maxAge:5*1000})
+              res.redirect('/login')
             }
           })
         }
         else{
-          console.log("ERREUR IDENTIFIANT N EXISTE PAS")
-          res.redirect('/')
+          res.cookie('Login',"L'identifiant n'existe pas",{maxAge:5*1000})
+          res.redirect('/login')
     }
     })
   },
