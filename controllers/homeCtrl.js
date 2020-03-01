@@ -16,9 +16,14 @@ module.exports = {
             res.redirect('/')
           }
           else{
-            account.create(req.body, function(){
-            console.log("GG")
-            res.redirect('/')
+            console.log(req.body.pswd[0])
+            bcrypt.hash(req.body.pswd[0], 6, function(err, psw){
+              req.body.pswd[0]=psw
+              account.create(req.body, function(){
+                console.log("GG")
+                res.redirect('/')
+            })
+
         })
       }
       })
@@ -41,16 +46,19 @@ module.exports = {
       account.boolMail(req.body, function (resDB) {
         if(resDB!=undefined){
           console.log("LOGIN TROUVER");
-          if(resDB.MDP==req.body.pswd){
-            console.log("MDP PAREIL")
-            var token = jwt.generateTokenForUser(resDB.IDCompte)
-            res.cookie('Token',token,{maxAge:600*1000})
-            res.redirect('/program')
-          }
-          else{
-            console.log("MDP DIFFERENT")
-            res.redirect('/')
-          }
+          bcrypt.compare(req.body.pswd, resDB.MDP, function(err, resCrypt){
+            if(resCrypt){
+              console.log("MDP PAREIL")
+              var token = jwt.generateTokenForUser(resDB.IDCompte)
+              res.cookie('Token',token,{maxAge:600*1000})
+              res.redirect('/program')
+            }
+            else{
+              console.log("MDP DIFFERENT")
+              res.redirect('/')
+            }
+          })
+
           
         }
         else{
