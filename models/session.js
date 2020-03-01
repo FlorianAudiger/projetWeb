@@ -51,6 +51,17 @@ class session{
         });
     }
 
+    static count (idS, cb){
+        console.log(idS)
+        db.query("SELECT COUNT(IDExercice) as nb FROM seconstitue, seance WHERE seconstitue.IDSeance=? AND seance.IDSeance=?",
+        [idS,idS]
+        ,function(err, result){
+            if(err) throw err;
+            console.log("SUP Seance")
+            cb(result)
+        });
+    }
+
 }
 
 module.exports = session;

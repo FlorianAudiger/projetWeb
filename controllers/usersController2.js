@@ -12,7 +12,8 @@ module.exports = {
                 exer.aExerciseAllRecord(req.params.id,jwt.idAccountToken(token), function(resDB2){
                     exer.aExerciseAllDate(req.params.id,jwt.idAccountToken(token), function(resDB3){
                         console.log(resDB2[0].PoidsMax)
-                        res.render('users/exercise', {resDB, resDB2, resDB3});
+                        //var a = res.json(resDB2)
+                        res.render('users/exercise', {resDB, resDB3});
             })
         })
     })

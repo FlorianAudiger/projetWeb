@@ -12,7 +12,7 @@
   <form action="/program/session/<%=resDB1[0].IDSeance %>" method="post">
     <br></br>
     <div class="input-group mb-3">
-      <select type="text" name="exercice" required>
+      <select type="text" name="exercice" class="custom-select" required>
         <!-- <optgroup label="Couleur"></optgroup> -->
         <% for (ses of resDB2) { %>
         <option> <%- ses.Nom -%> </option>

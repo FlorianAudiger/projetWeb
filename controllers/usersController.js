@@ -51,6 +51,18 @@ module.exports = {
                 else{
                     pro.aProgram(req.params.id, function(resDB1){
                         ses.allSessions(req.params.id, function(resDB2){
+                            console.log("OK")
+                            var tabCount = []
+                            for(let pas = 0; pas < resDB2.length; pas++){
+                                ses.count(resDB2[pas].IDSeance, function(resDB3){
+                                    tabCount[pas]=resDB3[0]
+                                    console.log(tabCount)
+                                })
+                                console.log("CECI DOIT S AFFICHER APRES")
+                            }
+                          
+
+
                             res.render('users/session', {resDB1, resDB2});
                         })
             })

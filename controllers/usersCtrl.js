@@ -56,6 +56,23 @@ module.exports = {
           res.redirect('/')
     }
     })
+  },
+  setting_get1: function (req, res, next) {
+    const token = req.cookies["Token"]
+    res.redirect("setting/"+jwt.idAccountToken(token))
+  },
+  setting_get2: function (req, res, next) {
+    const token = req.cookies["Token"]
+    if(!jwt.verifToken(token)){
+            res.redirect('/login')
+    }
+    else{
+      account.select(req.params.id, function(resDB){
+        res.render("users/setting",{resDB})
+      })
+    }
+
+      
   }
 
 }
