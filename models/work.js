@@ -22,7 +22,23 @@ class work{
         });
     }
 
-    
+    static deleteByIdWork (idS,idE, cb){
+        db.query("DELETE FROM `seconstitue` WHERE IDExercice=? AND IDSeance=?",[idE,idS]
+        ,function(err, result){
+            if(err) throw err;
+            console.log("SUP Seance")
+            cb(result)
+        });
+    }
+    static deleteByIdSession (content, cb){
+        console.log(content)
+        db.query("DELETE FROM `seconstitue` WHERE IDSeance=?",[content]
+        ,function(err, result){
+            if(err) throw err;
+            console.log("SUP Seance")
+            cb(result)
+        });
+    }
    
 }
 

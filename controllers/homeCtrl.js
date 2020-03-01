@@ -29,7 +29,9 @@ module.exports = {
     login_get: function(req, res, next) {
         res.render('login');
     },
-
+    index_get: function(req, res, next) {
+      res.render('index');
+  },
     logout_get:function(req, res, next) {
       res.clearCookie("Token");
       res.redirect('../');

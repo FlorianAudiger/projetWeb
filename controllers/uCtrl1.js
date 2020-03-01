@@ -35,10 +35,13 @@ module.exports = {
                 res.redirect('/login')
             }
         else{ //Token OK
-*/
-            pro.delete(req.params.id, function(resDB){
-            res.redirect('/program');
+*/          
+            //ses.allSessions(req.params.id, function(resDB1){
+              //  console.log(resDB1)
+                 pro.delete(req.params.id, function(resDB2){
+                    res.redirect('/program');
             })
+       //})
     },
     session_get: function(req, res, next) {
         const token = req.cookies["Token"]
@@ -51,19 +54,16 @@ module.exports = {
                 else{
                     pro.aProgram(req.params.id, function(resDB1){
                         ses.allSessions(req.params.id, function(resDB2){
-                            console.log("OK")
+
                             var tabCount = []
                             for(let pas = 0; pas < resDB2.length; pas++){
                                 ses.count(resDB2[pas].IDSeance, function(resDB3){
                                     tabCount[pas]=resDB3[0]
-                                    console.log(tabCount)
+                                    
                                 })
-                                console.log("CECI DOIT S AFFICHER APRES")
                             }
-                          
-
-
-                            res.render('users/session', {resDB1, resDB2});
+                            console.log(tabCount[0])
+                            res.render('users/session', {resDB1, tabCount, resDB2});
                         })
             })
             }
@@ -98,7 +98,7 @@ module.exports = {
               })
         }
     },    
-        work_post: function (req, res, next) {
+    work_post: function (req, res, next) {
         //On est forcément login ici
         exer.selectIdByName(req.body.exercice, function(resDB1){
         var idEx =resDB1;
@@ -107,6 +107,12 @@ module.exports = {
             res.redirect('back');
             })
         })
-    }
+    },
+    deleteWork_get: function (req, res, next) {
+        var sess= req.params.id1
+              work.deleteByIdWork(req.params.id1, req.params.id2, function(resDB){
+                res.redirect('/program/session/'+sess);
+              })
+      },
 }
     

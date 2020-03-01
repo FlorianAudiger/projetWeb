@@ -1,10 +1,9 @@
 var express = require('express');
 var router = express.Router();
-var uCtrl = require('../controllers/usersController2')
+var uCtrl = require('../controllers/uCtrl2')
 
-/* GET users listing. */
-
-// On est dans /program
+// Router Exercises
+// ! /exercise
 
 router.get('/', uCtrl.allExercises_get)
 router.get('/:id', uCtrl.exercise_get)

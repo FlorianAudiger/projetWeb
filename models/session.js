@@ -1,4 +1,5 @@
 const db = require('../config/db')
+const work = require('./work')
 
 class session{
     static allSessions (content, cb){
@@ -33,7 +34,7 @@ class session{
         });
     }
     static deleteByIdProgram (content, cb){
-        console.log(content)
+        console.log("Tu plantes ici")
         db.query("DELETE FROM `seance` WHERE IDProgramme=?",[content]
         ,function(err, result){
             if(err) throw err;
@@ -43,12 +44,14 @@ class session{
     }
     static deleteByIdSession (content, cb){
         console.log(content)
+        work.deleteByIdSession(content, function(){
         db.query("DELETE FROM `seance` WHERE IDSeance=?",[content]
         ,function(err, result){
             if(err) throw err;
             console.log("SUP Seance")
             cb(result)
         });
+    })
     }
 
     static count (idS, cb){

@@ -84,7 +84,6 @@ create table Programme (
 
 create table Seance (
      IDSeance int not null AUTO_INCREMENT,
-     Ordre int not null,
      Nom varchar(30) not null,
      IDProgramme int not null,
      constraint ID_Seance_ID primary key (IDSeance));
@@ -96,7 +95,6 @@ create table seConstitue (
      Serie int not null,
      Repetition int not null,
      Poids int,
-     Ordre int not null,
      constraint ID_seConstitue_ID primary key (IDExercice, IDSeance));
 
 
