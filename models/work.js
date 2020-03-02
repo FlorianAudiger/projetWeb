@@ -10,8 +10,12 @@ class work{
             ,function(err, result){
                 if(err) throw err;
                 console.log("Insert exo")
-                cb(result)
+                db.query("UPDATE `seance` SET nbreEx=nbreEx+1 WHERE IDSeance=?",[idS]
+                ,function(err, result2){
+                    if(err) throw err;
+                    cb(result)
             });
+        });
     }
 
     static allExercises (content, cb){
@@ -27,7 +31,11 @@ class work{
         ,function(err, result){
             if(err) throw err;
             console.log("SUP Seance")
-            cb(result)
+            db.query("UPDATE `seance` SET nbreEx=nbreEx-1 WHERE IDSeance=?",[idS]
+            ,function(err, result2){
+                if(err) throw err;
+                cb(result)
+        });
         });
     }
     static deleteByIdSession (content, cb){
@@ -36,7 +44,11 @@ class work{
         ,function(err, result){
             if(err) throw err;
             console.log("SUP Seance")
-            cb(result)
+            db.query("UPDATE `seance` SET nbreEx=nbreEx-1 WHERE IDSeance=?",[content]
+            ,function(err, result2){
+                if(err) throw err;
+                cb(result)
+        });
         });
     }
    

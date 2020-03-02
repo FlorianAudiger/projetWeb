@@ -86,6 +86,7 @@ create table Seance (
      IDSeance int not null AUTO_INCREMENT,
      Nom varchar(30) not null,
      IDProgramme int not null,
+     nbreEx int not null,
      constraint ID_Seance_ID primary key (IDSeance));
 
 create table seConstitue (

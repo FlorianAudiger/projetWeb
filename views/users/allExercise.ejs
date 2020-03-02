@@ -36,7 +36,10 @@
   <% for (exer of resDB) { %>
     <div class="col mb-2">
   <div class="card text-center">
-    <img src="img/im.jpg"  class="card-img-top" alt="...">
+
+    <% if(exer.IDMateriel==1){ %> <img src="img/exercises/aucun.png"  class="card-img-top" alt="..."><% } %>
+    <% if(exer.IDMateriel==3){ %> <img src="img/exercises/haltere.png"  class="card-img-top" alt="..."><% } %>
+    <% if(exer.IDMateriel==6){ %> <img src="img/exercises/machine.png"  class="card-img-top" alt="..."><% } %>
     <div class="card-body">
       <h5 class="card-title"><%= exer.Nom %></h5>
       <p class="card-text"><%= exer.Description %></p>

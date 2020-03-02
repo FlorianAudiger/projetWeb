@@ -16,6 +16,7 @@ INSERT INTO mensuration SET Nom="Mollet";
 INSERT INTO mensuration SET Nom="Torse";
 INSERT INTO mensuration SET Nom="Epaule";
 -- Matériel
+INSERT INTO `materiel` (`Nom`) VALUES ('Aucun');
 INSERT INTO `materiel` (`Nom`) VALUES ('Élastique');
 INSERT INTO `materiel` (`Nom`) VALUES ('Haltère');
 INSERT INTO `materiel` (`Nom`) VALUES ('Vélo elliptiques');
@@ -33,22 +34,27 @@ INSERT INTO `muscle` (`Nom`) VALUES ('Pectoraux');
 INSERT INTO `muscle` (`Nom`) VALUES ('Deltoides');
 INSERT INTO `muscle` (`Nom`) VALUES ('Dos');
 -- Exercice
-INSERT INTO `exercice` (`Nom`, `Description`, `Cardio`) VALUES ('Pompe', 'Pompe basique', '0');
+INSERT INTO `exercice` (`Nom`, `Description`, `Cardio`, `IDMateriel`) VALUES ('Pompe', 'Pompe basique', '0', '1');
 INSERT INTO `cible` (`IDExercice`, `IDMuscle`) VALUES ('1', '5');
 INSERT INTO `cible` (`IDExercice`, `IDMuscle`) VALUES ('1', '6');
 
-INSERT INTO `exercice` (`Nom`, `Description`, `Cardio`) VALUES ('Crunch', 'Au sol sur le dos avec les genoux pliés. Courber les coudes vers le bassin.', '0');
+INSERT INTO `exercice` (`Nom`, `Description`, `Cardio`, `IDMateriel`) VALUES ('Crunch', 'Au sol sur le dos avec les genoux pliés. Courber les coudes vers le bassin.', '0', '1');
 INSERT INTO `cible` (`IDExercice`, `IDMuscle`) VALUES ('2', '1');
 
-INSERT INTO `exercice` (`Nom`, `Description`, `Cardio`) VALUES ('Relevé de jambe', 'Au sol sur le dos droit. Remonter une jambe une par une.', '0');
+INSERT INTO `exercice` (`Nom`, `Description`, `Cardio`, `IDMateriel`) VALUES ('Relevé de jambe', 'Au sol sur le dos droit. Remonter une jambe une par une.', '0', '1');
 INSERT INTO `cible` (`IDExercice`, `IDMuscle`) VALUES ('3', '1');
 
-INSERT INTO `exercice` (`Nom`, `Description`, `Cardio`) VALUES ('Gainage', 'Se positionner face au sol, en appui sur les pointes de pied et les avant-bras, coudes à l aplomb des épaules.', '1');
+INSERT INTO `exercice` (`Nom`, `Description`, `Cardio`, `IDMateriel`) VALUES ('Gainage', 'Se positionner face au sol, en appui sur les pointes de pied et les avant-bras, coudes à l aplomb des épaules.', '0','1');
 INSERT INTO `cible` (`IDExercice`, `IDMuscle`) VALUES ('4', '1');
 
-INSERT INTO `exercice` (`Nom`, `Description`, `Cardio`, `IDMateriel`) VALUES ('Curl marteau', 'Une haltère dans chaque main, remontée à la verticale une par une jusqu aux épaules', '0', '2');
+INSERT INTO `exercice` (`Nom`, `Description`, `Cardio`, `IDMateriel`) VALUES ('Curl marteau', 'Une haltère dans chaque main, remontée à la verticale une par une jusqu aux épaules', '0', '3');
 INSERT INTO `cible` (`IDExercice`, `IDMuscle`) VALUES ('5', '2');
 
-INSERT INTO `exercice` (`Nom`, `Description`, `Cardio`, `IDMateriel`) VALUES ('Curl concentré', 'Assis, une haltère dans une main, remontée à la l horizontal', '0', '2');
+INSERT INTO `exercice` (`Nom`, `Description`, `Cardio`, `IDMateriel`) VALUES ('Curl concentré', 'Assis, une haltère dans une main, remontée à la l horizontal', '0', '3');
 INSERT INTO `cible` (`IDExercice`, `IDMuscle`) VALUES ('6', '2');
 
+INSERT INTO `exercice` (`Nom`, `Description`, `Cardio`, `IDMateriel`) VALUES ('Extension triceps avec haltère', 'Assis, une haltère dans une main, bras tendu à la verticale, remontée en arrière', '0', '3');
+INSERT INTO `cible` (`IDExercice`, `IDMuscle`) VALUES ('7', '3');
+
+INSERT INTO `exercice` (`Nom`, `Description`, `Cardio`, `IDMateriel`) VALUES ('Presse', 'Remonté de poids à l aide des jambes sur machine', '0', '6');
+INSERT INTO `cible` (`IDExercice`, `IDMuscle`) VALUES ('8', '4');

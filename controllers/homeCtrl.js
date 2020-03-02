@@ -5,7 +5,7 @@ const jwt = require("../config/jwt")
 
 // Constants
 const EMAIL_REGEX     = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-const PASSWORD_REGEX  = /^(?=.*\d).{4,8}$/;
+const PASSWORD_REGEX  = /^(?=.*\d).{4,16}$/;
 
 
 module.exports = {
@@ -13,6 +13,27 @@ module.exports = {
         account.boolMail(req.body, function (resDB) {
           if(resDB!=undefined){
             res.cookie('Register',"L'adresse mail existe déjà",{maxAge:5*1000})
+            res.redirect('/register')
+          }
+          else if (req.body.mail==null || req.body.pswd[0]== null || req.body.firstname==null || req.body.lastname==null){
+            res.cookie('Register',"Un des champs est vide",{maxAge:5*1000})
+            res.redirect('/register')
+          }
+
+          else if (req.body.firstname.length >= 20 || req.body.lastname.length >= 20) {
+            res.cookie('Register',"Votre nom dépasse la taille limite",{maxAge:5*1000})
+            res.redirect('/register')
+          }
+          else if(!EMAIL_REGEX.test(req.body.mail)){
+            res.cookie('Register',"L'adresse mail ne respecte pas le bon format",{maxAge:5*1000})
+            res.redirect('/register')
+          }
+          else if(!PASSWORD_REGEX.test(req.body.pswd[0])) {
+            res.cookie('Register',"Le mot de passe doit contenir au moins 1 chiffre et au moins 4 caractères",{maxAge:5*1000})
+            res.redirect('/register')
+          }
+          else if(req.body.pswd[0]!=req.body.pswd[1]) {
+            res.cookie('Register',"Le mot de passe n'est pas identique",{maxAge:5*1000})
             res.redirect('/register')
           }
           else{
@@ -23,10 +44,10 @@ module.exports = {
                 res.cookie('Register',"Votre inscription a eu lieu avec succès",{maxAge:5*1000})
                 res.redirect('/register')
             })
-
         })
       }
       })
+      //res.redirect('/register')
     },
     register_get: function(req, res, next) {
       const cookie = req.cookies["Register"]
