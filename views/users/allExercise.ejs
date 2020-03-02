@@ -7,7 +7,32 @@
   <h1> Liste de tous les exercices </h1>
 </div>
 <div class="container">
-<div class="row row-cols-1 row-cols-4">
+
+  <form action="/exercise" method="post">
+    <br></br>
+    <div class="input-group mb-3">
+      <select type="text" name="muscle" class="custom-select" required>
+        <option>Tous les muscles</option>
+        <% for (muscle of resDB2) { %>
+        <option> <%- muscle.Nom -%> </option>
+        <% } %>
+      </select>
+      <select type="text" name="materiel" class="custom-select" required>
+        <option>Tous les matériels</option>
+        <% for (materiel of resDB3) { %>
+        <option> <%- materiel.Nom -%> </option>
+        <% } %>
+      </select>
+      <div class="input-group-append">
+        <button class="btn btn-info" type="submit" id="button-addon2"> Filtrer </button>
+      </div>
+    </div>
+</form>
+
+
+
+
+<div class="row row-cols-1 row-cols-3">
   <% for (exer of resDB) { %>
     <div class="col mb-2">
   <div class="card text-center">

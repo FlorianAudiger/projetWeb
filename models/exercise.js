@@ -10,6 +10,45 @@ class exercise{
             cb(result)
         });
     }
+    static allExercisesByEquipment (content, cb){
+        db.query("SELECT exercice.Nom, exercice.Description FROM exercice, materiel WHERE materiel.Nom=? AND materiel.IDMateriel=exercice.IDMateriel", [content],
+        function(err, result){
+            if(err) throw err;
+            cb(result)
+        });
+    }
+    static allExercisesByMuscle (content, cb){
+        console.log(content)
+        db.query("SELECT exercice.Nom, exercice.Description FROM exercice, cible, muscle WHERE muscle.Nom=? AND muscle.IDMuscle=cible.IDMuscle AND cible.IDExercice = exercice.IDExercice", [content],
+        function(err, result){
+            if(err) throw err;
+            cb(result)
+        });
+    }
+    static allExerciceByEquipmentMuscle (idMa, idMu, cb){
+        console.log(idMa,idMu)
+        db.query("SELECT e.Nom, e.Description FROM materiel AS ma, exercice AS e, cible AS c, muscle AS mu WHERE mu.Nom=? AND mu.IDMuscle=c.IDMuscle AND c.IDExercice = e.IDExercice AND ma.Nom=? AND ma.IDMateriel=e.IDMateriel",
+        [idMu,idMa],
+        function(err, result){
+            console.log(result)
+            if(err) throw err;
+            cb(result)
+        });
+    }
+
+
+    static allMuscles (cb){
+        db.query("SELECT * FROM muscle",function(err, result){
+            if(err) throw err;
+            cb(result)
+        });
+    }
+    static allEquipments (cb){
+        db.query("SELECT * FROM materiel",function(err, result){
+            if(err) throw err;
+            cb(result)
+        });
+    }
 
     static aExercise (content,id, cb){
         db.query("SELECT * FROM exercice, fait WHERE fait.IDExercice = ? AND exercice.IDExercice=? AND fait.IDCompte=?",[content,content,id],

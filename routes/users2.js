@@ -8,6 +8,8 @@ const verifyToken = require("../config/jwtVerif");
 // ! /exercise
 
 router.get('/', verifyToken, uCtrl.allExercises_get)
+router.post('/', verifyToken, uCtrl.allExercises_post)
+
 router.get('/:id', verifyToken, uCtrl.exercise_get)
 router.post('/:id', verifyToken, uCtrl.addRecord_post)
 

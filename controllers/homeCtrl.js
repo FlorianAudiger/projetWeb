@@ -20,9 +20,7 @@ module.exports = {
             bcrypt.hash(req.body.pswd[0], 6, function(err, psw){
               req.body.pswd[0]=psw
               account.create(req.body, function(){
-                console.log("Votre inscription a eu lieu avec succès")
                 res.cookie('Register',"Votre inscription a eu lieu avec succès",{maxAge:5*1000})
-                
                 res.redirect('/register')
             })
 
