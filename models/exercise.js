@@ -50,7 +50,16 @@ class exercise{
         });
     }
 
-    static aExercise (content,id, cb){
+    static aExercise (content, cb){
+        console.log(content)
+
+        db.query("SELECT * FROM exercice WHERE exercice.IDExercice=?",[content],
+        function(err, result){
+            if(err) throw err;
+            cb(result)
+        });
+    }
+    static aExerciseRecordDate (content,id, cb){
         db.query("SELECT * FROM exercice, fait WHERE fait.IDExercice = ? AND exercice.IDExercice=? AND fait.IDCompte=?",[content,content,id],
         function(err, result){
             if(err) throw err;
@@ -65,7 +74,7 @@ class exercise{
         });
     }
     static aExerciseAllDate (content,id, cb){
-        db.query("SELECT DATE_FORMAT(Date,'%d/%m/%Y') FROM exercice, fait WHERE fait.IDExercice = ? AND exercice.IDExercice=? AND fait.IDCompte=?",[content,content,id],
+        db.query("SELECT DATE_FORMAT(Date,'%d/%m/%Y') as Date FROM exercice, fait WHERE fait.IDExercice = ? AND exercice.IDExercice=? AND fait.IDCompte=?",[content,content,id],
         function(err, result){
             if(err) throw err;
             cb(result)
@@ -87,25 +96,6 @@ class exercise{
             cb(result)
         })
     }
-  /*  static createDate (content, cb){
-        console.log("DEBUT DATE")
-        db.query("SELECT Date FROM date where Date=?", [content.date],
-        function(err, result){
-            if(err) throw err;
-            
-            if(result[0]==undefined){
-                db.query("INSERT INTO date (`Date`) VALUES (?)", [content.date], function(res){
-                    cb(res)
-                    console.log("AJOUTER")
-                })
-            }
-            else{
-                cb(result)
-                console.log("NON AJOUTER")
-            }  
-        })
-    }
-*/
 
 }
 

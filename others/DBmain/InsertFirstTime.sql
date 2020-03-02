@@ -33,6 +33,7 @@ INSERT INTO `muscle` (`Nom`) VALUES ('Jambes');
 INSERT INTO `muscle` (`Nom`) VALUES ('Pectoraux');
 INSERT INTO `muscle` (`Nom`) VALUES ('Deltoides');
 INSERT INTO `muscle` (`Nom`) VALUES ('Dos');
+INSERT INTO `muscle` (`Nom`) VALUES ('Fessiers');
 -- Exercice
 INSERT INTO `exercice` (`Nom`, `Description`, `Cardio`, `IDMateriel`) VALUES ('Pompe', 'Pompe basique', '0', '1');
 INSERT INTO `cible` (`IDExercice`, `IDMuscle`) VALUES ('1', '5');

@@ -5,16 +5,24 @@ module.exports = {
     exercise_get: function(req, res, next) {
         const token = req.cookies["Token"]
      //Gerer erreur si on cherche dans la barre URL un exo plus loin
-            
-            exer.aExercise(req.params.id,jwt.idAccountToken(token), function(resDB){
+    
+            exer.aExercise(req.params.id, function(resDB){
+                exer.aExerciseRecordDate(req.params.id,jwt.idAccountToken(token), function(resDB4){
                 exer.aExerciseAllRecord(req.params.id,jwt.idAccountToken(token), function(resDB2){
                     exer.aExerciseAllDate(req.params.id,jwt.idAccountToken(token), function(resDB3){
-
-                        //var a = res.json(resDB2)
-                        //res.render('users/exercise', {title: "Exercice", resDB, resDB3});
+                        var allRecord = []
+                        for(let i = 0; i < resDB2.length; i++){
+                            allRecord.push(resDB2[i].PoidsMax)
+                        }
+                        var allDate = []
+                        for(let i = 0; i < resDB3.length; i++){
+                            allDate.push(resDB3[i].Date)
+                        }
+                        res.render('users/exercise', {title: "Exercice", resDB, allRecord, allDate, resDB4});
             })
         })
     })
+})
           
     },
     allExercises_get: function(req, res, next) {

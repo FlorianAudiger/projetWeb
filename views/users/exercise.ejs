@@ -11,7 +11,10 @@
   <form action="/exercise/<%=resDB[0].IDExercice %>" method="post">
    <br></br>
    <div class="input-group mb-3">
-     <input type="number" name="poidsmax" placeholder="Poids maximum" class="form-control" required>
+    <% if(resDB[0].IDMateriel==1){ %>
+      <input type="number" name="poidsmax" placeholder="Nombre de répétitions maximale" class="form-control" required> <% } %>
+      <% if(resDB[0].IDMateriel!=1){ %>
+     <input type="number" name="poidsmax" placeholder="Poids maximal" class="form-control" required> <% } %>
      <input type="date" name="date" placeholder="Date format (MM/DD)" class="form-control" required>
      <div class="input-group-append">
        <button class="btn btn-primary" type="submit" id="button-addon2"> Ajouter </button>
@@ -29,14 +32,14 @@
 
   <div class="list-group">   
     
-    <% for (exer of resDB) { %>
+    <% for (exer of resDB4) { %>
 
      <a class="button list-group-item list-group-item-action">
        <div class="row">
          <div class="col-4">
        <p class="text-left font-weight-bold"><%=exer.PoidsMax%></p></div>
        <div class="col-4">
-       <p class="text-right font-italic"><%=exer.Date.toLocaleDateString("en-FR")%></p></div> 
+       <p class="text-right font-italic"><%=exer.Date.toLocaleDateString("en-FR")%></p></div>
        <div class="col-4 text-right">
         <form action="/" method="get">
          <button type="submit" class="btn btn-danger"> Supprimer </button>
@@ -50,56 +53,32 @@
  </div>
 
 
-<%- include('../footer') -%>
+
 </body>
 </html>
 
 <script>
-  var ctx = document.getElementById('myChart').getContext('2d');
-  var tab = [12, 19, 3, 5, 2, 3];
- /* 
- for (exer of resDB2) {
-  tab.push(exer.TempsRepos);
-  }
+var ctx = document.getElementById('myChart').getContext('2d');
+var chart = new Chart(ctx, {
+    // The type of chart we want to create
+    type: 'line',
 
-*/
-console.log(resDB2)
-//tab[2]=resDB2[0].PoidsMax;
-
-  var myChart = new Chart(ctx, {
-    type: 'bar',
+    // The data for our dataset
     data: {
-        labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],
+        labels: [<%=allDate%>],
         datasets: [{
-            label: '# of Votes',
-            data: tab,
-            backgroundColor: [
-                'rgba(255, 99, 132, 0.2)',
-                'rgba(54, 162, 235, 0.2)',
-                'rgba(255, 206, 86, 0.2)',
-                'rgba(75, 192, 192, 0.2)',
-                'rgba(153, 102, 255, 0.2)',
-                'rgba(255, 159, 64, 0.2)'
-            ],
-            borderColor: [
-                'rgba(255, 99, 132, 1)',
-                'rgba(54, 162, 235, 1)',
-                'rgba(255, 206, 86, 1)',
-                'rgba(75, 192, 192, 1)',
-                'rgba(153, 102, 255, 1)',
-                'rgba(255, 159, 64, 1)'
-            ],
-            borderWidth: 1
+            label: 'Record',
+            backgroundColor: 'rgb(255, 99, 132)',
+            borderColor: 'rgb(255, 99, 132)',
+            data: [<%=allRecord%>]
         }]
     },
+
+    // Configuration options go here
     options: {
-        scales: {
-            yAxes: [{
-                ticks: {
-                    beginAtZero: true
-                }
-            }]
-        }
+				responsive: true,
+
     }
+		
 });
 </script>
