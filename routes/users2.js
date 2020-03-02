@@ -1,11 +1,17 @@
 var express = require('express');
 var router = express.Router();
-var uCtrl = require('../controllers/usersController2')
+var uCtrl = require('../controllers/uCtrl2')
 
-/* GET users listing. */
+const verifyToken = require("../config/jwtVerif");
 
-// On est dans /program
+// Router Exercises
+// ! /exercise
 
-router.get('/', uCtrl.exercise_get)
+router.get('/', verifyToken, uCtrl.allExercises_get)
+router.post('/', verifyToken, uCtrl.allExercises_post)
+
+router.get('/:id', verifyToken, uCtrl.exercise_get)
+router.post('/:id', verifyToken, uCtrl.addRecord_post)
+
 
 module.exports = router;

@@ -1,0 +1,63 @@
+<%- include('header') -%>
+
+<body>
+  
+<div class="jumbotron text-center">
+
+  <h1> Mon profil </h1>
+</div>
+<div class="container">
+  
+  <div class="row">
+    <div class="col">
+    </div>
+
+    <div class="col-7">
+
+      <div class="card">
+
+  <div class="card-body text-center">
+    <p> Adresse e-mail actuelle</p>
+    <form action="/settings/<%=resDB[0].IDCompte %>" method="post" class="needs-validation" novalidate>
+  <div class="form-group">
+    <input type="text" class="form-control" id="mail" placeholder="<%=resDB[0].Mail %>" name="mail" disabled>
+  </div>
+  <p> Nouvel e-mail</p>
+  <div class="form-group">
+    <input type="text" class="form-control" id="mail" placeholder="Adresse email" name="mail" required>
+  </div>
+  <button type="submit" class="btn btn-info">&nbsp;Envoyer&nbsp;</button>
+</form>
+
+<form action="/settings/<%=resDB[0].IDCompte %>" method="post" class="needs-validation" novalidate></form>
+  <div class="form-group">
+    <p> <br></br> Ancien mot de passe </p>
+    <input type="password" class="form-control" id="pwd" placeholder="Ancien mot de passe" name="pswd" required>
+  </div>
+  <div class="form-group">
+    <p> Nouveau mot de passe </p>
+    <input type="password" class="form-control" id="pwd" placeholder="Nouveau mot de passe" name="pswd" required>
+    
+  </div>
+  <button type="submit" class="btn btn-info">&nbsp;Envoyer&nbsp;</button>
+</form>
+<br></br><br></br>
+
+  </div>
+</div>
+
+    </div>
+    <div class="col">
+
+    </div>
+  </div>
+
+
+
+
+</div>
+
+</body>
+
+<%- include('../footer') -%>
+</html>

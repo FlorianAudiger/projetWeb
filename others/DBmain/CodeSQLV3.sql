@@ -37,10 +37,6 @@ create table Compte (
      Prenom varchar(30) not null,
      constraint ID_Compte_ID primary key (IDCompte));
 
-create table Date (
-     Date date not null,
-     constraint ID_Date_ID primary key (Date));
-
 create table Exercice (
      IDExercice int not null AUTO_INCREMENT,
      Nom varchar(30) not null,
@@ -50,11 +46,12 @@ create table Exercice (
      constraint ID_Exercice_ID primary key (IDExercice));
 
 create table fait (
+     IDFait int not null AUTO_INCREMENT,
      IDCompte int not null,
      Date date not null,
      IDExercice int not null,
      PoidsMax int not null,
-     constraint ID_fait_ID primary key (IDExercice, Date, IDCompte));
+     constraint ID_fait_ID primary key (IDFait));
 
 create table Materiel (
      IDMateriel int not null AUTO_INCREMENT,
@@ -76,7 +73,7 @@ create table possede (
      Date date not null,
      IDMensuration int not null,
      Valeur int not null,
-     constraint ID_possede_ID primary key (Date, IDCompte, IDMensuration));
+     constraint ID_possede_ID primary key (IDCompte, IDMensuration));
 
 create table Programme (
      IDProgramme int not null AUTO_INCREMENT,
@@ -87,7 +84,6 @@ create table Programme (
 
 create table Seance (
      IDSeance int not null AUTO_INCREMENT,
-     Ordre int not null,
      Nom varchar(30) not null,
      IDProgramme int not null,
      constraint ID_Seance_ID primary key (IDSeance));
@@ -99,7 +95,6 @@ create table seConstitue (
      Serie int not null,
      Repetition int not null,
      Poids int,
-     Ordre int not null,
      constraint ID_seConstitue_ID primary key (IDExercice, IDSeance));
 
 
@@ -136,14 +131,6 @@ alter table Exercice add constraint FKutilise_FK
      foreign key (IDMateriel)
      references Materiel (IDMateriel);
 
-alter table fait add constraint FKfai_Exe
-     foreign key (IDExercice)
-     references Exercice (IDExercice);
-
-alter table fait add constraint FKfai_Dat_FK
-     foreign key (Date)
-     references Date (Date);
-
 alter table fait add constraint FKfai_Com_FK
      foreign key (IDCompte)
      references Compte (IDCompte);
@@ -151,10 +138,6 @@ alter table fait add constraint FKfai_Com_FK
 alter table possede add constraint FKpos_Men_FK
      foreign key (IDMensuration)
      references Mensuration (IDMensuration);
-
-alter table possede add constraint FKpos_Dat
-     foreign key (Date)
-     references Date (Date);
 
 alter table possede add constraint FKpos_Com_FK
      foreign key (IDCompte)
@@ -200,20 +183,11 @@ create index FKcib_Exe_IND
 create unique index ID_Compte_IND
      on Compte (IDCompte);
 
-create unique index ID_Date_IND
-     on Date (Date);
-
 create unique index ID_Exercice_IND
      on Exercice (IDExercice);
 
 create index FKutilise_IND
      on Exercice (IDMateriel);
-
-create unique index ID_fait_IND
-     on fait (IDExercice, Date, IDCompte);
-
-create index FKfai_Dat_IND
-     on fait (Date);
 
 create index FKfai_Com_IND
      on fait (IDCompte);
@@ -228,7 +202,7 @@ create unique index ID_Muscle_IND
      on Muscle (IDMuscle);
 
 create unique index ID_possede_IND
-     on possede (Date, IDCompte, IDMensuration);
+     on possede (IDCompte, IDMensuration);
 
 create index FKpos_Men_IND
      on possede (IDMensuration);

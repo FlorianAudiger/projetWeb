@@ -15,10 +15,17 @@
     <h4 class="card-title"> Connexion </h4>
 </div>
   <div class="card-body">
+
+
     <h5 class="card-title">Connectez-vous avec votre adresse email</h5>
     <form action="/login" method="post" class="needs-validation" novalidate>
   <div class="form-group">
-    <br></br>
+    <% if(error!=undefined){ %>
+      <div class="alert alert-danger" role="alert">
+        <%- error -%>
+      </div><%}%>
+      <% if(error==undefined){%> <div class="alert alert-light" role="alert"></div><%} %>
+
     <input type="text" class="form-control" id="uname" placeholder="Adresse email" name="mail" required>
 
     <div class="invalid-feedback">Veuillez remplir ce champ</div>
@@ -28,10 +35,7 @@
     <input type="password" class="form-control" id="pwd" placeholder="Mot de passe" name="pswd" required>
     <div class="invalid-feedback">Veuillez remplir ce champ</div>
   </div>
-  <div class="custom-control custom-checkbox">
-    <input type="checkbox" class="custom-control-input" id="customCheck1">
-    <label class="custom-control-label" for="customCheck1">Se souvenir de moi</label>
-  </div>
+
   <div class="row"> <div class="col-lg-8"></div>&nbsp;</div> <!-- Saut vide -->
   <button type="submit" class="btn btn-info">Se connecter</button>
 </form>

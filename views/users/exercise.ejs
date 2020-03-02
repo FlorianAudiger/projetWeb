@@ -4,27 +4,102 @@
   
 <div class="jumbotron text-center">
 
-  <h1> Mes exercices </h1>
+  <h1> <%=resDB[0].Nom %> </h1>
 </div>
-<div class="container">
 
-  <div class="list-group">
-  
+<div class="container">
+  <form action="/exercise/<%=resDB[0].IDExercice %>" method="post">
+   <br></br>
+   <div class="input-group mb-3">
+     <input type="number" name="poidsmax" placeholder="Poids maximum" class="form-control" required>
+     <input type="date" name="date" placeholder="Date format (MM/DD)" class="form-control" required>
+     <div class="input-group-append">
+       <button class="btn btn-primary" type="submit" id="button-addon2"> Ajouter </button>
+     </div>
+   </div>
+ </form>
+ 
+ <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.3/Chart.min.js"></script>
+ <div class="container">
+<h1>Graphique</h1>
+<canvas id="myChart"></canvas>
+ </div>
+
+
+
+  <div class="list-group">   
+    
     <% for (exer of resDB) { %>
-     
-      <a class="button list-group-item list-group-item-action" href= "/program">
-        <div class="row">
-          <div class="col-4">
-        <p class="text-left font-weight-bold"><%= exer.Nom %></p></div>
-        <div class="col-4">
-        <p class="text-right font-italic"><%= exer.Description %>&nbsp;</p></div> 
-        <div class="col-4 text-right">
-        </div>
-      </div>
-      </a>
-<% } %>
-</div>
-</div>
+
+     <a class="button list-group-item list-group-item-action">
+       <div class="row">
+         <div class="col-4">
+       <p class="text-left font-weight-bold"><%=exer.PoidsMax%></p></div>
+       <div class="col-4">
+       <p class="text-right font-italic"><%=exer.Date.toLocaleDateString("en-FR")%></p></div> 
+       <div class="col-4 text-right">
+        <form action="/" method="get">
+         <button type="submit" class="btn btn-danger"> Supprimer </button>
+        </form> 
+       </div>
+     </div>
+     </a>
+     <% } %>
+ </div>
+  
+ </div>
+
+
 <%- include('../footer') -%>
 </body>
 </html>
+
+<script>
+  var ctx = document.getElementById('myChart').getContext('2d');
+  var tab = [12, 19, 3, 5, 2, 3];
+ /* 
+ for (exer of resDB2) {
+  tab.push(exer.TempsRepos);
+  }
+
+*/
+console.log(resDB2)
+//tab[2]=resDB2[0].PoidsMax;
+
+  var myChart = new Chart(ctx, {
+    type: 'bar',
+    data: {
+        labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],
+        datasets: [{
+            label: '# of Votes',
+            data: tab,
+            backgroundColor: [
+                'rgba(255, 99, 132, 0.2)',
+                'rgba(54, 162, 235, 0.2)',
+                'rgba(255, 206, 86, 0.2)',
+                'rgba(75, 192, 192, 0.2)',
+                'rgba(153, 102, 255, 0.2)',
+                'rgba(255, 159, 64, 0.2)'
+            ],
+            borderColor: [
+                'rgba(255, 99, 132, 1)',
+                'rgba(54, 162, 235, 1)',
+                'rgba(255, 206, 86, 1)',
+                'rgba(75, 192, 192, 1)',
+                'rgba(153, 102, 255, 1)',
+                'rgba(255, 159, 64, 1)'
+            ],
+            borderWidth: 1
+        }]
+    },
+    options: {
+        scales: {
+            yAxes: [{
+                ticks: {
+                    beginAtZero: true
+                }
+            }]
+        }
+    }
+});
+</script>

@@ -2,7 +2,7 @@
 var jwt = require('jsonwebtoken');
 
 const JWT_KEY = '56697665204e6f64654a73';
-const jwtExpSec = 600
+const jwtExpSec = 604800
 
 // Exported functions
 module.exports = {

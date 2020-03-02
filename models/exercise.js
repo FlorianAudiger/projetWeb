@@ -10,6 +10,102 @@ class exercise{
             cb(result)
         });
     }
+    static allExercisesByEquipment (content, cb){
+        db.query("SELECT exercice.Nom, exercice.Description FROM exercice, materiel WHERE materiel.Nom=? AND materiel.IDMateriel=exercice.IDMateriel", [content],
+        function(err, result){
+            if(err) throw err;
+            cb(result)
+        });
+    }
+    static allExercisesByMuscle (content, cb){
+        console.log(content)
+        db.query("SELECT exercice.Nom, exercice.Description FROM exercice, cible, muscle WHERE muscle.Nom=? AND muscle.IDMuscle=cible.IDMuscle AND cible.IDExercice = exercice.IDExercice", [content],
+        function(err, result){
+            if(err) throw err;
+            cb(result)
+        });
+    }
+    static allExerciceByEquipmentMuscle (idMa, idMu, cb){
+        console.log(idMa,idMu)
+        db.query("SELECT e.Nom, e.Description FROM materiel AS ma, exercice AS e, cible AS c, muscle AS mu WHERE mu.Nom=? AND mu.IDMuscle=c.IDMuscle AND c.IDExercice = e.IDExercice AND ma.Nom=? AND ma.IDMateriel=e.IDMateriel",
+        [idMu,idMa],
+        function(err, result){
+            console.log(result)
+            if(err) throw err;
+            cb(result)
+        });
+    }
+
+
+    static allMuscles (cb){
+        db.query("SELECT * FROM muscle",function(err, result){
+            if(err) throw err;
+            cb(result)
+        });
+    }
+    static allEquipments (cb){
+        db.query("SELECT * FROM materiel",function(err, result){
+            if(err) throw err;
+            cb(result)
+        });
+    }
+
+    static aExercise (content,id, cb){
+        db.query("SELECT * FROM exercice, fait WHERE fait.IDExercice = ? AND exercice.IDExercice=? AND fait.IDCompte=?",[content,content,id],
+        function(err, result){
+            if(err) throw err;
+            cb(result)
+        });
+    }
+    static aExerciseAllRecord (content,id, cb){
+        db.query("SELECT PoidsMax FROM exercice, fait WHERE fait.IDExercice = ? AND exercice.IDExercice=? AND fait.IDCompte=?",[content,content,id],
+        function(err, result){
+            if(err) throw err;
+            cb(result)
+        });
+    }
+    static aExerciseAllDate (content,id, cb){
+        db.query("SELECT DATE_FORMAT(Date,'%d/%m/%Y') FROM exercice, fait WHERE fait.IDExercice = ? AND exercice.IDExercice=? AND fait.IDCompte=?",[content,content,id],
+        function(err, result){
+            if(err) throw err;
+            cb(result)
+        });
+    }
+    static selectIdByName (name, cb){
+        console.log(name)
+        db.query("SELECT IDExercice FROM exercice WHERE exercice.Nom=?", [name],
+        function(err, result){
+            if(err) throw err;
+            cb(result[0].IDExercice)
+        });
+    }
+
+    static createRecord (content,idC,idE, cb){
+        db.query("INSERT INTO `fait` (`IDCompte`,`IDExercice`,`PoidsMax`,`Date`) VALUES (?,?,?,?)", [idC,idE,content.poidsmax,content.date],
+        function(err, result){
+            if(err) throw err;
+            cb(result)
+        })
+    }
+  /*  static createDate (content, cb){
+        console.log("DEBUT DATE")
+        db.query("SELECT Date FROM date where Date=?", [content.date],
+        function(err, result){
+            if(err) throw err;
+            
+            if(result[0]==undefined){
+                db.query("INSERT INTO date (`Date`) VALUES (?)", [content.date], function(res){
+                    cb(res)
+                    console.log("AJOUTER")
+                })
+            }
+            else{
+                cb(result)
+                console.log("NON AJOUTER")
+            }  
+        })
+    }
+*/
 
 }
 
