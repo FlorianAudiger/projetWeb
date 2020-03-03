@@ -15,28 +15,32 @@
     <div class="col-7">
 
       <div class="card">
-
-  <div class="card-body text-center">
+        <div class="card-body text-center">
+        <% if(error!=undefined){ %>
+          <div class="alert alert-danger" role="alert">
+            <%- error -%>
+          </div><%}%>
+  
     <p> Adresse e-mail actuelle</p>
-    <form action="/settings/<%=resDB[0].IDCompte %>" method="post" class="needs-validation" novalidate>
+  <form action="/setting/mail/<%=resDB[0].IDCompte %>" method="post" class="needs-validation" novalidate>
   <div class="form-group">
-    <input type="text" class="form-control" id="mail" placeholder="<%=resDB[0].Mail %>" name="mail" disabled>
+    <input type="mail" class="form-control" id="mail1" placeholder="<%=resDB[0].Mail %>" name="mail" disabled>
   </div>
   <p> Nouvel e-mail</p>
   <div class="form-group">
-    <input type="text" class="form-control" id="mail" placeholder="Adresse email" name="mail" required>
+    <input type="mail" class="form-control" id="mail2" placeholder="Adresse email" name="mail" required>
   </div>
   <button type="submit" class="btn btn-info">&nbsp;Envoyer&nbsp;</button>
 </form>
 
-<form action="/settings/<%=resDB[0].IDCompte %>" method="post" class="needs-validation" novalidate></form>
+<form action="/setting/pswd/<%=resDB[0].IDCompte %>" method="post" class="needs-validation" novalidate>
   <div class="form-group">
     <p> <br></br> Ancien mot de passe </p>
-    <input type="password" class="form-control" id="pwd" placeholder="Ancien mot de passe" name="pswd" required>
+    <input type="password" class="form-control" id="pwd1" placeholder="Ancien mot de passe" name="pswd1" required>
   </div>
   <div class="form-group">
     <p> Nouveau mot de passe </p>
-    <input type="password" class="form-control" id="pwd" placeholder="Nouveau mot de passe" name="pswd" required>
+    <input type="password" class="form-control" id="pwd2" placeholder="Nouveau mot de passe" name="pswd2" required>
     
   </div>
   <button type="submit" class="btn btn-info">&nbsp;Envoyer&nbsp;</button>

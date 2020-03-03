@@ -18,6 +18,7 @@ module.exports = {
                         for(let i = 0; i < resDB3.length; i++){
                             allDate.push(resDB3[i].Date)
                         }
+
                         res.render('users/exercise', {title: "Exercice", resDB, allRecord, allDate, resDB4});
             })
         })

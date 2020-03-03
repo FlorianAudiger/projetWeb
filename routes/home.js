@@ -23,6 +23,7 @@ router.get('/logout', verifyToken, homeCtrl.logout_get)
 //Setting
 router.get('/setting', verifyToken, homeCtrl.setting_get1)
 router.get('/setting/:id', verifyToken, homeCtrl.setting_get2)
-//router.post('/', uCtrl.login_post)
+router.post('/setting/mail/:id', verifyToken, homeCtrl.setting_post1)
+router.post('/setting/pswd/:id', verifyToken, homeCtrl.setting_post2)
 
 module.exports = router;

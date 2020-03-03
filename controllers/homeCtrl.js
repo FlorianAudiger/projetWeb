@@ -15,7 +15,7 @@ module.exports = {
             res.cookie('Register',"L'adresse mail existe déjà",{maxAge:5*1000})
             res.redirect('/register')
           }
-          else if (req.body.mail==null || req.body.pswd[0]== null || req.body.firstname==null || req.body.lastname==null){
+          else if (req.body.mail=='' || req.body.pswd[0]== '' || req.body.firstname=='' || req.body.lastname==''){
             res.cookie('Register',"Un des champs est vide",{maxAge:5*1000})
             res.redirect('/register')
           }
@@ -92,16 +92,68 @@ module.exports = {
   },
   setting_get2: function (req, res, next) {
     const token = req.cookies["Token"]
+    const cookie = req.cookies["Setting"]
     if(!jwt.verifToken(token)){
             res.redirect('/login')
     }
     else{
       account.select(req.params.id, function(resDB){
-        res.render("users/setting",{title: "Paramètres", resDB})
+        res.render("users/setting",{title: "Paramètres", resDB, error: cookie})
       })
     }
 
       
-  }
+  },    
+  setting_post1: function(req, res){
+      account.boolMail(req.body, function (resDB) {
+      if(resDB!=undefined){
+        res.cookie('Setting',"L'adresse mail existe déjà",{maxAge:5*1000})
+        res.redirect('back')
+      }
+      else if (req.body.mail==''){
+        res.cookie('Setting',"Un des champs est vide",{maxAge:5*1000})
+        res.redirect('back')
+      }
+      else if(!EMAIL_REGEX.test(req.body.mail)){
+        res.cookie('Setting',"L'adresse mail ne respecte pas le bon format",{maxAge:5*1000})
+        res.redirect('back')
+      }
+      else{
+          account.updateMail(req.body.mail,req.params.id, function(){
+            res.cookie('Register',"Votre changement de mail a eu lieu avec succès",{maxAge:5*1000})
+            res.redirect('back')
+        })
 
+  }
+  })
+  //res.redirect('/register')
+},
+setting_post2: function(req, res){
+        if (req.body.pswd1== '' || req.body.pswd2==''){
+          res.cookie('Setting',"Un des champs est vide",{maxAge:5*1000})
+          res.redirect('back')
+        }
+        else if(!PASSWORD_REGEX.test(req.body.pswd2)) {
+          res.cookie('Setting',"Le mot de passe doit contenir au moins 1 chiffre et au moins 4 caractères",{maxAge:5*1000})
+          res.redirect('back')
+        }
+        else if(req.body.pswd1==req.body.pswd2) {
+          res.cookie('Setting',"Les mot de passe sont identiques",{maxAge:5*1000})
+          res.redirect('back')
+        }
+        else{
+          console.log(req.body.pswd2)
+          // VErifier que bon mot de passe
+          //
+          bcrypt.hash(req.body.pswd2, 6, function(err, psw){
+            req.body.pswd2=psw
+            account.updatePswd(req.body.pswd2,req.params.id, function(){
+              res.cookie('Setting',"Votre changement de mot de passe a eu lieu avec succès",{maxAge:5*1000})
+              res.redirect('back')
+          })
+      })
+      }
+}
+
+//res.redirect('/register')
 }
