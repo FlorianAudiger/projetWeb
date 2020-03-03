@@ -25,14 +25,6 @@ class account{
         });
     }
 
-    static checkLogin (content, cb){ // Enlever ?
-        console.log(content)
-            db.query("SELECT MDP FROM compte WHERE Mail=?", [content.mail]
-            ,function(err, result){
-                if(err) throw err;
-                cb(result[0])
-            });
-    }
     static select (content, cb){
         db.query("SELECT * FROM compte WHERE IDCompte = ?",[content]
         ,function(err, result){

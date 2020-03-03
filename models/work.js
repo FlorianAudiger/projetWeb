@@ -26,8 +26,8 @@ class work{
         });
     }
 
-    static deleteByIdWork (idS,idE, cb){
-        db.query("DELETE FROM `seconstitue` WHERE IDExercice=? AND IDSeance=?",[idE,idS]
+    static deleteByIdWork (idS,idE,idW, cb){
+        db.query("DELETE FROM `seconstitue` WHERE IDExercice=? AND IDSeance=? AND IDWork=?",[idE,idS,idW]
         ,function(err, result){
             if(err) throw err;
             console.log("SUP Seance")

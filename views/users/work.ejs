@@ -46,7 +46,7 @@
       <div class="col text-right">
         <p class="text-right font-italic"><%= exer.Poids %>&nbsp;</p></div> 
         <div class="col-2 text-right">
-       <form action="/program/session/<%=resDB1[0].IDSeance %>/deleteExercise/<%=exer.IDExercice%>" method="get">
+       <form action="/program/session/<%=resDB1[0].IDSeance %>/deleteExercise/<%=exer.IDExercice%>/<%=exer.IDWork%>" method="get">
         <button type="submit" class="btn btn-danger"> Supprimer </button>
        </form> 
       </div>

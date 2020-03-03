@@ -8,30 +8,35 @@ const exer = require("../models/exercise")
 module.exports = {
     program_get: function(req, res, next) {
         const token = req.cookies["Token"]
+        const cookie = req.cookies["Programme"]
         pro.allPrograms(jwt.idAccountToken(token), function(resDB){
-            res.render('users/program', {title: "Mes programmes", resDB});
+            res.render('users/program', {title: "Mes programmes", resDB, msg:cookie});
         })
     },
 
     addProgram_post: function (req, res, next) {
         const token = req.cookies["Token"]
         pro.create(req.body, jwt.idAccountToken(token), function(resDB){
+            res.cookie('Programme',["Ajout d'un programme avec succès",2],{maxAge:5*1000})
             res.redirect('/program');
         })
     },
 
     deleteProgram_get: function (req, res, next) {
-        /*const token = req.cookies["Token"]
-        if(!jwt.verifToken(token)){
-                res.redirect('/login')
-            }
-        else{ //Token OK
-*/          
+
             //ses.allSessions(req.params.id, function(resDB1){
               //  console.log(resDB1)
+              try{
                  pro.delete(req.params.id, function(resDB2){
+                    res.cookie('Programme',["Suppression d'un programme avec succès",2],{maxAge:5*1000})
                     res.redirect('/program');
-            })
+                })
+                 }
+                 catch{
+                    res.cookie('Programme',["Erreur",1],{maxAge:5*1000})
+                    res.redirect('/program');
+                 }
+            
        //})
     },
     session_get: function(req, res, next) {
@@ -91,7 +96,7 @@ module.exports = {
     },
     deleteWork_get: function (req, res, next) {
         var sess= req.params.id1
-              work.deleteByIdWork(req.params.id1, req.params.id2, function(resDB){
+              work.deleteByIdWork(req.params.id1, req.params.id2, req.params.id3, function(resDB){
                 res.redirect('/program/session/'+sess);
               })
       },

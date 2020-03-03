@@ -17,6 +17,6 @@ router.get('/:id1/deleteSession/:id2', verifyToken, uCtrl.deleteSession_get)
 
 router.get('/session/:id', verifyToken, uCtrl.work_get)
 router.post('/session/:id', verifyToken, uCtrl.work_post)
-router.get('/session/:id1/deleteExercise/:id2', verifyToken, uCtrl.deleteWork_get)
+router.get('/session/:id1/deleteExercise/:id2/:id3', verifyToken, uCtrl.deleteWork_get)
 
 module.exports = router;
