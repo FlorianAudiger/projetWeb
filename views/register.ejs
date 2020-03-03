@@ -18,16 +18,8 @@
   <div class="card-body">
     <h5 class="card-title">Inscrivez-vous avec votre adresse email</h5>
     
-    <% if(error=="Votre inscription a eu lieu avec succès"){ %>
-      <div class="alert alert-success" role="alert">
-        <%- error -%>
-      </div><%}%>
-     <% if(error!="Votre inscription a eu lieu avec succès" && error!=undefined){ %>
-      <div class="alert alert-danger" role="alert">
-        <%- error -%>
-      </div><%}%>
-      <% if(error==undefined){%> <div class="alert alert-light" role="alert"></div><%} %>
-
+    <%- include('alert') -%>
+    
     <form action="/register" method="post" class="needs-validation" novalidate>
   <div class="form-group">
     

@@ -16,10 +16,7 @@
 
       <div class="card">
         <div class="card-body text-center">
-        <% if(error!=undefined){ %>
-          <div class="alert alert-danger" role="alert">
-            <%- error -%>
-          </div><%}%>
+          <%- include('../alert') -%>
   
     <p> Adresse e-mail actuelle</p>
   <form action="/setting/mail/<%=resDB[0].IDCompte %>" method="post" class="needs-validation" novalidate>
