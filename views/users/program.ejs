@@ -1,14 +1,13 @@
 <%- include('header') -%>
 
 <body>
-  
 <div class="jumbotron text-center">
-
   <h1> Mes Programmes </h1>
 </div>
+
 <div class="container">
+  <%- include('../alert') -%>
   <form action="/program" method="post">
-    <br></br>
     <div class="input-group mb-3">
       <input type="text" name="name" placeholder="Nom du nouveau programme" class="form-control" required>
       <input type="text" name="description" placeholder="Description (facultatif)" class="form-control">
@@ -43,6 +42,5 @@
 </div>
 
 </body>
-
 <%- include('../footer') -%>
 </html>

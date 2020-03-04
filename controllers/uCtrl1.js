@@ -8,35 +8,37 @@ const exer = require("../models/exercise")
 module.exports = {
     program_get: function(req, res, next) {
         const token = req.cookies["Token"]
+        const cookie = req.cookies["Programme"]
         pro.allPrograms(jwt.idAccountToken(token), function(resDB){
-            res.render('users/program', {title: "Mes programmes", resDB});
+            res.render('users/program', {title: "Mes programmes", resDB, msg:cookie});
         })
     },
 
     addProgram_post: function (req, res, next) {
         const token = req.cookies["Token"]
         pro.create(req.body, jwt.idAccountToken(token), function(resDB){
+            res.cookie('Programme',["Ajout d'un programme avec succès",2],{maxAge:5*1000})
             res.redirect('/program');
         })
     },
 
     deleteProgram_get: function (req, res, next) {
-        /*const token = req.cookies["Token"]
-        if(!jwt.verifToken(token)){
-                res.redirect('/login')
-            }
-        else{ //Token OK
-*/          
+
             //ses.allSessions(req.params.id, function(resDB1){
               //  console.log(resDB1)
+
                  pro.delete(req.params.id, function(resDB2){
+                    res.cookie('Programme',["Suppression d'un programme avec succès",2],{maxAge:5*1000})
                     res.redirect('/program');
-            })
+                })
+                 
+
+            
        //})
     },
     session_get: function(req, res, next) {
         const token = req.cookies["Token"]
-
+        const cookie = req.cookies["Session"]
             pro.programAcces(jwt.idAccountToken(token),req.params.id, function(resDB){ //Vérifie si on a accès au programme
                 if(resDB[0] ==undefined){res.redirect("/program")}
                 else{
@@ -51,7 +53,7 @@ module.exports = {
                                 })
                             }
                             console.log(tabCount[0])
-                            res.render('users/session', {title: "Mes séances",resDB1, tabCount, resDB2});
+                            res.render('users/session', {title: "Mes séances", msg:cookie, resDB1, tabCount, resDB2});
                         })
             })
             }
@@ -60,6 +62,7 @@ module.exports = {
     addSession_post: function (req, res, next) {
         //On est forcément login ici
         ses.create(req.body, req.params.id, function(resDB){
+            res.cookie('Session',["Ajout d'une séance avec succès",2],{maxAge:5*1000})
             res.redirect('back');
             })
           },
@@ -67,14 +70,16 @@ module.exports = {
     deleteSession_get: function (req, res, next) {
             var prog= req.params.id1
                   ses.deleteByIdSession(req.params.id2, function(resDB){
+                    res.cookie('Session',["Suppression d'une séance avec succès",2],{maxAge:5*1000})
                     res.redirect('/program/'+prog);
                   })
           },
           work_get: function(req, res, next) {
+            const cookie = req.cookies["Work"]
                 ses.aSession(req.params.id, function(resDB1){
                     exer.allExercises(function(resDB2){
                         work.allExercises(req.params.id, function(resDB3){
-                            res.render('users/work',{title: "Mes exercices", resDB1, resDB2, resDB3})
+                            res.render('users/work',{title: "Mes exercices",msg:cookie, resDB1, resDB2, resDB3})
                         })
                     })
               })
@@ -85,14 +90,17 @@ module.exports = {
         var idEx =resDB1;
         console.log(idEx)
         work.create(req.body, req.params.id, idEx, function(resDB2){
+            res.cookie('Work',["Ajout d'un exercice avec succès",2],{maxAge:5*1000})
             res.redirect('back');
             })
         })
     },
     deleteWork_get: function (req, res, next) {
         var sess= req.params.id1
-              work.deleteByIdWork(req.params.id1, req.params.id2, function(resDB){
+              work.deleteByIdWork(req.params.id1, req.params.id2, req.params.id3, function(resDB){
+                res.cookie('Work',["Suppression d'un exercice avec succès",2],{maxAge:5*1000})
                 res.redirect('/program/session/'+sess);
+                
               })
       },
 }

@@ -18,39 +18,26 @@
   <div class="card-body">
     <h5 class="card-title">Inscrivez-vous avec votre adresse email</h5>
     
-    <% if(error=="Votre inscription a eu lieu avec succès"){ %>
-      <div class="alert alert-success" role="alert">
-        <%- error -%>
-      </div><%}%>
-     <% if(error!="Votre inscription a eu lieu avec succès" && error!=undefined){ %>
-      <div class="alert alert-danger" role="alert">
-        <%- error -%>
-      </div><%}%>
-      <% if(error==undefined){%> <div class="alert alert-light" role="alert"></div><%} %>
-
+    <%- include('alert') -%>
+    
     <form action="/register" method="post" class="needs-validation" novalidate>
   <div class="form-group">
     
     <input type="text" class="form-control" id="firstName" placeholder="Prenom" name="firstname" required>
-    <div class="invalid-feedback">Please fill out this field.</div>
   </div>
   <div class="form-group">
     <input type="text" class="form-control" id="lastName" placeholder="Nom" name="lastname" required>
-    <div class="invalid-feedback">Please fill out this field.</div>
   </div>
   <div class="form-group">
-    <input type="text" class="form-control" id="mail" placeholder="Adresse email" name="mail" required>
-    <div class="invalid-feedback">Please fill out this field.</div>
+    <input type="email" class="form-control" id="mail" placeholder="Adresse email" name="mail" required>
   </div>
   <div class="form-group">
     <label for="pwd"></label>
-    <input type="password" class="form-control" id="pwd" placeholder="Mot de passe" name="pswd" required>
-    <div class="invalid-feedback">Please fill out this field.</div>
+    <input type="password" class="form-control" id="pwd" placeholder="Mot de passe (min. 1 chiffre et 3 lettres)" name="pswd" required>
   </div>
   <div class="form-group">
     <label for="pwd"></label>
     <input type="password" class="form-control" id="pwd" placeholder="Confirmez votre Mot de passe" name="pswd" required>
-    <div class="invalid-feedback">Please fill out this field.</div>
   </div>
   <div class="custom-control custom-checkbox">
     <input type="checkbox" class="custom-control-input" id="customCheck1" required>

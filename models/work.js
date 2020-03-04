@@ -10,8 +10,12 @@ class work{
             ,function(err, result){
                 if(err) throw err;
                 console.log("Insert exo")
-                cb(result)
+                db.query("UPDATE `seance` SET nbreEx=nbreEx+1 WHERE IDSeance=?",[idS]
+                ,function(err, result2){
+                    if(err) throw err;
+                    cb(result)
             });
+        });
     }
 
     static allExercises (content, cb){
@@ -22,12 +26,16 @@ class work{
         });
     }
 
-    static deleteByIdWork (idS,idE, cb){
-        db.query("DELETE FROM `seconstitue` WHERE IDExercice=? AND IDSeance=?",[idE,idS]
+    static deleteByIdWork (idS,idE,idW, cb){
+        db.query("DELETE FROM `seconstitue` WHERE IDExercice=? AND IDSeance=? AND IDWork=?",[idE,idS,idW]
         ,function(err, result){
             if(err) throw err;
             console.log("SUP Seance")
-            cb(result)
+            db.query("UPDATE `seance` SET nbreEx=nbreEx-1 WHERE IDSeance=?",[idS]
+            ,function(err, result2){
+                if(err) throw err;
+                cb(result)
+        });
         });
     }
     static deleteByIdSession (content, cb){
@@ -36,6 +44,19 @@ class work{
         ,function(err, result){
             if(err) throw err;
             console.log("SUP Seance")
+            db.query("UPDATE `seance` SET nbreEx=nbreEx-1 WHERE IDSeance=?",[content]
+            ,function(err, result2){
+                if(err) throw err;
+                cb(result)
+        });
+        });
+    }
+
+    static cleanWork (cb){
+        db.query("DELETE FROM seconstitue WHERE IDWork NOT IN(SELECT IDWork FROM seance, seconstitue WHERE seance.IDSeance = seconstitue.IDSeance)"
+        ,function(err, result){
+            if(err) throw err;
+            console.log("CLEAN OK")
             cb(result)
         });
     }

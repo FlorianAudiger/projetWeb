@@ -17,17 +17,31 @@ class account{
             cb(result[0])
         });
     }
-
-    static checkLogin (content, cb){ // Enlever ?
-        console.log(content)
-            db.query("SELECT MDP FROM compte WHERE Mail=?", [content.mail]
-            ,function(err, result){
-                if(err) throw err;
-                cb(result[0])
-            });
+    static boolPswd (content, id, cb){
+        db.query("SELECT * FROM compte WHERE MDP=? AND IDCompte = ?", [content, id]
+        ,function(err, result){
+            if(err) throw err;
+            cb(result[0])
+        });
     }
+
     static select (content, cb){
         db.query("SELECT * FROM compte WHERE IDCompte = ?",[content]
+        ,function(err, result){
+            if(err) throw err;
+            cb(result)
+        });
+    }
+
+    static updateMail (content, id, cb){
+        db.query("UPDATE compte SET Mail= ? WHERE IDCompte =?",[content, id]
+        ,function(err, result){
+            if(err) throw err;
+            cb(result)
+        });
+    }
+    static updatePswd (content, id, cb){
+        db.query("UPDATE compte SET MDP= ? WHERE IDCompte =?",[content, id]
         ,function(err, result){
             if(err) throw err;
             cb(result)

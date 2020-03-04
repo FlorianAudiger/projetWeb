@@ -11,7 +11,7 @@
 
  <div class="container">
  <form action="/program/<%=resDB1[0].IDProgramme %>" method="post">
-  <br></br>
+  <%- include('../alert') -%>
   <div class="input-group mb-3">
     <input type="text" name="name" placeholder="Nom nouvelle séance" class="form-control" required>
     <div class="input-group-append">
@@ -32,7 +32,7 @@
         <div class="col-4">
       <p class="text-left font-weight-bold"><%= ses.Nom %></p></div>
       <div class="col-4">
-      <p class="text-right font-italic"><%= ses.Ordre %>&nbsp;</p></div> 
+      <p class="text-right"><%= ses.nbreEx %> exercice(s)</p></div> 
       <div class="col-4 text-right">
        <form action="/program/<%=resDB1[0].IDProgramme %>/deleteSession/<%=ses.IDSeance %>" method="get">
         <button type="submit" class="btn btn-danger"> Supprimer </button>

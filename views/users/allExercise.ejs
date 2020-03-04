@@ -7,7 +7,7 @@
   <h1> Liste de tous les exercices </h1>
 </div>
 <div class="container">
-
+  <%- include('../alert') -%>
   <form action="/exercise" method="post">
     <br></br>
     <div class="input-group mb-3">
@@ -36,11 +36,19 @@
   <% for (exer of resDB) { %>
     <div class="col mb-2">
   <div class="card text-center">
-    <img src="img/im.jpg"  class="card-img-top" alt="...">
+<!-- FAIRE UNE FONCTION -->
+    <% if(exer.IDMateriel==1){ %> <img src="img/exercises/aucun.png"  class="card-img-top" alt="..."><% } %>
+    <% if(exer.IDMateriel==3){ %> <img src="img/exercises/haltere.png"  class="card-img-top" alt="..."><% } %>
+    <% if(exer.IDMateriel==6){ %> <img src="img/exercises/machine.png"  class="card-img-top" alt="..."><% } %>
     <div class="card-body">
       <h5 class="card-title"><%= exer.Nom %></h5>
-      <p class="card-text"><%= exer.Description %></p>
-      <a href="/exercise/<%=exer.IDExercice %>" class="btn btn-primary">Statistique</a>
+   
+      <div class="row">
+        <div class="col">
+      <a href="/exercise/<%=exer.IDExercice %>" class="btn btn-primary btn-block">Stats</a></div>
+      <div class="col">
+        <a href="<%=exer.Description%>" class="btn btn-secondary btn-block">Vidéo</a></div>
+    </div>
     </div>
   </div>
 </div>

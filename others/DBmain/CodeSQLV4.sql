@@ -90,13 +90,14 @@ create table Seance (
      constraint ID_Seance_ID primary key (IDSeance));
 
 create table seConstitue (
+     IDWork int not null AUTO_INCREMENT,
      IDExercice int not null,
      IDSeance int not null,
      TempsRepos int not null,
      Serie int not null,
      Repetition int not null,
      Poids int,
-     constraint ID_seConstitue_ID primary key (IDExercice, IDSeance));
+     constraint ID_seConstitue_ID primary key (IDWork));
 
 
 -- Constraints Section
@@ -157,13 +158,6 @@ alter table Seance add constraint FKconcerne_FK
      foreign key (IDProgramme)
      references Programme (IDProgramme);
 
-alter table seConstitue add constraint FKseC_Sea_FK
-     foreign key (IDSeance)
-     references Seance (IDSeance);
-
-alter table seConstitue add constraint FKseC_Exe
-     foreign key (IDExercice)
-     references Exercice (IDExercice);
 
 
 -- Index Section
@@ -224,7 +218,7 @@ create index FKconcerne_IND
      on Seance (IDProgramme);
 
 create unique index ID_seConstitue_IND
-     on seConstitue (IDExercice, IDSeance);
+     on seConstitue (IDWork);
 
 create index FKseC_Sea_IND
      on seConstitue (IDSeance);

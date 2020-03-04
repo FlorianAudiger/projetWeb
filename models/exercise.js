@@ -11,7 +11,7 @@ class exercise{
         });
     }
     static allExercisesByEquipment (content, cb){
-        db.query("SELECT exercice.Nom, exercice.Description FROM exercice, materiel WHERE materiel.Nom=? AND materiel.IDMateriel=exercice.IDMateriel", [content],
+        db.query("SELECT exercice.Nom, exercice.Description, exercice.IDMateriel FROM exercice, materiel WHERE materiel.Nom=? AND materiel.IDMateriel=exercice.IDMateriel", [content],
         function(err, result){
             if(err) throw err;
             cb(result)
@@ -19,7 +19,7 @@ class exercise{
     }
     static allExercisesByMuscle (content, cb){
         console.log(content)
-        db.query("SELECT exercice.Nom, exercice.Description FROM exercice, cible, muscle WHERE muscle.Nom=? AND muscle.IDMuscle=cible.IDMuscle AND cible.IDExercice = exercice.IDExercice", [content],
+        db.query("SELECT exercice.Nom, exercice.Description, exercice.IDMateriel FROM exercice, cible, muscle WHERE muscle.Nom=? AND muscle.IDMuscle=cible.IDMuscle AND cible.IDExercice = exercice.IDExercice", [content],
         function(err, result){
             if(err) throw err;
             cb(result)
@@ -27,7 +27,7 @@ class exercise{
     }
     static allExerciceByEquipmentMuscle (idMa, idMu, cb){
         console.log(idMa,idMu)
-        db.query("SELECT e.Nom, e.Description FROM materiel AS ma, exercice AS e, cible AS c, muscle AS mu WHERE mu.Nom=? AND mu.IDMuscle=c.IDMuscle AND c.IDExercice = e.IDExercice AND ma.Nom=? AND ma.IDMateriel=e.IDMateriel",
+        db.query("SELECT e.Nom, e.Description, e.IDMateriel FROM materiel AS ma, exercice AS e, cible AS c, muscle AS mu WHERE mu.Nom=? AND mu.IDMuscle=c.IDMuscle AND c.IDExercice = e.IDExercice AND ma.Nom=? AND ma.IDMateriel=e.IDMateriel",
         [idMu,idMa],
         function(err, result){
             console.log(result)
@@ -50,7 +50,16 @@ class exercise{
         });
     }
 
-    static aExercise (content,id, cb){
+    static aExercise (content, cb){
+        console.log(content)
+
+        db.query("SELECT * FROM exercice WHERE exercice.IDExercice=?",[content],
+        function(err, result){
+            if(err) throw err;
+            cb(result)
+        });
+    }
+    static aExerciseRecordDate (content,id, cb){
         db.query("SELECT * FROM exercice, fait WHERE fait.IDExercice = ? AND exercice.IDExercice=? AND fait.IDCompte=?",[content,content,id],
         function(err, result){
             if(err) throw err;
@@ -65,7 +74,7 @@ class exercise{
         });
     }
     static aExerciseAllDate (content,id, cb){
-        db.query("SELECT DATE_FORMAT(Date,'%d/%m/%Y') FROM exercice, fait WHERE fait.IDExercice = ? AND exercice.IDExercice=? AND fait.IDCompte=?",[content,content,id],
+        db.query("SELECT DATE_FORMAT(Date,'%d/%m/%Y') as Date FROM exercice, fait WHERE fait.IDExercice = ? AND exercice.IDExercice=? AND fait.IDCompte=?",[content,content,id],
         function(err, result){
             if(err) throw err;
             cb(result)
@@ -80,33 +89,38 @@ class exercise{
         });
     }
 
+    static recordDate (content,idC,idE, cb){
+        db.query("SELECT * FROM `fait` WHERE IDCompte=? AND IDExercice=? AND Date=?", [idC,idE,content.date],
+        function(err, result){
+            if(err) throw err;
+            cb(result)
+        })
+    }
+
     static createRecord (content,idC,idE, cb){
+        this.recordDate(content,idC,idE, function(resDB){ // IF date already return error
+            if(resDB[0] !=undefined){
+                console.log("date existe deja")
+                cb(0)}
+                else{
         db.query("INSERT INTO `fait` (`IDCompte`,`IDExercice`,`PoidsMax`,`Date`) VALUES (?,?,?,?)", [idC,idE,content.poidsmax,content.date],
         function(err, result){
             if(err) throw err;
             cb(result)
         })
     }
-  /*  static createDate (content, cb){
-        console.log("DEBUT DATE")
-        db.query("SELECT Date FROM date where Date=?", [content.date],
-        function(err, result){
-            if(err) throw err;
-            
-            if(result[0]==undefined){
-                db.query("INSERT INTO date (`Date`) VALUES (?)", [content.date], function(res){
-                    cb(res)
-                    console.log("AJOUTER")
-                })
-            }
-            else{
-                cb(result)
-                console.log("NON AJOUTER")
-            }  
-        })
-    }
-*/
+    })
+}
 
+    static deleteRecordById(idW, cb){        
+    db.query("DELETE FROM `fait` WHERE IDFait=?",[idW]
+    ,function(err, result){
+        if(err) throw err;
+        console.log("SUP Record")
+        cb(result)
+    })
+
+}
 }
 
 module.exports = exercise;

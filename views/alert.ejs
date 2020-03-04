@@ -1,0 +1,11 @@
+<!-- 1 == ERROR ; 2 == succeess-->
+
+<% if(msg==undefined){%> <div class="alert alert-light" role="alert"></div> <%} 
+else if(msg[1]==2){ %>
+  <div class="alert alert-success text-center" role="alert">
+    <%- msg[0] -%>
+  </div><%}else if(msg[1]==1){ %>
+  <div class="alert alert-danger text-center" role="alert">
+    <%- msg[0] -%>
+  </div><%}%>
+
