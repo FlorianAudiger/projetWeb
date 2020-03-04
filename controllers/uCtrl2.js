@@ -88,7 +88,12 @@ module.exports = {
 }
 
     
-}
+},
+deleteRecord_get:function (req, res, next) {
+          exer.deleteRecordById(req.params.id2, function(resDB){
+            res.redirect('/exercise/'+req.params.id1);
+          })
+  }
 }
 
     

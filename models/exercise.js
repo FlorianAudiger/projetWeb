@@ -112,7 +112,15 @@ class exercise{
     })
 }
 
+    static deleteRecordById(idW, cb){        
+    db.query("DELETE FROM `fait` WHERE IDFait=?",[idW]
+    ,function(err, result){
+        if(err) throw err;
+        console.log("SUP Record")
+        cb(result)
+    })
 
+}
 }
 
 module.exports = exercise;
