@@ -70,6 +70,7 @@ module.exports = {
     deleteSession_get: function (req, res, next) {
             var prog= req.params.id1
                   ses.deleteByIdSession(req.params.id2, function(resDB){
+                    res.cookie('Session',["Suppression d'une séance avec succès",2],{maxAge:5*1000})
                     res.redirect('/program/'+prog);
                   })
           },
@@ -97,7 +98,9 @@ module.exports = {
     deleteWork_get: function (req, res, next) {
         var sess= req.params.id1
               work.deleteByIdWork(req.params.id1, req.params.id2, req.params.id3, function(resDB){
+                res.cookie('Work',["Suppression d'un exercice avec succès",2],{maxAge:5*1000})
                 res.redirect('/program/session/'+sess);
+                
               })
       },
 }

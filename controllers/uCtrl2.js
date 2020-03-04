@@ -90,6 +90,7 @@ module.exports = {
     
 },
 deleteRecord_get:function (req, res, next) {
+    res.cookie('Exercise',["Record supprimé avec succès",2],{maxAge:5*1000})
           exer.deleteRecordById(req.params.id2, function(resDB){
             res.redirect('/exercise/'+req.params.id1);
           })
