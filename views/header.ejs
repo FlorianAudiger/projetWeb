@@ -1,9 +1,9 @@
 <!doctype html>
 <html lang="fr">
   <head>
-    <link rel="icon" href="img/Icone.png" />
-    <title><%- title -%> </title>
     <!-- Required meta tags -->
+    <link rel="icon" href="/img/Icone.png" />
+    <title><%- title -%> </title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <!-- Bootstrap CSS -->
@@ -15,7 +15,7 @@
 <nav class="navbar navbar-expand-sm bg-dark navbar-dark">
     <!-- Brand -->
     <a class="navbar-brand" href="/">
-      <img src="img/Icone.png" width="32" height="32" class="d-inline-block align-top" alt="">
+      <img src="/img/Icone.png" width="32" height="32" class="d-inline-block align-top" alt="">
       Suivi Sportif
     </a>
       <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
@@ -23,16 +23,21 @@
     </button>
     <div class="collapse navbar-collapse" id="collapsibleNavbar">
     <ul class="navbar-nav ml-auto">
-        <li class="nav-item active">
+        <li class="nav-item">
+        
           <a class="nav-link" href="login">
-          <button type="button" class="btn btn-primary btn-md my-2 my-sm-0 ml-3">Se connecter</button>
+          <button type="button" class="btn btn-primary btn-md my-2 my-sm-0 ml-2 btn-block">Se connecter</button>
           </a>
+        
         </li>
         <li class="nav-item">
+    
           <a class="nav-link" href="register">
-          <button type="button" class="btn btn-warning btn-md my-2 my-sm-0 ml-3">&nbsp;S'inscrire&nbsp;</button>
+          <button type="button" class="btn btn-danger btn-md my-2 my-sm-0 ml-2 btn-block"> S'inscrire </button>
           </a>
         </li>
+        </div>
+        
     </ul>
     </div>
   </nav>
