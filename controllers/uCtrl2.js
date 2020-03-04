@@ -5,7 +5,7 @@ module.exports = {
     exercise_get: function(req, res, next) {
         const token = req.cookies["Token"]
      //Gerer erreur si on cherche dans la barre URL un exo plus loin
-    
+     const cookie = req.cookies["Exercise"]
             exer.aExercise(req.params.id, function(resDB){
                 exer.aExerciseRecordDate(req.params.id,jwt.idAccountToken(token), function(resDB4){
                 exer.aExerciseAllRecord(req.params.id,jwt.idAccountToken(token), function(resDB2){
@@ -22,7 +22,7 @@ module.exports = {
                             allDate.push(a)
                         }
                         console.log(allDate)
-                        res.render('users/exercise', {title: "Exercice", resDB, allRecord, allDate, resDB4});
+                        res.render('users/exercise', {title: "Exercice", msg:cookie ,resDB, allRecord, allDate, resDB4});
             })
         })
     })
@@ -42,7 +42,14 @@ module.exports = {
     addRecord_post: function(req, res, next) {
             const token = req.cookies["Token"]
             exer.createRecord(req.body, jwt.idAccountToken(token), req.params.id, function(resDB){
-                res.redirect('back');        
+                if(resDB==0){
+                    res.cookie('Exercise',["Il n'est pas possible d'avoir deux record pour une même date",1],{maxAge:5*1000})
+                    res.redirect('back'); 
+                }
+                else{
+                res.cookie('Exercise',["Record ajouté avec succès",2],{maxAge:5*1000})
+                res.redirect('back');    
+                }    
         })
     },
     allExercises_post: function(req, res, next) {

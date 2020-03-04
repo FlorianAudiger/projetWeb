@@ -8,8 +8,8 @@
 </div>
 
 <div class="container">
+  <%- include('../alert') -%>
   <form action="/exercise/<%=resDB[0].IDExercice %>" method="post">
-   <br></br>
    <div class="input-group mb-3">
     <% if(resDB[0].IDMateriel==1){ %>
       <input type="number" name="poidsmax" placeholder="Nombre de répétitions maximale" class="form-control" required> <% } %>
@@ -76,7 +76,7 @@
                             else{ 
                               y=a
                               var mydate = new Date(y,m,d);
-                            allDate2.push(mydate)
+                            allDate2.push(mydate.toLocaleDateString())
                               b=0}
                               console.log(i)
 
@@ -106,11 +106,13 @@ var chart = new Chart(ctx, {
         scales: {
             xAxes: {
                 type: 'time',
+                distribution:'series',
                 time: {
                 displayFormats: {
-                        week: 'MMM YYYY'
+                        week: 'MMM YYYY',
                     }
             }
+            
         }
     }
   }

@@ -89,13 +89,29 @@ class exercise{
         });
     }
 
+    static recordDate (content,idC,idE, cb){
+        db.query("SELECT * FROM `fait` WHERE IDCompte=? AND IDExercice=? AND Date=?", [idC,idE,content.date],
+        function(err, result){
+            if(err) throw err;
+            cb(result)
+        })
+    }
+
     static createRecord (content,idC,idE, cb){
+        this.recordDate(content,idC,idE, function(resDB){ // IF date already return error
+            if(resDB[0] !=undefined){
+                console.log("date existe deja")
+                cb(0)}
+                else{
         db.query("INSERT INTO `fait` (`IDCompte`,`IDExercice`,`PoidsMax`,`Date`) VALUES (?,?,?,?)", [idC,idE,content.poidsmax,content.date],
         function(err, result){
             if(err) throw err;
             cb(result)
         })
     }
+    })
+}
+
 
 }
 
