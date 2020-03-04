@@ -42,8 +42,13 @@
     <% if(exer.IDMateriel==6){ %> <img src="img/exercises/machine.png"  class="card-img-top" alt="..."><% } %>
     <div class="card-body">
       <h5 class="card-title"><%= exer.Nom %></h5>
-      <p class="card-text"><%= exer.Description %></p>
-      <a href="/exercise/<%=exer.IDExercice %>" class="btn btn-primary">Statistique</a>
+   
+      <div class="row">
+        <div class="col">
+      <a href="/exercise/<%=exer.IDExercice %>" class="btn btn-primary btn-block">Stats</a></div>
+      <div class="col">
+        <a href="<%=exer.Description%>" class="btn btn-secondary btn-block">Vidéo</a></div>
+    </div>
     </div>
   </div>
 </div>

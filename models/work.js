@@ -51,6 +51,15 @@ class work{
         });
         });
     }
+
+    static cleanWork (cb){
+        db.query("DELETE FROM seconstitue WHERE IDWork NOT IN(SELECT IDWork FROM seance, seconstitue WHERE seance.IDSeance = seconstitue.IDSeance)"
+        ,function(err, result){
+            if(err) throw err;
+            console.log("CLEAN OK")
+            cb(result)
+        });
+    }
    
 }
 

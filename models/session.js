@@ -29,13 +29,15 @@ class session{
             });
     }
     static deleteByIdProgram (content, cb){
-        console.log("Tu plantes ici")
-        db.query("DELETE FROM `seance` WHERE IDProgramme=?",[content]
-        ,function(err, result){
-            if(err) throw err;
-            console.log("SUP Seance")
-            cb(result)
-        });
+       
+            db.query("DELETE FROM `seance` WHERE IDProgramme=?",[content]
+            ,function(err, result){
+                if(err) throw err;
+                console.log("SUP Seance")
+                work.cleanWork(function(resDB){ })
+                cb(result)
+            });
+       
     }
     static deleteByIdSession (content, cb){
         console.log(content)

@@ -16,7 +16,7 @@ class programs{
         ses.deleteByIdProgram(content, function(){
             db.query("DELETE FROM `programme` WHERE IDProgramme=?",[content]
             ,function(err, result){
-                if(err) throw err;
+                if(err) console.log("DZD")
                 console.log("SUP programme")
                 cb(result)
             });
