@@ -26,22 +26,19 @@ module.exports = {
 
             //ses.allSessions(req.params.id, function(resDB1){
               //  console.log(resDB1)
-              try{
+
                  pro.delete(req.params.id, function(resDB2){
                     res.cookie('Programme',["Suppression d'un programme avec succès",2],{maxAge:5*1000})
                     res.redirect('/program');
                 })
-                 }
-                 catch{
-                    res.cookie('Programme',["Erreur",1],{maxAge:5*1000})
-                    res.redirect('/program');
-                 }
+                 
+
             
        //})
     },
     session_get: function(req, res, next) {
         const token = req.cookies["Token"]
-
+        const cookie = req.cookies["Session"]
             pro.programAcces(jwt.idAccountToken(token),req.params.id, function(resDB){ //Vérifie si on a accès au programme
                 if(resDB[0] ==undefined){res.redirect("/program")}
                 else{
@@ -56,7 +53,7 @@ module.exports = {
                                 })
                             }
                             console.log(tabCount[0])
-                            res.render('users/session', {title: "Mes séances",resDB1, tabCount, resDB2});
+                            res.render('users/session', {title: "Mes séances", msg:cookie, resDB1, tabCount, resDB2});
                         })
             })
             }
@@ -65,6 +62,7 @@ module.exports = {
     addSession_post: function (req, res, next) {
         //On est forcément login ici
         ses.create(req.body, req.params.id, function(resDB){
+            res.cookie('Session',["Ajout d'une séance avec succès",2],{maxAge:5*1000})
             res.redirect('back');
             })
           },
@@ -76,10 +74,11 @@ module.exports = {
                   })
           },
           work_get: function(req, res, next) {
+            const cookie = req.cookies["Work"]
                 ses.aSession(req.params.id, function(resDB1){
                     exer.allExercises(function(resDB2){
                         work.allExercises(req.params.id, function(resDB3){
-                            res.render('users/work',{title: "Mes exercices", resDB1, resDB2, resDB3})
+                            res.render('users/work',{title: "Mes exercices",msg:cookie, resDB1, resDB2, resDB3})
                         })
                     })
               })
@@ -90,6 +89,7 @@ module.exports = {
         var idEx =resDB1;
         console.log(idEx)
         work.create(req.body, req.params.id, idEx, function(resDB2){
+            res.cookie('Work',["Ajout d'un exercice avec succès",2],{maxAge:5*1000})
             res.redirect('back');
             })
         })

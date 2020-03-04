@@ -16,9 +16,12 @@ module.exports = {
                         }
                         var allDate = []
                         for(let i = 0; i < resDB3.length; i++){
-                            allDate.push(resDB3[i].Date)
+                            //allDate.push(resDB3[i].Date)
+                           a = resDB3[i].Date.split("/")
+                            //var mydate = new Date(a[2],a[1],a[0]);
+                            allDate.push(a)
                         }
-
+                        console.log(allDate)
                         res.render('users/exercise', {title: "Exercice", resDB, allRecord, allDate, resDB4});
             })
         })
@@ -27,10 +30,11 @@ module.exports = {
           
     },
     allExercises_get: function(req, res, next) {
+        var msg = undefined;
             exer.allExercises(function(resDB){
                 exer.allMuscles(function(resDB2){
                     exer.allEquipments(function(resDB3){
-                res.render('users/allExercise', {title: "Liste des exercices", resDB, resDB2, resDB3});
+                res.render('users/allExercise', {title: "Liste des exercices", msg, resDB, resDB2, resDB3});
             })
         })
     })
@@ -42,6 +46,9 @@ module.exports = {
         })
     },
     allExercises_post: function(req, res, next) {
+        var msg = ["Filtre actif: \v Muscle: " + req.body.muscle + "---\v Matériel: " + req.body.materiel +"---",2]
+
+        console.log(msg)
         if(req.body.muscle == "Tous les muscles" && req.body.materiel == "Tous les matériels"){
             res.redirect('back'); 
         }
@@ -49,7 +56,7 @@ module.exports = {
             exer.allExercisesByEquipment(req.body.materiel, function(resDB){
                 exer.allMuscles(function(resDB2){
                     exer.allEquipments(function(resDB3){
-                res.render('users/allExercise', {title: "Liste des exercices", resDB, resDB2, resDB3});
+                res.render('users/allExercise', {title: "Liste des exercices", msg, resDB, resDB2, resDB3});
             })
         })
     })
@@ -58,7 +65,7 @@ module.exports = {
             exer.allExercisesByMuscle(req.body.muscle, function(resDB){
                 exer.allMuscles(function(resDB2){
                     exer.allEquipments(function(resDB3){
-                res.render('users/allExercise', {title: "Liste des exercices", resDB, resDB2, resDB3});
+                res.render('users/allExercise', {title: "Liste des exercices", msg, resDB, resDB2, resDB3});
             })
         })
     })
@@ -67,7 +74,7 @@ module.exports = {
             exer.allExerciceByEquipmentMuscle(req.body.materiel, req.body.muscle, function(resDB){
                 exer.allMuscles(function(resDB2){
                     exer.allEquipments(function(resDB3){
-                res.render('users/allExercise', {title: "Liste des exercices", resDB, resDB2, resDB3});
+                res.render('users/allExercise', {title: "Liste des exercices", msg, resDB, resDB2, resDB3});
             })
         })
     }) 

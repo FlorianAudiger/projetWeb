@@ -39,7 +39,7 @@
          <div class="col-4">
        <p class="text-left font-weight-bold"><%=exer.PoidsMax%></p></div>
        <div class="col-4">
-       <p class="text-right font-italic"><%=exer.Date.toLocaleDateString("en-FR")%></p></div>
+       <p class="text-right font-italic"><%=exer.Date.toLocaleDateString()%></p></div>
        <div class="col-4 text-right">
         <form action="/" method="get">
          <button type="submit" class="btn btn-danger"> Supprimer </button>
@@ -58,6 +58,32 @@
 </html>
 
 <script>
+  var allDate2 = []
+  var allDate1 = [<%=allDate%>]
+  var y = 0
+  var m = 0
+  var d = 0
+  var b = 0
+                        for(let i = 0; i < allDate1.length; i++){
+                            //allDate.push(resDB3[i].Date)
+                            var a = allDate1[i]
+                            b++
+                            if(b==1) {
+                              d=a
+
+                            }
+                            else if(b==2) m=a
+                            else{ 
+                              y=a
+                              var mydate = new Date(y,m,d);
+                            allDate2.push(mydate)
+                              b=0}
+                              console.log(i)
+
+                        }
+                        console.log(allDate2)
+
+
 var ctx = document.getElementById('myChart').getContext('2d');
 var chart = new Chart(ctx, {
     // The type of chart we want to create
@@ -65,11 +91,11 @@ var chart = new Chart(ctx, {
   
     // The data for our dataset
     data: {
-        labels: [<%=allDate%>],
+        labels: allDate2,
         datasets: [{
             label: 'Record',
-            backgroundColor: 'rgb(255, 99, 132)',
-            borderColor: 'rgb(255, 99, 132)',
+            backgroundColor: 'rgb(255, 209, 26)',
+            borderColor: 'rgb(255, 209, 26)',
             data: [<%=allRecord%>]
         }]
     },
@@ -80,9 +106,13 @@ var chart = new Chart(ctx, {
         scales: {
             xAxes: {
                 type: 'time',
+                time: {
+                displayFormats: {
+                        week: 'MMM YYYY'
+                    }
             }
         }
     }
-		
+  }
 });
 </script>

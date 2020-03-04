@@ -9,8 +9,8 @@
 </div>
 
 <div class="container">
+  <%- include('../alert') -%>
   <form action="/program/session/<%=resDB1[0].IDSeance %>" method="post">
-    <br></br>
     <div class="input-group mb-3">
       <select type="text" name="exercice" class="custom-select" required>
         <!-- <optgroup label="Couleur"></optgroup> -->

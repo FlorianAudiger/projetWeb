@@ -11,7 +11,7 @@
 
  <div class="container">
  <form action="/program/<%=resDB1[0].IDProgramme %>" method="post">
-  <br></br>
+  <%- include('../alert') -%>
   <div class="input-group mb-3">
     <input type="text" name="name" placeholder="Nom nouvelle séance" class="form-control" required>
     <div class="input-group-append">
