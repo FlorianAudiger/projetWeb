@@ -142,17 +142,24 @@ setting_post2: function(req, res){
           res.redirect('back')
         }
         else{
-          console.log(req.body.pswd2)
-          // VErifier que bon mot de passe
-          //
-          bcrypt.hash(req.body.pswd2, 6, function(err, psw){
-            req.body.pswd2=psw
-            account.updatePswd(req.body.pswd2,req.params.id, function(){
-              res.cookie('Setting',["Votre changement de mot de passe a eu lieu avec succès",2],{maxAge:5*1000})
-              res.redirect('back')
-          })
+          account.select(req.params.id, function (resDB) {
+              bcrypt.compare(req.body.pswd1, resDB[0].MDP, function(err, resCrypt){
+                if(resCrypt){ //pwd ok
+                  bcrypt.hash(req.body.pswd2, 6, function(err, psw){
+                    req.body.pswd2=psw
+                    account.updatePswd(req.body.pswd2,req.params.id, function(){
+                      res.cookie('Setting',["Votre changement de mot de passe a eu lieu avec succès",2],{maxAge:5*1000})
+                      res.redirect('back')
+                  })
+              })
+                }
+                else{
+                  res.cookie('Setting',["Votre mot de passe est incorrect",1],{maxAge:5*1000})
+                  res.redirect('back')
+                }
+              })
       })
-      }
+    }
 }
 
 //res.redirect('/register')
