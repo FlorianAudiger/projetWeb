@@ -93,15 +93,15 @@ module.exports = {
   setting_get2: function (req, res, next) {
     const token = req.cookies["Token"]
     const cookie = req.cookies["Setting"]
-    if(!jwt.verifToken(token)){
-            res.redirect('/login')
-    }
-    else{
+        if(jwt.idAccountToken(token)!=req.params.id){//Vérifie si on a accès au programme
+            res.cookie('Setting',["Vous n'avez pas les droits d'accès",1],{maxAge:5*1000})
+            res.redirect("/setting/"+jwt.idAccountToken(token))}
+        else{
       account.select(req.params.id, function(resDB){
         res.render("users/setting",{title: "Paramètres", resDB, msg: cookie})
       })
-    }
-
+    
+  }
       
   },    
   setting_post1: function(req, res){

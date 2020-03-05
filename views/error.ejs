@@ -1,5 +1,7 @@
-<h1><%= message %></h1>
-<h2><%= error.status %></h2>
 
-<!-- <pre><%= error.stack %></pre> -->
-<pre><%= error.stack %></pre> 
+<%- include('header') -%>
+
+<div class="jumbotron text-center">
+<h2>Error <%= error.status %>: <%= message %></h2>
+</div>
+<!-- <pre><%= error.stack %></pre> --> 

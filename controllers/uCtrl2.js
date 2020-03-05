@@ -4,8 +4,13 @@ const exer = require('../models/exercise')
 module.exports = {
     exercise_get: function(req, res, next) {
         const token = req.cookies["Token"]
-     //Gerer erreur si on cherche dans la barre URL un exo plus loin
      const cookie = req.cookies["Exercise"]
+
+     exer.aExercise(req.params.id, function(resDB){ //Vérifie si on a accès à l'exo
+         if(resDB[0] ==undefined){
+             res.redirect("/exercise")
+            }
+         else{
             exer.aExercise(req.params.id, function(resDB){
                 exer.aExerciseRecordDate(req.params.id,jwt.idAccountToken(token), function(resDB4){
                 exer.aExerciseAllRecord(req.params.id,jwt.idAccountToken(token), function(resDB2){
@@ -27,7 +32,9 @@ module.exports = {
         })
     })
 })
-          
+        
+}  
+    })   
     },
     allExercises_get: function(req, res, next) {
         var msg = undefined;
@@ -90,11 +97,22 @@ module.exports = {
     
 },
 deleteRecord_get:function (req, res, next) {
+
+    const token = req.cookies["Token"]
+    exer.exerciseAcces(jwt.idAccountToken(token),req.params.id1,req.params.id2, function(resDB){ //Vérifie si on a accès au programme
+        if(resDB[0] ==undefined){
+            res.cookie('Exercise',["Vous n'avez pas les droits",1],{maxAge:5*1000})
+            res.redirect("/exercise/"+req.params.id1)}
+        else{
+
     res.cookie('Exercise',["Record supprimé avec succès",2],{maxAge:5*1000})
           exer.deleteRecordById(req.params.id2, function(resDB){
             res.redirect('/exercise/'+req.params.id1);
           })
   }
+})
+}
+
 }
 
     

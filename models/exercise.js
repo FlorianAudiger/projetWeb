@@ -11,7 +11,7 @@ class exercise{
         });
     }
     static allExercisesByEquipment (content, cb){
-        db.query("SELECT exercice.Nom, exercice.Description, exercice.IDMateriel FROM exercice, materiel WHERE materiel.Nom=? AND materiel.IDMateriel=exercice.IDMateriel", [content],
+        db.query("SELECT exercice.Nom, exercice.Description, exercice.IDMateriel, exercice.IDExercice FROM exercice, materiel WHERE materiel.Nom=? AND materiel.IDMateriel=exercice.IDMateriel", [content],
         function(err, result){
             if(err) throw err;
             cb(result)
@@ -19,7 +19,7 @@ class exercise{
     }
     static allExercisesByMuscle (content, cb){
         console.log(content)
-        db.query("SELECT exercice.Nom, exercice.Description, exercice.IDMateriel FROM exercice, cible, muscle WHERE muscle.Nom=? AND muscle.IDMuscle=cible.IDMuscle AND cible.IDExercice = exercice.IDExercice", [content],
+        db.query("SELECT exercice.Nom, exercice.Description, exercice.IDMateriel, exercice.IDExercice FROM exercice, cible, muscle WHERE muscle.Nom=? AND muscle.IDMuscle=cible.IDMuscle AND cible.IDExercice = exercice.IDExercice", [content],
         function(err, result){
             if(err) throw err;
             cb(result)
@@ -27,7 +27,7 @@ class exercise{
     }
     static allExerciceByEquipmentMuscle (idMa, idMu, cb){
         console.log(idMa,idMu)
-        db.query("SELECT e.Nom, e.Description, e.IDMateriel FROM materiel AS ma, exercice AS e, cible AS c, muscle AS mu WHERE mu.Nom=? AND mu.IDMuscle=c.IDMuscle AND c.IDExercice = e.IDExercice AND ma.Nom=? AND ma.IDMateriel=e.IDMateriel",
+        db.query("SELECT e.Nom, e.Description, e.IDMateriel, e.IDExercice FROM materiel AS ma, exercice AS e, cible AS c, muscle AS mu WHERE mu.Nom=? AND mu.IDMuscle=c.IDMuscle AND c.IDExercice = e.IDExercice AND ma.Nom=? AND ma.IDMateriel=e.IDMateriel",
         [idMu,idMa],
         function(err, result){
             console.log(result)
@@ -51,8 +51,6 @@ class exercise{
     }
 
     static aExercise (content, cb){
-        console.log(content)
-
         db.query("SELECT * FROM exercice WHERE exercice.IDExercice=?",[content],
         function(err, result){
             if(err) throw err;
@@ -121,6 +119,15 @@ class exercise{
     })
 
 }
+
+    static exerciseAcces (idC, idE, idR, cb){
+        db.query("SELECT * FROM fait WHERE IDCompte=? AND IDExercice=? AND IDFait=?", [idC, idE,idR]
+        ,function(err, result){
+            if(err) throw err;
+            cb(result)
+        });
+}
+
 }
 
 module.exports = exercise;
