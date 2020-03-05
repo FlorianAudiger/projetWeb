@@ -38,7 +38,7 @@ class programs{
         });
     }
 
-    static programAcces (IDCompte, IDPro, cb){ //A refaire: On evite les conditions ici
+    static programAcces (IDCompte, IDPro, cb){
         db.query("SELECT * FROM programme WHERE IDProgramme = ? AND IDCompte=?", [IDPro, IDCompte]
         ,function(err, result){
             if(err) throw err;

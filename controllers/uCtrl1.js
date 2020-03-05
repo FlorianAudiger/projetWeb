@@ -40,7 +40,9 @@ module.exports = {
         const token = req.cookies["Token"]
         const cookie = req.cookies["Session"]
             pro.programAcces(jwt.idAccountToken(token),req.params.id, function(resDB){ //Vérifie si on a accès au programme
-                if(resDB[0] ==undefined){res.redirect("/program")}
+                if(resDB[0] ==undefined){
+                    res.cookie('Programme',["Vous n'avez pas accès à ce programme",1],{maxAge:5*1000})
+                    res.redirect("/program")}
                 else{
                     pro.aProgram(req.params.id, function(resDB1){
                         ses.allSessions(req.params.id, function(resDB2){
@@ -76,6 +78,12 @@ module.exports = {
           },
           work_get: function(req, res, next) {
             const cookie = req.cookies["Work"]
+            const token = req.cookies["Token"]
+            ses.sessionAcces(jwt.idAccountToken(token),req.params.id, function(resDB){ //Vérifie si on a accès au programme
+                if(resDB[0] ==undefined){
+                    res.cookie('Programme',["Vous n'avez pas accès à cette séance",1],{maxAge:5*1000})
+                    res.redirect("/program")}
+                else{
                 ses.aSession(req.params.id, function(resDB1){
                     exer.allExercises(function(resDB2){
                         work.allExercises(req.params.id, function(resDB3){
@@ -83,6 +91,8 @@ module.exports = {
                         })
                     })
               })
+            }
+        })
     },    
     work_post: function (req, res, next) {
         //On est forcément login ici

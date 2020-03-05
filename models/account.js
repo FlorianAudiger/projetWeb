@@ -47,7 +47,6 @@ class account{
             cb(result)
         });
     }
-
 }
 
 module.exports = account;

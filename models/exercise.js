@@ -51,8 +51,6 @@ class exercise{
     }
 
     static aExercise (content, cb){
-        console.log(content)
-
         db.query("SELECT * FROM exercice WHERE exercice.IDExercice=?",[content],
         function(err, result){
             if(err) throw err;

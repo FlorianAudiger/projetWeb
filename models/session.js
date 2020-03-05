@@ -62,6 +62,14 @@ class session{
         });
     }
 
+    static sessionAcces (idC, idS, cb){
+        db.query("SELECT * FROM seance, programme WHERE seance.IDProgramme=programme.IDProgramme AND programme.IDCompte=? AND seance.IDSeance=?", [idC, idS]
+        ,function(err, result){
+            if(err) throw err;
+            cb(result)
+        });
+    }
+
 }
 
 module.exports = session;
