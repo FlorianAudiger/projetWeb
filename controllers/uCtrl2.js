@@ -4,7 +4,6 @@ const exer = require('../models/exercise')
 module.exports = {
     exercise_get: function(req, res, next) {
         const token = req.cookies["Token"]
-     //Gerer erreur si on cherche dans la barre URL un exo plus loin
      const cookie = req.cookies["Exercise"]
 
      exer.aExercise(req.params.id, function(resDB){ //Vérifie si on a accès à l'exo
