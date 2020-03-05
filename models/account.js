@@ -5,9 +5,9 @@ class account{
     static create (content, cb){
         db.query("INSERT INTO compte SET Mail = ?, MDP = ?, Prenom = ?, Nom = ?", [content.mail,content.pswd[0],content.firstname,content.lastname]
         ,function(err, result){
-            if(err) throw err;
-            console.log("Insert compte")
-            cb(result)
+            if(err) {console.log("Impossible de créer le compte.");}
+            else{
+            cb(result)}
         });
     }
     static boolMail (content, cb){

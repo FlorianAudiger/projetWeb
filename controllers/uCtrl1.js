@@ -4,7 +4,6 @@ const ses = require('../models/session')
 const work = require('../models/work')
 const exer = require("../models/exercise")
 
-
 module.exports = {
     program_get: function(req, res, next) {
         const token = req.cookies["Token"]
@@ -33,8 +32,6 @@ module.exports = {
 
     deleteProgram_get: function (req, res, next) {
 
-            //ses.allSessions(req.params.id, function(resDB1){
-              //  console.log(resDB1)
               const token = req.cookies["Token"]
               pro.programAcces(jwt.idAccountToken(token),req.params.id, function(resDB){ //Vérifie si on a accès
                   if(resDB[0] ==undefined){
