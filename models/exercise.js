@@ -119,6 +119,15 @@ class exercise{
     })
 
 }
+
+    static exerciseAcces (idC, idE, idR, cb){
+        db.query("SELECT * FROM fait WHERE IDCompte=? AND IDExercice=? AND IDFait=?", [idC, idE,idR]
+        ,function(err, result){
+            if(err) throw err;
+            cb(result)
+        });
+}
+
 }
 
 module.exports = exercise;

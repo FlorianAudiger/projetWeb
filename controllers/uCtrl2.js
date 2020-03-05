@@ -97,11 +97,22 @@ module.exports = {
     
 },
 deleteRecord_get:function (req, res, next) {
+
+    const token = req.cookies["Token"]
+    exer.exerciseAcces(jwt.idAccountToken(token),req.params.id1,req.params.id2, function(resDB){ //Vérifie si on a accès au programme
+        if(resDB[0] ==undefined){
+            res.cookie('Exercise',["Vous n'avez pas les droits",1],{maxAge:5*1000})
+            res.redirect("/exercise/"+req.params.id1)}
+        else{
+
     res.cookie('Exercise',["Record supprimé avec succès",2],{maxAge:5*1000})
           exer.deleteRecordById(req.params.id2, function(resDB){
             res.redirect('/exercise/'+req.params.id1);
           })
   }
+})
+}
+
 }
 
     
