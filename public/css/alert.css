@@ -1,5 +1,5 @@
 .fade-out {
-    animation: fadeOut ease-in 3s;
+    animation: fadeOut ease-in 3.5s;
     opacity: 0;
   }
 

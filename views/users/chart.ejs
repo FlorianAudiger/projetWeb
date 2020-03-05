@@ -13,7 +13,8 @@
             b++
             if(b==1) {
                d=a}
-              else if(b==2) m=a
+              else if(b==2){
+                 m=a-1}
             else{ 
               y=a
               var mydate = new Date(y,m,d);
@@ -41,14 +42,14 @@ var chart = new Chart(ctx, {
 
     // Configuration options go here
     options: {
-				responsive: true,
+        responsive: true,
+        bounds : 'data',
         scales: {
             xAxes: {
                 type: 'time',
-                distribution:'series',
                 time: {
                 displayFormats: {
-                        week: 'MMM YYYY',
+                        month: 'MMM YYYY',
                     }
             }
             

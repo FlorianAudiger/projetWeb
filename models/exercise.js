@@ -5,7 +5,7 @@ class exercise{
 
 
     static allExercises (cb){
-        db.query("SELECT * FROM exercice",function(err, result){
+        db.query("SELECT * FROM exercice ORDER BY Nom",function(err, result){
             if(err) throw err;
             cb(result)
         });
@@ -64,20 +64,15 @@ class exercise{
             cb(result)
         });
     }
-    static aExerciseAllRecord (content,id, cb){
-        db.query("SELECT PoidsMax FROM exercice, fait WHERE fait.IDExercice = ? AND exercice.IDExercice=? AND fait.IDCompte=?",[content,content,id],
+
+    static aExerciseDateRecord(idE, idC, cb){
+        db.query("SELECT DATE_FORMAT(Date,'%d/%m/%Y') as Date, PoidsMax FROM exercice, fait WHERE fait.IDExercice =? AND exercice.IDExercice=? AND fait.IDCompte=? ORDER BY Date",[idE,idE,idC],
         function(err, result){
             if(err) throw err;
             cb(result)
         });
     }
-    static aExerciseAllDate (content,id, cb){
-        db.query("SELECT DATE_FORMAT(Date,'%d/%m/%Y') as Date FROM exercice, fait WHERE fait.IDExercice = ? AND exercice.IDExercice=? AND fait.IDCompte=?",[content,content,id],
-        function(err, result){
-            if(err) throw err;
-            cb(result)
-        });
-    }
+
     static selectIdByName (name, cb){
         console.log(name)
         db.query("SELECT IDExercice FROM exercice WHERE exercice.Nom=?", [name],

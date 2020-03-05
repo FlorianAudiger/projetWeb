@@ -38,7 +38,10 @@ INSERT INTO `exercice` (`Nom`, `Description`, `Cardio`, `IDMateriel`) VALUES ('C
 INSERT INTO `exercice` (`Nom`, `Description`, `Cardio`, `IDMateriel`) VALUES ('Curl concentré', 'https://www.youtube.com/', '0', '3');
 INSERT INTO `exercice` (`Nom`, `Description`, `Cardio`, `IDMateriel`) VALUES ('Extension triceps avec haltère', 'https://www.youtube.com/', '0', '3');
 INSERT INTO `exercice` (`Nom`, `Description`, `Cardio`, `IDMateriel`) VALUES ('Presse', 'https://www.youtube.com/', '0', '6');
-
+INSERT INTO `exercice` (`Nom`, `Description`, `Cardio`, `IDMateriel`) VALUES ('Dips', 'https://www.youtube.com/', '0', '6');
+INSERT INTO `exercice` (`Nom`, `Description`, `Cardio`, `IDMateriel`) VALUES ('Squat', 'https://www.youtube.com/', '0', '8');
+INSERT INTO `exercice` (`Nom`, `Description`, `Cardio`, `IDMateriel`) VALUES ('Butterfly', 'https://www.youtube.com/', '0', '6');
+INSERT INTO `exercice` (`Nom`, `Description`, `Cardio`, `IDMateriel`) VALUES ('Traction', 'https://www.youtube.com/', '0', '6');
 
 INSERT INTO `cible` (`IDExercice`, `IDMuscle`) VALUES ('1', '5');
 INSERT INTO `cible` (`IDExercice`, `IDMuscle`) VALUES ('1', '6');
@@ -49,3 +52,8 @@ INSERT INTO `cible` (`IDExercice`, `IDMuscle`) VALUES ('5', '2');
 INSERT INTO `cible` (`IDExercice`, `IDMuscle`) VALUES ('6', '2');
 INSERT INTO `cible` (`IDExercice`, `IDMuscle`) VALUES ('7', '3');
 INSERT INTO `cible` (`IDExercice`, `IDMuscle`) VALUES ('8', '4');
+INSERT INTO `cible` (`IDExercice`, `IDMuscle`) VALUES ('9', '3');
+INSERT INTO `cible` (`IDExercice`, `IDMuscle`) VALUES ('10', '4');
+INSERT INTO `cible` (`IDExercice`, `IDMuscle`) VALUES ('10', '8');
+INSERT INTO `cible` (`IDExercice`, `IDMuscle`) VALUES ('11', '5');
+INSERT INTO `cible` (`IDExercice`, `IDMuscle`) VALUES ('11', '7');

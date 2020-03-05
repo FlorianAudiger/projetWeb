@@ -13,22 +13,21 @@ module.exports = {
          else{
             exer.aExercise(req.params.id, function(resDB){
                 exer.aExerciseRecordDate(req.params.id,jwt.idAccountToken(token), function(resDB4){
-                exer.aExerciseAllRecord(req.params.id,jwt.idAccountToken(token), function(resDB2){
-                    exer.aExerciseAllDate(req.params.id,jwt.idAccountToken(token), function(resDB3){
+                exer.aExerciseDateRecord(req.params.id,jwt.idAccountToken(token), function(resDB2){
                         var allRecord = []
                         for(let i = 0; i < resDB2.length; i++){
                             allRecord.push(resDB2[i].PoidsMax)
                         }
                         var allDate = []
-                        for(let i = 0; i < resDB3.length; i++){
+                        for(let i = 0; i < resDB2.length; i++){
                             //allDate.push(resDB3[i].Date)
-                           a = resDB3[i].Date.split("/")
+                           a = resDB2[i].Date.split("/")
                             //var mydate = new Date(a[2],a[1],a[0]);
                             allDate.push(a)
                         }
                         console.log(allDate)
                         res.render('users/exercise', {title: "Exercice", msg:cookie ,resDB, allRecord, allDate, resDB4});
-            })
+            
         })
     })
 })
