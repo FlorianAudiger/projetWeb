@@ -8,7 +8,7 @@ module.exports = {
 
      exer.aExercise(req.params.id, function(resDB){ //Vérifie si on a accès à l'exo
          if(resDB[0] ==undefined){
-             res.redirect("/exercise")
+             res.status(403).redirect("/exercise")
             }
          else{
             exer.aExercise(req.params.id, function(resDB){
@@ -51,7 +51,7 @@ module.exports = {
             exer.createRecord(req.body, jwt.idAccountToken(token), req.params.id, function(resDB){
                 if(resDB==0){
                     res.cookie('Exercise',["Il n'est pas possible d'avoir deux record pour une même date",1],{maxAge:5*1000})
-                    res.redirect('back'); 
+                    res.status(400).redirect('back'); 
                 }
                 else{
                 res.cookie('Exercise',["Record ajouté avec succès",2],{maxAge:5*1000})
@@ -102,7 +102,7 @@ deleteRecord_get:function (req, res, next) {
     exer.exerciseAcces(jwt.idAccountToken(token),req.params.id1,req.params.id2, function(resDB){ //Vérifie si on a accès au programme
         if(resDB[0] ==undefined){
             res.cookie('Exercise',["Vous n'avez pas les droits",1],{maxAge:5*1000})
-            res.redirect("/exercise/"+req.params.id1)}
+            res.status(403).redirect("/exercise/"+req.params.id1)}
         else{
 
     res.cookie('Exercise',["Record supprimé avec succès",2],{maxAge:5*1000})
