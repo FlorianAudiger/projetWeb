@@ -4,6 +4,7 @@ var express = require('express');
 var path = require('path');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
+var toobusy = require('toobusy-js');
 
 var home = require('./routes/home');
 var routeUsers = require('./routes/users');
@@ -22,6 +23,10 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
+//Security
+app.use(bodyParser.urlencoded({ limit: "1kb" }));
+app.use(bodyParser.json({ limit: "1kb" }));
+
 // Router
 app.use('/', home);
 app.use('/register', home);
@@ -33,6 +38,15 @@ app.use('/setting', home);
 app.use('/program', routeUsers);
 app.use('/exercise', routeUsers2);
 
+app.use(function(req, res, next) {
+  if (toobusy()) {
+      // log if you see necessary
+      res.status(503)
+      res.render('error',{title: "Erreur"});
+  } else {
+  next();
+  }
+});
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
