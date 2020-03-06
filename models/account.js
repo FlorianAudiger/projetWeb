@@ -9,6 +9,7 @@ class account{
             else{cb(result)}
         });
     }
+
     static boolMail (content, cb){
         db.query("SELECT * FROM compte WHERE Mail = ?", [content.mail]
         ,function(err, result){
@@ -32,6 +33,7 @@ class account{
             else{cb(result)}
         });
     }
+    
     static updatePswd (content, id, cb){
         db.query("UPDATE compte SET MDP= ? WHERE IDCompte =?",[content, id]
         ,function(err, result){

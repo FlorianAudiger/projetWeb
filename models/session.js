@@ -5,8 +5,8 @@ class session{
     static allSessions (content, cb){
         db.query("SELECT * FROM seance WHERE IDProgramme = ?", [content]
         ,function(err, result){
-            if(err) throw err;
-            cb(result)
+            if(err) {cb(0)}
+            else{cb(result)}
         });
     }
 
@@ -14,8 +14,8 @@ class session{
         console.log(content)
         db.query("SELECT * FROM seance WHERE IDSeance = ?", [content]
         ,function(err, result){
-            if(err) throw err;
-            cb(result)
+            if(err) {cb(0)}
+            else{cb(result)}
         });
     }
 
@@ -23,9 +23,8 @@ class session{
             db.query("INSERT INTO `seance` (`Nom`, `nbreEx`, `IDProgramme`) VALUES (?,?,?)",
             [content.name,0,id]
             ,function(err, result){
-                if(err) throw err;
-                console.log("Insert seance")
-                cb(result)
+                if(err) {cb(0)}
+                else{cb(result)}
             });
     }
     static deleteByIdProgram (content, cb){
@@ -44,9 +43,8 @@ class session{
         work.deleteByIdSession(content, function(){
         db.query("DELETE FROM `seance` WHERE IDSeance=?",[content]
         ,function(err, result){
-            if(err) throw err;
-            console.log("SUP Seance")
-            cb(result)
+            if(err) {cb(0)}
+            else{cb(result)}
         });
     })
     }
