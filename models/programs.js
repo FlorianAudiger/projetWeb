@@ -46,6 +46,14 @@ class programs{
         });
     }
 
+    static programCount (IDCompte, cb){
+        db.query("SELECT COUNT(IDProgramme) AS count FROM programme WHERE IDCompte=?", [IDCompte]
+        ,function(err, result){
+            if(err) throw err;
+            cb(result)
+        });
+    }
+
 }
 
 module.exports = programs;

@@ -50,68 +50,7 @@
  </div>
 
 
-
+ <%- include('../footer') -%>
 </body>
 </html>
-
-<script>
-  var allDate2 = []
-  var allDate1 = [<%=allDate%>]
-  var y = 0
-  var m = 0
-  var d = 0
-  var b = 0
-                        for(let i = 0; i < allDate1.length; i++){
-                            //allDate.push(resDB3[i].Date)
-                            var a = allDate1[i]
-                            b++
-                            if(b==1) {
-                              d=a
-
-                            }
-                            else if(b==2) m=a
-                            else{ 
-                              y=a
-                              var mydate = new Date(y,m,d);
-                            allDate2.push(mydate.toLocaleDateString())
-                              b=0}
-                              console.log(i)
-
-                        }
-                        console.log(allDate2)
-
-
-var ctx = document.getElementById('myChart').getContext('2d');
-var chart = new Chart(ctx, {
-    // The type of chart we want to create
-    type: 'line',
-  
-    // The data for our dataset
-    data: {
-        labels: allDate2,
-        datasets: [{
-            label: 'Record',
-            backgroundColor: 'rgb(255, 209, 26)',
-            borderColor: 'rgb(255, 209, 26)',
-            data: [<%=allRecord%>]
-        }]
-    },
-
-    // Configuration options go here
-    options: {
-				responsive: true,
-        scales: {
-            xAxes: {
-                type: 'time',
-                distribution:'series',
-                time: {
-                displayFormats: {
-                        week: 'MMM YYYY',
-                    }
-            }
-            
-        }
-    }
-  }
-});
-</script>
+<%- include('chart') -%>

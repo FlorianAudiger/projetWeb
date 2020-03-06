@@ -1,11 +1,14 @@
-html {
-    position: relative;
-    min-height: 100%;
+html, body {
+    height: 100%;
+    margin: 0; padding: 0;
+}
+
+body {
+    display : table;
+    width: 100%;
 }
 
 .footer {
-    position: absolute;
-    bottom: 0;
-    width: 100%;
+    display : table-row;
     height: 60px;
 }

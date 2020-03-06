@@ -13,28 +13,28 @@ module.exports = {
         account.boolMail(req.body, function (resDB) {
           if(resDB!=undefined){
             res.cookie('Register',["L'adresse mail existe déjà",1],{maxAge:5*1000})
-            res.redirect('/register')
+            res.status(400).redirect('/register')
           }
           else if (req.body.mail=='' || req.body.pswd[0]== '' || req.body.firstname=='' || req.body.lastname==''){
             res.cookie('Register',["Un des champs est vide",1],{maxAge:5*1000})
-            res.redirect('/register')
+            res.status(400).redirect('/register')
           }
 
           else if (req.body.firstname.length >= 20 || req.body.lastname.length >= 20) {
             res.cookie('Register',["Votre nom dépasse la taille limite",1],{maxAge:5*1000})
-            res.redirect('/register')
+            res.status(400).redirect('/register')
           }
           else if(!EMAIL_REGEX.test(req.body.mail)){
             res.cookie('Register',["L'adresse mail ne respecte pas le bon format",1],{maxAge:5*1000})
-            res.redirect('/register')
+            res.status(400).redirect('/register')
           }
           else if(!PASSWORD_REGEX.test(req.body.pswd[0])) {
             res.cookie('Register',["Le mot de passe doit contenir au moins 1 chiffre et au moins 4 caractères",1],{maxAge:5*1000})
-            res.redirect('/register')
+            res.status(400).redirect('/register')
           }
           else if(req.body.pswd[0]!=req.body.pswd[1]) {
             res.cookie('Register',["Le mot de passe n'est pas identique",1],{maxAge:5*1000})
-            res.redirect('/register')
+            res.status(400).redirect('/register')
           }
           else{
             console.log(req.body.pswd[0])
@@ -76,13 +76,13 @@ module.exports = {
             }
             else{
               res.cookie('Login',["Votre mot de passe est incorrect",1],{maxAge:5*1000})
-              res.redirect('/login')
+              res.status(400).redirect('/login')
             }
           })
         }
         else{
           res.cookie('Login',["L'identifiant n'existe pas",1],{maxAge:5*1000})
-          res.redirect('/login')
+          res.status(400).redirect('/login')
     }
     })
   },
@@ -95,7 +95,7 @@ module.exports = {
     const cookie = req.cookies["Setting"]
         if(jwt.idAccountToken(token)!=req.params.id){//Vérifie si on a accès au programme
             res.cookie('Setting',["Vous n'avez pas les droits d'accès",1],{maxAge:5*1000})
-            res.redirect("/setting/"+jwt.idAccountToken(token))}
+            res.status(403).redirect("/setting/"+jwt.idAccountToken(token))}
         else{
       account.select(req.params.id, function(resDB){
         res.render("users/setting",{title: "Paramètres", resDB, msg: cookie})
@@ -108,15 +108,15 @@ module.exports = {
       account.boolMail(req.body, function (resDB) {
       if(resDB!=undefined){
         res.cookie('Setting',["L'adresse mail existe déjà",1],{maxAge:5*1000})
-        res.redirect('back')
+        res.status(400).redirect('back')
       }
       else if (req.body.mail==''){
         res.cookie('Setting',["Un des champs est vide",1],{maxAge:5*1000})
-        res.redirect('back')
+        res.status(400).redirect('back')
       }
       else if(!EMAIL_REGEX.test(req.body.mail)){
         res.cookie('Setting',["L'adresse mail ne respecte pas le bon format",1],{maxAge:5*1000})
-        res.redirect('back')
+        res.status(400).redirect('back')
       }
       else{
           account.updateMail(req.body.mail,req.params.id, function(){
@@ -131,15 +131,15 @@ module.exports = {
 setting_post2: function(req, res){
         if (req.body.pswd1== '' || req.body.pswd2==''){
           res.cookie('Setting',["Un des champs est vide",1],{maxAge:5*1000})
-          res.redirect('back')
+          res.status(400).redirect('back')
         }
         else if(!PASSWORD_REGEX.test(req.body.pswd2)) {
           res.cookie('Setting',["Le mot de passe doit contenir au moins 1 chiffre et au moins 4 caractères",1],{maxAge:5*1000})
-          res.redirect('back')
+          res.status(400).redirect('back')
         }
         else if(req.body.pswd1==req.body.pswd2) {
           res.cookie('Setting',["Les mot de passe sont identiques",1],{maxAge:5*1000})
-          res.redirect('back')
+          res.status(400).redirect('back')
         }
         else{
           account.select(req.params.id, function (resDB) {
@@ -155,7 +155,7 @@ setting_post2: function(req, res){
                 }
                 else{
                   res.cookie('Setting',["Votre mot de passe est incorrect",1],{maxAge:5*1000})
-                  res.redirect('back')
+                  res.status(400).redirect('back')
                 }
               })
       })

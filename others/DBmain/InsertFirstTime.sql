@@ -7,9 +7,9 @@ INSERT INTO mensuration SET Nom="Poids";
 INSERT INTO mensuration SET Nom="Quadriceps";
 INSERT INTO mensuration SET Nom="Tour de taille";
 INSERT INTO mensuration SET Nom="Biceps";
-INSERT INTO mensuration SET Nom="Mollet";
+--INSERT INTO mensuration SET Nom="Mollet";
 INSERT INTO mensuration SET Nom="Torse";
-INSERT INTO mensuration SET Nom="Epaule";
+--INSERT INTO mensuration SET Nom="Epaule";
 -- Matériel
 INSERT INTO `materiel` (`Nom`) VALUES ('Aucun');
 INSERT INTO `materiel` (`Nom`) VALUES ('Élastique');
@@ -38,7 +38,10 @@ INSERT INTO `exercice` (`Nom`, `Description`, `Cardio`, `IDMateriel`) VALUES ('C
 INSERT INTO `exercice` (`Nom`, `Description`, `Cardio`, `IDMateriel`) VALUES ('Curl concentré', 'https://www.youtube.com/', '0', '3');
 INSERT INTO `exercice` (`Nom`, `Description`, `Cardio`, `IDMateriel`) VALUES ('Extension triceps avec haltère', 'https://www.youtube.com/', '0', '3');
 INSERT INTO `exercice` (`Nom`, `Description`, `Cardio`, `IDMateriel`) VALUES ('Presse', 'https://www.youtube.com/', '0', '6');
-
+INSERT INTO `exercice` (`Nom`, `Description`, `Cardio`, `IDMateriel`) VALUES ('Dips', 'https://www.youtube.com/', '0', '6');
+INSERT INTO `exercice` (`Nom`, `Description`, `Cardio`, `IDMateriel`) VALUES ('Squat', 'https://www.youtube.com/', '0', '8');
+INSERT INTO `exercice` (`Nom`, `Description`, `Cardio`, `IDMateriel`) VALUES ('Butterfly', 'https://www.youtube.com/', '0', '6');
+INSERT INTO `exercice` (`Nom`, `Description`, `Cardio`, `IDMateriel`) VALUES ('Traction', 'https://www.youtube.com/', '0', '6');
 
 INSERT INTO `cible` (`IDExercice`, `IDMuscle`) VALUES ('1', '5');
 INSERT INTO `cible` (`IDExercice`, `IDMuscle`) VALUES ('1', '6');
@@ -49,3 +52,8 @@ INSERT INTO `cible` (`IDExercice`, `IDMuscle`) VALUES ('5', '2');
 INSERT INTO `cible` (`IDExercice`, `IDMuscle`) VALUES ('6', '2');
 INSERT INTO `cible` (`IDExercice`, `IDMuscle`) VALUES ('7', '3');
 INSERT INTO `cible` (`IDExercice`, `IDMuscle`) VALUES ('8', '4');
+INSERT INTO `cible` (`IDExercice`, `IDMuscle`) VALUES ('9', '3');
+INSERT INTO `cible` (`IDExercice`, `IDMuscle`) VALUES ('10', '4');
+INSERT INTO `cible` (`IDExercice`, `IDMuscle`) VALUES ('10', '8');
+INSERT INTO `cible` (`IDExercice`, `IDMuscle`) VALUES ('11', '5');
+INSERT INTO `cible` (`IDExercice`, `IDMuscle`) VALUES ('11', '7');

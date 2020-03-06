@@ -60,6 +60,14 @@ class work{
             cb(result)
         });
     }
+
+    static workCount (idS, cb){
+        db.query("SELECT COUNT(IDWork) AS count FROM seconstitue WHERE IDSeance=?", [idS]
+        ,function(err, result){
+            if(err) throw err;
+            cb(result)
+        });
+    }
    
 }
 

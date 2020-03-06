@@ -70,6 +70,14 @@ class session{
         });
     }
 
+    static sessionCount (idP, cb){
+        db.query("SELECT COUNT(IDSeance) AS count FROM seance WHERE IDProgramme=?", [idP]
+        ,function(err, result){
+            if(err) throw err;
+            cb(result)
+        });
+    }
+
 }
 
 module.exports = session;
