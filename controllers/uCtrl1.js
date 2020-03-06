@@ -9,7 +9,7 @@ module.exports = {
         const token = req.cookies["Token"]
         const cookie = req.cookies["Programme"]
         pro.allPrograms(jwt.idAccountToken(token), function(resDB){
-            if(resDB==0){
+            if(resDB==1){
                 res.render('error',{title: "Erreur", error: "", message:"Problème de connexion"})
             }
                 else{
@@ -21,7 +21,7 @@ module.exports = {
     addProgram_post: function (req, res, next) {
         const token = req.cookies["Token"]
         pro.programCount(jwt.idAccountToken(token), function(resDB){
-            if(resDB==0){
+            if(resDB==1){
                 res.render('error',{title: "Erreur", error: "", message:"Problème de connexion"})
             }
                 else{
@@ -31,7 +31,7 @@ module.exports = {
             }
             else{
                 pro.create(req.body, jwt.idAccountToken(token), function(resDB){
-                    if(resDB==0){
+                    if(resDB==1){
                         res.render('error',{title: "Erreur", error: "", message:"Problème de connexion"})
                     }
                         else{
@@ -50,7 +50,7 @@ module.exports = {
               const token = req.cookies["Token"]
               pro.programAcces(jwt.idAccountToken(token),req.params.id, function(resDB){ //Vérifie si on a accès
                   if(resDB[0] ==undefined){
-                    if(resDB==0){
+                    if(resDB==1){
                         res.render('error',{title: "Erreur", error: "", message:"Problème de connexion"})
                     }
                         else{
@@ -59,7 +59,7 @@ module.exports = {
                         }
                   else{
                  pro.delete(req.params.id, function(resDB2){
-                    if(resDB==0){
+                    if(resDB==1){
                         res.render('error',{title: "Erreur", error: "", message:"Problème de connexion"})
                     }
                         else{
@@ -84,7 +84,7 @@ module.exports = {
                 else{
                     pro.aProgram(req.params.id, function(resDB1){
                         ses.allSessions(req.params.id, function(resDB2){
-                            if(resDB1==0 || resDB2==0){
+                            if(resDB1==1 || resDB2==1){
                                 res.render('error',{title: "Erreur", error: "", message:"Problème de connexion"})
                             }
                                 else{

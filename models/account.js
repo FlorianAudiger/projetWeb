@@ -5,7 +5,7 @@ class account{
     static create (content, cb){
         db.query("INSERT INTO compte SET Mail = ?, MDP = ?, Prenom = ?, Nom = ?", [content.mail,content.pswd[0],content.firstname,content.lastname]
         ,function(err, result){
-            if(err) {cb(0)}
+            if(err) {cb(1)}
             else{cb(result)}
         });
     }
@@ -13,7 +13,7 @@ class account{
     static boolMail (content, cb){
         db.query("SELECT * FROM compte WHERE Mail = ?", [content.mail]
         ,function(err, result){
-            if(err) {cb(0)}
+            if(err) {cb(1)}
             else{cb(result)}
         });
     }
@@ -21,7 +21,7 @@ class account{
     static select (content, cb){
         db.query("SELECT * FROM compte WHERE IDCompte = ?",[content]
         ,function(err, result){
-            if(err) {cb(0)}
+            if(err) {cb(1)}
             else{cb(result)}
         });
     }
@@ -29,7 +29,7 @@ class account{
     static updateMail (content, id, cb){
         db.query("UPDATE compte SET Mail= ? WHERE IDCompte =?",[content, id]
         ,function(err, result){
-            if(err) {cb(0)}
+            if(err) {cb(1)}
             else{cb(result)}
         });
     }
@@ -37,7 +37,7 @@ class account{
     static updatePswd (content, id, cb){
         db.query("UPDATE compte SET MDP= ? WHERE IDCompte =?",[content, id]
         ,function(err, result){
-            if(err) {cb(0)}
+            if(err) {cb(1)}
             else{cb(result)}
         });
     }

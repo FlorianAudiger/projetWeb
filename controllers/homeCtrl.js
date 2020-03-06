@@ -11,7 +11,7 @@ const PASSWORD_REGEX  = /^(?=.*\d).{4,16}$/;
 module.exports = {
     register_post: function(req, res){
         account.boolMail(req.body, function (resDB) {
-          if(resDB==0){
+          if(resDB==1){
           res.cookie('Register',["Erreur de connexion avec la base de donnée",1],{maxAge:5*1000})
           res.status(400).redirect('/register')}
           else{
@@ -45,7 +45,7 @@ module.exports = {
             bcrypt.hash(req.body.pswd[0], 6, function(err, psw){
               req.body.pswd[0]=psw
               account.create(req.body, function(resDB){
-                if(resDB==0){
+                if(resDB==1){
                   res.cookie('Register',["Impossible de créer le compte",1],{maxAge:5*1000})
                   res.status(400).redirect('/register')
                 }
@@ -78,7 +78,7 @@ module.exports = {
 
     login_post: function(req, res){
       account.boolMail(req.body, function (resDB) {
-        if(resDB==0){
+        if(resDB==1){
           res.cookie('Login',["Erreur de connexion avec la base de donnée",1],{maxAge:5*1000})
           res.status(400).redirect('/login')}
         else{
@@ -114,7 +114,7 @@ module.exports = {
             res.status(403).redirect("/setting/"+jwt.idAccountToken(token))}
         else{
       account.select(req.params.id, function(resDB){
-        if(resDB==0){
+        if(resDB==1){
           res.render('error',{title: "Erreur", error: "", message:"Erreur connexion"});
         }
         else{
@@ -127,7 +127,7 @@ module.exports = {
   },    
   setting_post1: function(req, res){
       account.boolMail(req.body, function (resDB) {
-        if(resDB==0){
+        if(resDB==1){
           res.cookie('Setting',["Erreur de connexion avec la base de donnée",1],{maxAge:5*1000})
           res.status(400).redirect('/back')}
           else{
@@ -145,7 +145,7 @@ module.exports = {
       }
       else{
           account.updateMail(req.body.mail,req.params.id, function(resDB){
-            if(resDB==0){
+            if(resDB==1){
               res.cookie('Setting',["Erreur de connexion avec la base de donnée",1],{maxAge:5*1000})
               res.status(400).redirect('back')}
               else{
@@ -173,7 +173,7 @@ setting_post2: function(req, res){
         }
         else{
           account.select(req.params.id, function (resDB) {
-            if(resDB==0){
+            if(resDB==1){
               res.cookie('Setting',["Erreur de connexion avec la base de donnée",1],{maxAge:5*1000})
               res.status(400).redirect('/back')}
               else{
@@ -182,7 +182,7 @@ setting_post2: function(req, res){
                   bcrypt.hash(req.body.pswd2, 6, function(err, psw){
                     req.body.pswd2=psw
                     account.updatePswd(req.body.pswd2,req.params.id, function(resDB){
-                      if(resDB==0){
+                      if(resDB==1){
                         res.cookie('Setting',["Erreur de connexion avec la base de donnée",1],{maxAge:5*1000})
                         res.status(400).redirect('back')}
                         else{

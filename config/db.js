@@ -1,10 +1,10 @@
 var mysql = require('mysql');
 
 
-//const db = mysql.createConnection(process.env.CLEARDB_DATABASE_URL);
+//const connection= mysql.createPool(process.env.CLEARDB_DATABASE_URL);
 
 //Create connection
-const db = mysql.createConnection({
+const connection = mysql.createConnection({
   host: "localhost",
   user: "root",
   password : '',
@@ -14,12 +14,18 @@ const db = mysql.createConnection({
 });
 
 //Connection
-db.connect(function(err) {
-  if (err) {console.log("Impossible de se connecter à la Base de données");}
+connection.connect(function(err) {
+  if (err) {throw err}
   else{
   console.log("Connected!");
   }
 });
-
-
-module.exports = db;
+/*
+connection.getConnection((err, connection) => {
+  if(err)
+      console.error("Connexion impossible à la base de données");
+  if(connection)
+      connection.release();
+});
+*/
+module.exports = connection;
