@@ -27,7 +27,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use(bodyParser.urlencoded({ limit: "1kb" }));
 app.use(bodyParser.json({ limit: "1kb" }));
 
-// Router
+/**** Router ****/
 app.use('/', home);
 app.use('/register', home);
 app.use('/login', home);
@@ -37,7 +37,9 @@ app.use('/setting', home);
 // Users
 app.use('/program', routeUsers);
 app.use('/exercise', routeUsers2);
+/****/
 
+//Security
 app.use(function(req, res, next) {
   if (toobusy()) {
       // log if you see necessary

@@ -1,63 +1,65 @@
-
 <%- include('header') -%>
 
 <body>
-<br></br>
-<div class="container">
-  <div class="row">
-    <div class="col"></div>
-
-    <div class="col-7">
-
-      <div class="card text-center">
-
-<div class="card-header">
-    <h4 class="card-title"> Inscription </h4>
-</div>
-  <div class="card-body">
-    <h5 class="card-title">Inscrivez-vous avec votre adresse email</h5>
-    
-    <%- include('alert') -%>
-    
-    <form action="/register" method="post" class="needs-validation" novalidate>
-  <div class="form-group">
-    
-    <input type="text" class="form-control" id="firstName" placeholder="Prenom" name="firstname" required>
-  </div>
-  <div class="form-group">
-    <input type="text" class="form-control" id="lastName" placeholder="Nom" name="lastname" required>
-  </div>
-  <div class="form-group">
-    <input type="email" class="form-control" id="mail" placeholder="Adresse email" name="mail" required>
-  </div>
-  <div class="form-group mt-4">
-    <input type="password" class="form-control" id="pwd" placeholder="Mot de passe (min. 1 chiffre et 3 lettres)" name="pswd" required>
-  </div>
-  <div class="form-group">
-    <input type="password" class="form-control" id="pwd" placeholder="Confirmez votre Mot de passe" name="pswd" required>
-  </div>
-  <div class="custom-control custom-checkbox">
-    <input type="checkbox" class="custom-control-input" id="customCheck1" required>
-    <label class="custom-control-label" for="customCheck1">En cochant cette case, vous acceptez notre <a href="https://example.com">Politique de confidentialité</a></label>
-    <div class="invalid-feedback">Vous devez accepter notre politique de confidentialité pour continuer.</div>
-  </div>  
-  <div class="row"> <div class="col-lg-8"></div>&nbsp;</div> <!-- Saut vide -->
-  <button type="submit" class="btn btn-info">&nbsp;S'inscrire&nbsp;</button>
-</form>
-
-<script src="/js/requiredInput.js"></script>
   <br></br>
-  <div class="card-text"> Vous avez déjà un compte ? <a href="https://example.com">Connectez-vous </a></div>
+  <div class="container">
+    <div class="row">
+      <div class="col"></div>
+      <div class="col-7">
+        <div class="card text-center">
+          <div class="card-header">
+            <h4 class="card-title"> Inscription </h4>
+          </div>
 
-  </div>
-</div>
+          <div class="card-body">
+            <h5 class="card-title">Inscrivez-vous avec votre adresse email</h5>
 
+            <%- include('alert') -%>
+
+            <form action="/register" method="post" class="needs-validation" novalidate>
+              <div class="form-group">
+                <input type="text" class="form-control" id="firstName" placeholder="Prenom" name="firstname" required>
+              </div>
+              <div class="form-group">
+                <input type="text" class="form-control" id="lastName" placeholder="Nom" name="lastname" required>
+              </div>
+              <div class="form-group">
+                <input type="email" class="form-control" id="mail" placeholder="Adresse email" name="mail" required>
+              </div>
+              <div class="form-group mt-4">
+                <input type="password" class="form-control" id="pwd"
+                  placeholder="Mot de passe (min. 1 chiffre et 3 lettres)" name="pswd" required>
+              </div>
+              <div class="form-group">
+                <input type="password" class="form-control" id="pwd" placeholder="Confirmez votre Mot de passe"
+                  name="pswd" required>
+              </div>
+              <div class="custom-control custom-checkbox">
+                <input type="checkbox" class="custom-control-input" id="customCheck1" required>
+                <label class="custom-control-label" for="customCheck1">En cochant cette case, vous acceptez notre <a
+                    href="https://example.com">Politique de confidentialité</a></label>
+                <div class="invalid-feedback">Vous devez accepter notre politique de confidentialité pour continuer.
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-lg-8"></div>&nbsp;
+              </div>
+              <button type="submit" class="btn btn-info">&nbsp;S'inscrire&nbsp;</button>
+            </form>
+
+            <script src="/js/requiredInput.js"></script>
+            <br></br>
+            <div class="card-text"> Vous avez déjà un compte ? <a href="https://example.com">Connectez-vous </a></div>
+
+          </div>
+        </div>
+
+      </div>
+      <div class="col">
+
+      </div>
     </div>
-    <div class="col">
-
-    </div>
   </div>
-</div>
 
 
   <%- include('footer') -%>

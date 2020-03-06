@@ -1,13 +1,12 @@
 <!-- 1 == ERROR ; 2 == succeess-->
 
-<link rel="stylesheet" type="text/css" href="/css/alert.css" media="all"/>
+<link rel="stylesheet" type="text/css" href="/css/alert.css" media="all" />
 
 <% if(msg==undefined){%> <div class="alert alert-light" role="alert"></div> <%} 
 else if(msg[1]==2){ %>
-  <div class="alert alert-success text-center fade-out" role="alert">
-    <%- msg[0] -%>
-  </div><%}else if(msg[1]==1){ %>
-  <div class="alert alert-danger text-center fade-out" role="alert">
-    <%- msg[0] -%>
-  </div><%}%>
-
+<div class="alert alert-success text-center fade-out" role="alert">
+  <%- msg[0] -%>
+</div><%}else if(msg[1]==1){ %>
+<div class="alert alert-danger text-center fade-out" role="alert">
+  <%- msg[0] -%>
+</div><%}%>

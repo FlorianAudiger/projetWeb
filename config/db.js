@@ -7,17 +7,18 @@ var mysql = require('mysql');
 const connection = mysql.createConnection({
   host: "localhost",
   user: "root",
-  password : '',
+  password: '',
   database: "programmesport"
 
   //TODO ADD PASSWORD
 });
 
 //Connection
-connection.connect(function(err) {
-  if (err) {throw err}
-  else{
-  console.log("Connected!");
+connection.connect(function (err) {
+  if (err) {
+    throw err
+  } else {
+    console.log("Connected!");
   }
 });
 /*

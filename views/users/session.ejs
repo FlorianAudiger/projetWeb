@@ -1,50 +1,45 @@
 <%- include('header') -%>
 
 <body>
-  
-<div class="jumbotron text-center">
 
-  <h1> Mes séances d'entraînement </h1>
- <h3> <%- resDB1[0].Nom -%>  </h3>
- <h5 class=font-italic> <%- resDB1[0].Description -%>  </h5>
-</div>
-
- <div class="container">
- <form action="/program/<%=resDB1[0].IDProgramme %>" method="post">
-  <%- include('../alert') -%>
-  <div class="input-group mb-3">
-    <input type="text" name="name" placeholder="Nom nouvelle séance" class="form-control" required>
-    <div class="input-group-append">
-      <button class="btn btn-primary" type="submit" id="button-addon2"> Créer une séance </button>
-    </div>
+  <div class="jumbotron text-center">
+    <h1> Mes séances d'entraînement </h1>
+    <h3> <%- resDB1[0].Nom -%> </h3>
+    <h5 class=font-italic> <%- resDB1[0].Description -%> </h5>
   </div>
-</form>
 
-
-
-
- <div class="list-group">
-  
-  <% for (ses of resDB2) { %>
-   
-    <a class="button list-group-item list-group-item-action" href= "/program/session/<%=ses.IDSeance %>">
-      <div class="row">
-        <div class="col-4">
-      <p class="text-left font-weight-bold"><%= ses.Nom %></p></div>
-      <div class="col-4">
-      <p class="text-right"><%= ses.nbreEx %> exercice(s)</p></div> 
-      <div class="col-4 text-right">
-       <form action="/program/<%=resDB1[0].IDProgramme %>/deleteSession/<%=ses.IDSeance %>" method="get">
-        <button type="submit" class="btn btn-danger"> Supprimer </button>
-       </form> 
+  <div class="container">
+    <form action="/program/<%=resDB1[0].IDProgramme %>" method="post">
+      <%- include('../alert') -%>
+      <div class="input-group mb-3">
+        <input type="text" name="name" placeholder="Nom nouvelle séance" class="form-control" required>
+        <div class="input-group-append">
+          <button class="btn btn-primary" type="submit" id="button-addon2"> Créer une séance </button>
+        </div>
       </div>
+    </form>
+    <div class="list-group">
+      <% for (ses of resDB2) { %>
+      <a class="button list-group-item list-group-item-action" href="/program/session/<%=ses.IDSeance %>">
+        <div class="row">
+          <div class="col-4">
+            <p class="text-left font-weight-bold"><%= ses.Nom %></p>
+          </div>
+          <div class="col-4">
+            <p class="text-right"><%= ses.nbreEx %> exercice(s)</p>
+          </div>
+          <div class="col-4 text-right">
+            <form action="/program/<%=resDB1[0].IDProgramme %>/deleteSession/<%=ses.IDSeance %>" method="get">
+              <button type="submit" class="btn btn-danger"> Supprimer </button>
+            </form>
+          </div>
+        </div>
+      </a>
+      <% } %>
     </div>
-    </a>
 
-<% } %>
-</div>
- 
-</div>
-<%- include('../footer') -%>
+  </div>
+  <%- include('../footer') -%>
 </body>
+
 </html>

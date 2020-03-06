@@ -1,56 +1,57 @@
 <%- include('header') -%>
 
 <body>
-  
-<div class="jumbotron text-center">
 
-  <h1> <%=resDB[0].Nom %> </h1>
-</div>
+  <div class="jumbotron text-center">
+    <h1> <%=resDB[0].Nom %> </h1>
+  </div>
 
-<div class="container">
-  <%- include('../alert') -%>
-  <form action="/exercise/<%=resDB[0].IDExercice %>" method="post">
-   <div class="input-group mb-3">
-    <% if(resDB[0].IDMateriel==1){ %>
-      <input type="number" name="poidsmax" placeholder="Nombre de répétitions maximale" class="form-control" required> <% } %>
-      <% if(resDB[0].IDMateriel!=1){ %>
-     <input type="number" name="poidsmax" placeholder="Poids maximal" class="form-control" required> <% } %>
-     <input type="date" name="date" placeholder="Date format (MM/DD)" class="form-control" required>
-     <div class="input-group-append">
-       <button class="btn btn-primary" type="submit" id="button-addon2"> Ajouter </button>
-     </div>
-   </div>
- </form>
- 
- <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.3/Chart.min.js"></script>
- <div class="container">
-<h1>Graphique</h1>
-<canvas id="myChart"></canvas>
- </div>
+  <div class="container">
+    <%- include('../alert') -%>
+    <form action="/exercise/<%=resDB[0].IDExercice %>" method="post">
+      <div class="input-group mb-3">
+        <% if(resDB[0].IDMateriel==1){ %>
+        <input type="number" name="poidsmax" placeholder="Nombre de répétitions maximale" class="form-control" required>
+        <% } %>
+        <% if(resDB[0].IDMateriel!=1){ %>
+        <input type="number" name="poidsmax" placeholder="Poids maximal" class="form-control" required> <% } %>
+        <input type="date" name="date" placeholder="Date format (MM/DD)" class="form-control" required>
+        <div class="input-group-append">
+          <button class="btn btn-primary" type="submit" id="button-addon2"> Ajouter </button>
+        </div>
+      </div>
+    </form>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.3/Chart.min.js"></script>
+    <div class="container">
+      <h1>Graphique</h1>
+      <canvas id="myChart"></canvas>
+    </div>
 
-  <div class="list-group">   
-    
-    <% for (exer of resDB4) { %>
-     <a class="button list-group-item list-group-item-action">
-       <div class="row">
-         <div class="col-4">
-       <p class="text-left font-weight-bold"><%=exer.PoidsMax%></p></div>
-       <div class="col-4">
-       <p class="text-right font-italic"><%=exer.Date.toLocaleDateString()%></p></div>
-       <div class="col-4 text-right">
-        <form action="/exercise/<%=exer.IDExercice %>/deleteRecord/<%=exer.IDFait %>" method="get">
-         <button type="submit" class="btn btn-danger"> Supprimer </button>
-        </form> 
-       </div>
-     </div>
-     </a>
-     <% } %>
- </div>
-  
- </div>
+    <div class="list-group">
+      <% for (exer of resDB4) { %>
+      <a class="button list-group-item list-group-item-action">
+        <div class="row">
+          <div class="col-4">
+            <p class="text-left font-weight-bold"><%=exer.PoidsMax%></p>
+          </div>
+          <div class="col-4">
+            <p class="text-right font-italic"><%=exer.Date.toLocaleDateString()%></p>
+          </div>
+          <div class="col-4 text-right">
+            <form action="/exercise/<%=exer.IDExercice %>/deleteRecord/<%=exer.IDFait %>" method="get">
+              <button type="submit" class="btn btn-danger"> Supprimer </button>
+            </form>
+          </div>
+        </div>
+      </a>
+      <% } %>
+    </div>
+
+  </div>
 
 
- <%- include('../footer') -%>
+  <%- include('../footer') -%>
 </body>
+
 </html>
-<%- include('chart') -%>
+<%- include('./Modules/chart') -%>
