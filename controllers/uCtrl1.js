@@ -9,23 +9,38 @@ module.exports = {
         const token = req.cookies["Token"]
         const cookie = req.cookies["Programme"]
         pro.allPrograms(jwt.idAccountToken(token), function(resDB){
+            if(resDB==0){
+                res.render('error',{title: "Erreur", error: "", message:"Problème de connexion"})
+            }
+                else{
             res.render('users/program', {title: "Mes programmes", resDB, msg:cookie});
+                }
         })
     },
 
     addProgram_post: function (req, res, next) {
         const token = req.cookies["Token"]
         pro.programCount(jwt.idAccountToken(token), function(resDB){
+            if(resDB==0){
+                res.render('error',{title: "Erreur", error: "", message:"Problème de connexion"})
+            }
+                else{
             if(resDB[0].count>=15){
                 res.cookie('Programme',["Impossible d'ajouter un programme (maximum 15)",1],{maxAge:5*1000})
                 res.status(400).redirect('/program');
             }
             else{
                 pro.create(req.body, jwt.idAccountToken(token), function(resDB){
+                    if(resDB==0){
+                        res.render('error',{title: "Erreur", error: "", message:"Problème de connexion"})
+                    }
+                        else{
                     res.cookie('Programme',["Ajout d'un programme avec succès",2],{maxAge:5*1000})
                     res.redirect('/program');
+                        }
                 })
             }
+        }
         })
 
     },
@@ -35,12 +50,22 @@ module.exports = {
               const token = req.cookies["Token"]
               pro.programAcces(jwt.idAccountToken(token),req.params.id, function(resDB){ //Vérifie si on a accès
                   if(resDB[0] ==undefined){
+                    if(resDB==0){
+                        res.render('error',{title: "Erreur", error: "", message:"Problème de connexion"})
+                    }
+                        else{
                       res.cookie('Programme',["Vous n'avez pas les droits",1],{maxAge:5*1000})
                       res.status(403).redirect("/program")}
+                        }
                   else{
                  pro.delete(req.params.id, function(resDB2){
+                    if(resDB==0){
+                        res.render('error',{title: "Erreur", error: "", message:"Problème de connexion"})
+                    }
+                        else{
                     res.cookie('Programme',["Suppression d'un programme avec succès",2],{maxAge:5*1000})
                     res.redirect('/program');
+                        }
                 })
             }
         })
@@ -59,7 +84,10 @@ module.exports = {
                 else{
                     pro.aProgram(req.params.id, function(resDB1){
                         ses.allSessions(req.params.id, function(resDB2){
-
+                            if(resDB1==0 || resDB2==0){
+                                res.render('error',{title: "Erreur", error: "", message:"Problème de connexion"})
+                            }
+                                else{
                             var tabCount = []
                             for(let pas = 0; pas < resDB2.length; pas++){
                                 ses.count(resDB2[pas].IDSeance, function(resDB3){
@@ -67,8 +95,8 @@ module.exports = {
                                     
                                 })
                             }
-                            console.log(tabCount[0])
                             res.render('users/session', {title: "Mes séances", msg:cookie, resDB1, tabCount, resDB2});
+                        }
                         })
             })
             }

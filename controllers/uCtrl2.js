@@ -3,7 +3,7 @@ const exer = require('../models/exercise')
 
 module.exports = {
     exercise_get: function(req, res, next) {
-        const token = req.cookies["Token"]
+    const token = req.cookies["Token"]
      const cookie = req.cookies["Exercise"]
 
      exer.aExercise(req.params.id, function(resDB){ //Vérifie si on a accès à l'exo
@@ -20,9 +20,7 @@ module.exports = {
                         }
                         var allDate = []
                         for(let i = 0; i < resDB2.length; i++){
-                            //allDate.push(resDB3[i].Date)
                            a = resDB2[i].Date.split("/")
-                            //var mydate = new Date(a[2],a[1],a[0]);
                             allDate.push(a)
                         }
                         console.log(allDate)
