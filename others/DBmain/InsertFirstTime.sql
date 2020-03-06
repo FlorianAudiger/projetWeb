@@ -7,9 +7,8 @@ INSERT INTO mensuration SET Nom="Poids";
 INSERT INTO mensuration SET Nom="Quadriceps";
 INSERT INTO mensuration SET Nom="Tour de taille";
 INSERT INTO mensuration SET Nom="Biceps";
---INSERT INTO mensuration SET Nom="Mollet";
 INSERT INTO mensuration SET Nom="Torse";
---INSERT INTO mensuration SET Nom="Epaule";
+
 -- Matériel
 INSERT INTO `materiel` (`Nom`) VALUES ('Aucun');
 INSERT INTO `materiel` (`Nom`) VALUES ('Élastique');
