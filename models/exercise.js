@@ -98,7 +98,6 @@ class exercise {
     }
 
     static selectIdByName(name, cb) {
-        console.log(name)
         db.query("SELECT IDExercice FROM exercice WHERE exercice.Nom=?", [name],
             function (err, result) {
                 if (err) throw err;
@@ -120,7 +119,6 @@ class exercise {
     static createRecord(content, idC, idE, cb) {
         this.recordDate(content, idC, idE, function (resDB) { // IF date already return error
             if (resDB[0] != undefined) {
-                console.log("date existe deja")
                 cb(1)
             } else {
                 db.query("INSERT INTO `fait` (`IDCompte`,`IDExercice`,`PoidsMax`,`Date`) VALUES (?,?,?,?)", [idC, idE, content.poidsmax, content.date],
@@ -135,7 +133,6 @@ class exercise {
     static deleteRecordById(idW, cb) {
         db.query("DELETE FROM `fait` WHERE IDFait=?", [idW], function (err, result) {
             if (err) throw err;
-            console.log("SUP Record")
             cb(result)
         })
 

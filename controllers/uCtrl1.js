@@ -37,7 +37,7 @@ module.exports = {
             } else {
                 if (resDB[0].count >= 15) {
                     res.cookie('Programme', ["Impossible d'ajouter un programme (maximum 15)", 1], {
-                        maxAge: 5 * 1000
+                        maxAge: 3 * 1000
                     })
                     res.status(400).redirect('/program');
                 } else {
@@ -50,7 +50,7 @@ module.exports = {
                             })
                         } else {
                             res.cookie('Programme', ["Ajout d'un programme avec succès", 2], {
-                                maxAge: 5 * 1000
+                                maxAge: 3 * 1000
                             })
                             res.redirect('/program');
                         }
@@ -74,7 +74,7 @@ module.exports = {
                     })
                 } else {
                     res.cookie('Programme', ["Vous n'avez pas les droits", 1], {
-                        maxAge: 5 * 1000
+                        maxAge: 3 * 1000
                     })
                     res.status(403).redirect("/program")
                 }
@@ -88,7 +88,7 @@ module.exports = {
                         })
                     } else {
                         res.cookie('Programme', ["Suppression d'un programme avec succès", 2], {
-                            maxAge: 5 * 1000
+                            maxAge: 3 * 1000
                         })
                         res.redirect('/program');
                     }
@@ -106,7 +106,7 @@ module.exports = {
         pro.programAcces(jwt.idAccountToken(token), req.params.id, function (resDB) { //Vérifie si on a accès au programme
             if (resDB[0] == undefined) {
                 res.cookie('Programme', ["Vous n'avez pas accès à ce programme", 1], {
-                    maxAge: 5 * 1000
+                    maxAge: 3 * 1000
                 })
                 res.status(403).redirect("/program")
             } else {
@@ -144,14 +144,14 @@ module.exports = {
             ses.sessionCount(req.params.id, function (resDB) {
                 if (resDB[0].count >= 12) {
                     res.cookie('Session', ["Impossible d'ajouter une séance (maximum 12)", 1], {
-                        maxAge: 5 * 1000
+                        maxAge: 3 * 1000
                     })
                     res.status(400).redirect('/program/' + req.params.id);
                 } else {
 
                     ses.create(req.body, req.params.id, function (resDB) {
                         res.cookie('Session', ["Ajout d'une séance avec succès", 2], {
-                            maxAge: 5 * 1000
+                            maxAge: 3 * 1000
                         })
                         res.redirect('back');
                     })
@@ -166,14 +166,14 @@ module.exports = {
         ses.sessionAcces(jwt.idAccountToken(token), req.params.id2, function (resDB) { //Vérifie si on a accès au programme
             if (resDB[0] == undefined) {
                 res.cookie('Programme', ["Vous n'avez pas les droits", 1], {
-                    maxAge: 5 * 1000
+                    maxAge: 3 * 1000
                 })
                 res.status(403).redirect("/program")
             } else {
 
                 ses.deleteByIdSession(req.params.id2, function (resDB) {
                     res.cookie('Session', ["Suppression d'une séance avec succès", 2], {
-                        maxAge: 5 * 1000
+                        maxAge: 3 * 1000
                     })
                     res.redirect('/program/' + req.params.id1);
                 })
@@ -186,7 +186,7 @@ module.exports = {
         ses.sessionAcces(jwt.idAccountToken(token), req.params.id, function (resDB) { //Vérifie si on a accès au programme
             if (resDB[0] == undefined) {
                 res.cookie('Programme', ["Vous n'avez pas accès à cette séance", 1], {
-                    maxAge: 5 * 1000
+                    maxAge: 3 * 1000
                 })
                 res.status(403).redirect("/program")
             } else {
@@ -212,17 +212,16 @@ module.exports = {
         work.workCount(req.params.id, function (resDB) {
             if (resDB[0].count >= 16) {
                 res.cookie('Work', ["Impossible d'ajouter un exercice (maximum 16)", 1], {
-                    maxAge: 5 * 1000
+                    maxAge: 3 * 1000
                 })
                 res.status(400).redirect('/program/session/' + req.params.id);
             } else {
 
                 exer.selectIdByName(req.body.exercice, function (resDB1) {
                     var idEx = resDB1;
-                    console.log(idEx)
                     work.create(req.body, req.params.id, idEx, function (resDB2) {
                         res.cookie('Work', ["Ajout d'un exercice avec succès", 2], {
-                            maxAge: 5 * 1000
+                            maxAge: 3 * 1000
                         })
                         res.redirect('back');
                     })
@@ -236,14 +235,14 @@ module.exports = {
         ses.sessionAcces(jwt.idAccountToken(token), req.params.id2, function (resDB) { //Vérifie si on a accès
             if (resDB[0] == undefined) {
                 res.cookie('Programme', ["Vous n'avez pas les droits", 1], {
-                    maxAge: 5 * 1000
+                    maxAge: 3 * 1000
                 })
                 res.status(403).redirect("/program")
             } else {
                 var sess = req.params.id1
                 work.deleteByIdWork(req.params.id1, req.params.id2, req.params.id3, function (resDB) {
                     res.cookie('Work', ["Suppression d'un exercice avec succès", 2], {
-                        maxAge: 5 * 1000
+                        maxAge: 3 * 1000
                     })
                     res.redirect('/program/session/' + sess);
 
