@@ -1,7 +1,7 @@
 var mysql = require('mysql');
 
 //LOL
-const db = mysql.createPool(process.env.CLEARDB_DATABASE_URL);
+const db = mysql.createConnection(process.env.CLEARDB_DATABASE_URL);
 /*
 //Create connection
 const db = mysql.createConnection({
