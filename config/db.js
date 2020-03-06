@@ -1,6 +1,6 @@
 var mysql = require('mysql');
 
-
+//LOL
 const db = mysql.createPool(process.env.CLEARDB_DATABASE_URL);
 /*
 //Create connection
