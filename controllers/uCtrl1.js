@@ -232,7 +232,7 @@ module.exports = {
     deleteWork_get: function (req, res, next) {
 
         const token = req.cookies["Token"]
-        ses.sessionAcces(jwt.idAccountToken(token), req.params.id2, function (resDB) { //Vérifie si on a accès
+        ses.sessionAcces(jwt.idAccountToken(token), req.params.id1, function (resDB) { //Vérifie si on a accès
             if (resDB[0] == undefined) {
                 res.cookie('Programme', ["Vous n'avez pas les droits", 1], {
                     maxAge: 3 * 1000
