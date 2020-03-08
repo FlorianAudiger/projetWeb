@@ -4,8 +4,7 @@ var uCtrl = require('../controllers/uCtrl2')
 
 const verifyToken = require("../config/jwtVerif");
 
-// Router Exercises
-// ! /exercise
+// Router Exercises --> Exercise --> AllExercices
 
 router.get('/', verifyToken, uCtrl.allExercises_get)
 router.post('/', verifyToken, uCtrl.allExercises_post)

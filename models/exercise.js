@@ -100,7 +100,7 @@ class exercise {
     static selectIdByName(name, cb) {
         db.query("SELECT IDExercice FROM exercice WHERE exercice.Nom=?", [name],
             function (err, result) {
-                if (err) throw err;
+                if (err) {console.log(err)};
                 cb(result[0].IDExercice)
             });
     }
@@ -123,7 +123,7 @@ class exercise {
             } else {
                 db.query("INSERT INTO `fait` (`IDCompte`,`IDExercice`,`PoidsMax`,`Date`) VALUES (?,?,?,?)", [idC, idE, content.poidsmax, content.date],
                     function (err, result) {
-                        if (err) throw err;
+                        if (err) {console.log(err)};
                         cb(result)
                     })
             }
@@ -132,7 +132,7 @@ class exercise {
 
     static deleteRecordById(idW, cb) {
         db.query("DELETE FROM `fait` WHERE IDFait=?", [idW], function (err, result) {
-            if (err) throw err;
+            if (err) {console.log(err)};
             cb(result)
         })
 
@@ -140,7 +140,7 @@ class exercise {
 
     static exerciseAcces(idC, idE, idR, cb) {
         db.query("SELECT * FROM fait WHERE IDCompte=? AND IDExercice=? AND IDFait=?", [idC, idE, idR], function (err, result) {
-            if (err) throw err;
+            if (err) {console.log(err)};
             cb(result)
         });
     }

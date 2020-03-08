@@ -1,6 +1,6 @@
 var mysql = require('mysql');
 
-
+// Connection datebase with heroku
 //const connection= mysql.createPool(process.env.CLEARDB_DATABASE_URL);
 
 //Create connection

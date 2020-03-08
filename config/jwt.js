@@ -6,6 +6,7 @@ const jwtExpSec = 604800
 
 // Exported functions
 module.exports = {
+  // Return Token for user
   generateTokenForUser: function(userData) {
     return jwt.sign({
       userId: userData,
@@ -15,6 +16,7 @@ module.exports = {
       expiresIn: jwtExpSec
     })
 },
+    // Return true if it's the token is ok
     verifToken: function(token){
         if (!token) {
             console.log("Token n'existe pas")
@@ -22,27 +24,17 @@ module.exports = {
           }
         var payload
         try {
-          // Parse the JWT string and store the result in `payload`.
-          // Note that we are passing the key in this method as well. This method will throw an error
-          // if the token is invalid (if it has expired according to the expiry time we set on sign in),
-          // or if the signature does not match
           payload = jwt.verify(token, JWT_KEY)
         } catch (e) {
           if (e instanceof jwt.JsonWebTokenError) {
-            // if the error thrown is because the JWT is unauthorized, return a 401 error
-            //return res.status(401).end()
             return false
           }
-          // otherwise, return a bad request error
-          //return res.status(400).end()
           return false
         }
-      
-        // Finally, return the welcome message to the user, along with their
-        // username given in the token
         return true
     }
     ,
+    // Return id of user of the token in arg 
     idAccountToken: function(token){
         if (!token) {
             console.log("Token n'existe pas")
@@ -53,15 +45,10 @@ module.exports = {
           payload = jwt.verify(token, JWT_KEY)
         } catch (e) {
           if (e instanceof jwt.JsonWebTokenError) {
-            // if the error thrown is because the JWT is unauthorized, return a 401 error
-            //return res.status(401).end()
             return undefined
           }
-          // otherwise, return a bad request error
-          //return res.status(400).end()
           return undefined
         }
-      
         return payload.userId
     }
 }

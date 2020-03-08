@@ -4,8 +4,7 @@ var uCtrl = require('../controllers/uCtrl1')
 
 const verifyToken = require("../config/jwtVerif");
 
-// Router program
-// ! /program
+// Router program --> Session --> Work
 
 router.get('/', verifyToken, uCtrl.program_get)
 router.post('/', verifyToken, uCtrl.addProgram_post)

@@ -6,7 +6,7 @@ module.exports = {
         const token = req.cookies["Token"]
         const cookie = req.cookies["Exercise"]
 
-        exer.aExercise(req.params.id, function (resDB) { //Vérifie si on a accès à l'exo
+        exer.aExercise(req.params.id, function (resDB) { //VERIF IF We have rights to see it
             if (resDB[0] == undefined) {
                 res.status(403).redirect("/exercise")
             } else {
@@ -123,7 +123,7 @@ module.exports = {
     deleteRecord_get: function (req, res, next) {
 
         const token = req.cookies["Token"]
-        exer.exerciseAcces(jwt.idAccountToken(token), req.params.id1, req.params.id2, function (resDB) { //Vérifie si on a accès au programme
+        exer.exerciseAcces(jwt.idAccountToken(token), req.params.id1, req.params.id2, function (resDB) { //VERIF IF We have rights to see it
             if (resDB[0] == undefined) {
                 res.cookie('Exercise', ["Vous n'avez pas les droits", 1], {
                     maxAge: 3 * 1000

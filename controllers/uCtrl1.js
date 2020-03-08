@@ -62,9 +62,8 @@ module.exports = {
     },
 
     deleteProgram_get: function (req, res, next) {
-
         const token = req.cookies["Token"]
-        pro.programAcces(jwt.idAccountToken(token), req.params.id, function (resDB) { //Vérifie si on a accès
+        pro.programAcces(jwt.idAccountToken(token), req.params.id, function (resDB) { //VERIF IF We have rights to see it
             if (resDB[0] == undefined) {
                 if (resDB == 1) {
                     res.render('error', {
@@ -95,15 +94,11 @@ module.exports = {
                 })
             }
         })
-
-
-
-        //})
     },
     session_get: function (req, res, next) {
         const token = req.cookies["Token"]
         const cookie = req.cookies["Session"]
-        pro.programAcces(jwt.idAccountToken(token), req.params.id, function (resDB) { //Vérifie si on a accès au programme
+        pro.programAcces(jwt.idAccountToken(token), req.params.id, function (resDB) { //VERIF IF We have rights to see it
             if (resDB[0] == undefined) {
                 res.cookie('Programme', ["Vous n'avez pas accès à ce programme", 1], {
                     maxAge: 3 * 1000
@@ -140,7 +135,6 @@ module.exports = {
         })
     },
     addSession_post: function (req, res, next) {
-            //On est forcément login ici
             ses.sessionCount(req.params.id, function (resDB) {
                 if (resDB[0].count >= 12) {
                     res.cookie('Session', ["Impossible d'ajouter une séance (maximum 12)", 1], {
@@ -163,7 +157,7 @@ module.exports = {
 
     deleteSession_get: function (req, res, next) {
         const token = req.cookies["Token"]
-        ses.sessionAcces(jwt.idAccountToken(token), req.params.id2, function (resDB) { //Vérifie si on a accès au programme
+        ses.sessionAcces(jwt.idAccountToken(token), req.params.id2, function (resDB) { //VERIF IF We have rights to see it
             if (resDB[0] == undefined) {
                 res.cookie('Programme', ["Vous n'avez pas les droits", 1], {
                     maxAge: 3 * 1000
@@ -183,7 +177,7 @@ module.exports = {
     work_get: function (req, res, next) {
         const cookie = req.cookies["Work"]
         const token = req.cookies["Token"]
-        ses.sessionAcces(jwt.idAccountToken(token), req.params.id, function (resDB) { //Vérifie si on a accès au programme
+        ses.sessionAcces(jwt.idAccountToken(token), req.params.id, function (resDB) { //VERIF IF We have rights to see it
             if (resDB[0] == undefined) {
                 res.cookie('Programme', ["Vous n'avez pas accès à cette séance", 1], {
                     maxAge: 3 * 1000
@@ -207,8 +201,6 @@ module.exports = {
         })
     },
     work_post: function (req, res, next) {
-        //On est forcément login ici
-
         work.workCount(req.params.id, function (resDB) {
             if (resDB[0].count >= 16) {
                 res.cookie('Work', ["Impossible d'ajouter un exercice (maximum 16)", 1], {
@@ -216,7 +208,6 @@ module.exports = {
                 })
                 res.status(400).redirect('/program/session/' + req.params.id);
             } else {
-
                 exer.selectIdByName(req.body.exercice, function (resDB1) {
                     var idEx = resDB1;
                     work.create(req.body, req.params.id, idEx, function (resDB2) {
@@ -232,7 +223,7 @@ module.exports = {
     deleteWork_get: function (req, res, next) {
 
         const token = req.cookies["Token"]
-        ses.sessionAcces(jwt.idAccountToken(token), req.params.id1, function (resDB) { //Vérifie si on a accès
+        ses.sessionAcces(jwt.idAccountToken(token), req.params.id1, function (resDB) { //VERIF IF We have rights to see it
             if (resDB[0] == undefined) {
                 res.cookie('Programme', ["Vous n'avez pas les droits", 1], {
                     maxAge: 3 * 1000
@@ -245,7 +236,6 @@ module.exports = {
                         maxAge: 3 * 1000
                     })
                     res.redirect('/program/session/' + sess);
-
                 })
             }
         })

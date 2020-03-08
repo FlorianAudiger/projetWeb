@@ -1,3 +1,5 @@
+// Does not work
+
 <form name="chronoForm">
 <input type="text" class="form-control" name="chronotime" id="chronotime" value="0:00:00:00"/>
   <input type="button" class="btn btn-danger" name="startstop" value="start!" onClick="chronoStart()" />

@@ -9,6 +9,13 @@ const PASSWORD_REGEX = /^(?=.*\d).{4,16}$/;
 
 
 module.exports = {
+  register_get: function (req, res, next) {
+    const cookie = req.cookies["Register"]
+    res.render('register', {
+      title: "Inscription",
+      msg: cookie
+    });
+  },
   register_post: function (req, res) {
     account.boolMail(req.body, function (resDB) {
       if (resDB == 1) {
@@ -67,33 +74,15 @@ module.exports = {
         }
       }
     })
-    //res.redirect('/register')
+  },
 
-  },
-  register_get: function (req, res, next) {
-    const cookie = req.cookies["Register"]
-    res.render('register', {
-      title: "Inscription",
-      msg: cookie
-    });
-  },
   login_get: function (req, res, next) {
     const cookie = req.cookies["Login"]
     res.render('login', {
       title: "Connexion",
       msg: cookie
     });
-  },
-  index_get: function (req, res, next) {
-    res.render('index', {
-      title: "Mon suivi sportif"
-    });
-  },
-  logout_get: function (req, res, next) {
-    res.clearCookie("Token");
-    res.redirect('../');
-  },
-
+  },  
   login_post: function (req, res) {
     account.boolMail(req.body, function (resDB) {
       if (resDB == 1) {
@@ -126,6 +115,18 @@ module.exports = {
       }
     })
   },
+
+  index_get: function (req, res, next) {
+    res.render('index', {
+      title: "Mon suivi sportif"
+    });
+  },
+  logout_get: function (req, res, next) {
+    res.clearCookie("Token");
+    res.redirect('../');
+  },
+
+
   setting_get1: function (req, res, next) {
     const token = req.cookies["Token"]
     res.redirect("setting/" + jwt.idAccountToken(token))
@@ -198,7 +199,6 @@ module.exports = {
         }
       }
     })
-    //res.redirect('/register')
   },
   setting_post2: function (req, res) {
     if (req.body.pswd1 == '' || req.body.pswd2 == '') {
@@ -254,6 +254,4 @@ module.exports = {
       })
     }
   }
-
-  //res.redirect('/register')
 }

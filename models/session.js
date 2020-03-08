@@ -36,7 +36,7 @@ class session {
     static deleteByIdProgram(content, cb) {
 
         db.query("DELETE FROM `seance` WHERE IDProgramme=?", [content], function (err, result) {
-            if (err) throw err;
+            if (err) {console.log(err)};
             work.cleanWork(function (resDB) {})
             cb(result)
         });
@@ -58,21 +58,21 @@ class session {
         db.query("SELECT COUNT(IDExercice) as nb FROM seconstitue, seance WHERE seconstitue.IDSeance=? AND seance.IDSeance=?",
             [idS, idS],
             function (err, result) {
-                if (err) throw err;
+                if (err) {console.log(err)};
                 cb(result)
             });
     }
 
     static sessionAcces(idC, idS, cb) {
         db.query("SELECT * FROM seance, programme WHERE seance.IDProgramme=programme.IDProgramme AND programme.IDCompte=? AND seance.IDSeance=?", [idC, idS], function (err, result) {
-            if (err) throw err;
+            if (err) {console.log(err)};
             cb(result)
         });
     }
 
     static sessionCount(idP, cb) {
         db.query("SELECT COUNT(IDSeance) AS count FROM seance WHERE IDProgramme=?", [idP], function (err, result) {
-            if (err) throw err;
+            if (err) {console.log(err)};
             cb(result)
         });
     }
