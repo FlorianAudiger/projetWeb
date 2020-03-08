@@ -17,7 +17,7 @@ module.exports = {
         })
         res.status(400).redirect('/register')
       } else {
-        if (resDB != undefined) {
+        if (resDB[0] != undefined) {
           res.cookie('Register', ["L'adresse mail existe déjà", 1], {
             maxAge: 3 * 1000
           })
@@ -102,7 +102,7 @@ module.exports = {
         })
         res.status(400).redirect('/login')
       } else {
-        if (resDB != undefined) { //login ok
+        if (resDB[0] != undefined) { //login ok
           bcrypt.compare(req.body.pswd, resDB[0].MDP, function (err, resCrypt) {
             if (resCrypt) { //pwd ok
               var token = jwt.generateTokenForUser(resDB[0].IDCompte)
@@ -166,7 +166,7 @@ module.exports = {
         })
         res.status(400).redirect('/back')
       } else {
-        if (resDB != undefined) {
+        if (resDB[0] != undefined) {
           res.cookie('Setting', ["L'adresse mail existe déjà", 1], {
             maxAge: 3 * 1000
           })
